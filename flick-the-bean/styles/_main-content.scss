@@ -1,0 +1,14 @@
+
+.main {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.main__heading {
+	color: #fff;
+	font-size: 22px;
+	font-weight: 500;
+	text-transform: uppercase;
+	margin: 30px 0 12px;
+}

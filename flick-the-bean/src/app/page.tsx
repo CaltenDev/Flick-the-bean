@@ -1,97 +1,99 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import styles from './page.module.css'
+"use client"
+
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    let hamburgerMenu = document.querySelector(".hamburger");
+    const list = document.querySelector(".header__list");
+    hamburgerMenu?.addEventListener("click", () => {
+      hamburgerMenu?.classList.toggle("open");
+      list?.classList.toggle("open");
+    });
+  }, []);
   return (
-    <main className={styles.main}>
-      <Link href="/about">About</Link>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    <div className="bg-wrapper">
+			<header className="header">
+				<a href="#">
+					<img src="./../../static/svgs/logo.svg" alt="logo" />
+				</a>
+				<div className="hamburger">
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<nav className="header__nav">
+					<ul className="header__list">
+						<li className="header__item"><a href="#" className="header__link">Faq</a></li>
+						<li className="header__item"><a href="#" className="header__link">Stats</a></li>
+						<li className="header__item"><a href="#" className="header__link">Flip History</a></li>
+						<li className="header__item"><a href="#" className="header__link">Profile</a></li>
+					</ul>
+				</nav>
+			</header>
+			<h1 className="heading-primary">
+				#1 PLACE TO <br /><span className="heading-primary__thick">BEAN</span> FLICK AND
+				<span className="heading-primary__thick">COIN</span> FLIP
+			</h1>
+			<section className="top-area">
+				<button className="primary-btn">Play</button>
+				<div className="arrow-down">
+					<img className="arrow-down__figure" src="./../../static/svgs/arrow.svg" alt="arrow down icon" />
+				</div>
+			</section>
+			<main className="main">
+				<div className="line"></div>
+				<h2 className="main__heading">MOST RECENT BEAN FLICKERS</h2>
+				<ul className="primary-list">
+					<li className="primary-list__item">
+						<div className="primary-list__col">8Y2M...QKrQ</div>
+						<div className="primary-list__col-2">flipped 0.1 eth and lost.</div>
+						<div className="primary-list__col">an hr ago</div>
+					</li>
+					<li className="primary-list__item">
+						<div className="primary-list__col">8Y2M...QKrQ</div>
+						<div className="primary-list__col-2">flipped 0.2 eth and doubled.</div>
+						<div className="primary-list__col">an hr ago</div>
+					</li>
+					<li className="primary-list__item">
+						<div className="primary-list__col">8Y2M...QKrQ</div>
+						<div className="primary-list__col-2">flipped 0.1 eth and lost.</div>
+						<div className="primary-list__col">an hr ago</div>
+					</li>
+					<li className="primary-list__item">
+						<div className="primary-list__col">8Y2M...QKrQ</div>
+						<div className="primary-list__col-2">flipped 0.2 eth and doubled.</div>
+						<div className="primary-list__col">an hr ago</div>
+					</li>
+					<li className="primary-list__item">
+						<div className="primary-list__col">8Y2M...QKrQ</div>
+						<div className="primary-list__col-2">flipped 0.1 eth and lost.</div>
+						<div className="primary-list__col">an hr ago</div>
+					</li>
+					<li className="primary-list__item">
+						<div className="primary-list__col">8Y2M...QKrQ</div>
+						<div className="primary-list__col-2">flipped 0.2 eth and doubled.</div>
+						<div className="primary-list__col">an hr ago</div>
+					</li>
+					<li className="primary-list__item">
+						<div className="primary-list__col">8Y2M...QKrQ</div>
+						<div className="primary-list__col-2">flipped 0.1 eth and lost.</div>
+						<div className="primary-list__col">an hr ago</div>
+					</li>
+					<li className="primary-list__item">
+						<div className="primary-list__col">8Y2M...QKrQ</div>
+						<div className="primary-list__col-2">flipped 0.2 eth and doubled.</div>
+						<div className="primary-list__col">an hr ago</div>
+					</li>
+				</ul>
+				<h2 className="secondary-heading">Flip Responsibly!</h2>
+				<footer className="footer">
+					<h3 className="footer__heading">
+						Game powered by ordinal <a href="#" className="footer__heading-number">12335432232</a>
+					</h3>
+					<h3 className="footer__subheading">All rights reserved to Flick the Bean ©</h3>
+				</footer>
+			</main>
+		</div>
   )
 }
