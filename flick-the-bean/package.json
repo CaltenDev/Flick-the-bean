@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dep-netlify": "netlify deploy --build --prod"
   },
   "dependencies": {
+    "@netlify/plugin-nextjs": "^4.40.1",
     "@types/node": "20.5.9",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
@@ -17,5 +19,8 @@
     "react-dom": "18.2.0",
     "sass": "^1.66.1",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "netlify-cli": "^16.3.1"
   }
 }
