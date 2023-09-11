@@ -15,7 +15,7 @@ export default function Home() {
     <div className="bg-wrapper">
 			<header className="header">
 				<a href="#">
-					<img src="./../../static/svgs/logo.svg" alt="logo" />
+					<img src="../../static/svgs/logo.svg" alt="logo" />
 				</a>
 				<div className="hamburger">
 					<span></span>
@@ -38,7 +38,7 @@ export default function Home() {
 			<section className="top-area">
 				<button className="primary-btn">Play</button>
 				<div className="arrow-down">
-					<img className="arrow-down__figure" src="./../../static/svgs/arrow.svg" alt="arrow down icon" />
+					<img className="arrow-down__figure" src="../../static/svgs/arrow.svg" alt="arrow down icon" />
 				</div>
 			</section>
 			<main className="main">
