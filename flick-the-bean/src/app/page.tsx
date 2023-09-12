@@ -51,7 +51,7 @@ export default function Home() {
 			<div className="bg-wrapper">
 				<header className="header">
 					<a href="#">
-						<img src="../../static/svgs/logo.svg" alt="logo" />
+						<img src="/static/svgs/logo.svg" alt="logo" />
 					</a>
 					<div className="hamburger">
 						<span></span>
@@ -78,7 +78,7 @@ export default function Home() {
 						Play
 					</button>
 					<div className="arrow-down">
-						<img className="arrow-down__figure" src="../../static/img/arrow.svg" alt="arrow down icon" />
+						<img className="arrow-down__figure" src="/static/img/arrow.svg" alt="arrow down icon" />
 					</div>
 				</section>
 				<main className="main">
@@ -138,7 +138,7 @@ export default function Home() {
 
 			<div className="modal play-modal">
 				<div className="modal__content text-center">
-					<button className="modal__btn"><img src="./../../static/svgs/close.svg" alt="close" /></button>
+					<button className="modal__btn"><img src=".//static/svgs/close.svg" alt="close" /></button>
 					<h1 className="modal__heading">Connect your wallet to play</h1>
 					<p className="modal__text">
 						If you dont have a wallet, you can select a provider <br />
@@ -147,16 +147,16 @@ export default function Home() {
 					<div className="modal__seprator"></div>
 					<div className="modal__btn-wrapper">
 						<button className="btn-secondary">
-							<img src="./../../static/img/leather-icon.png" alt="leather-icon" /><span>Leather</span>
+							<img src=".//static/img/leather-icon.png" alt="leather-icon" /><span>Leather</span>
 						</button>
 						<button className="btn-secondary">
-							<img src="./../../static/img/unisat-icon.png" alt="unisat-icon" /><span>UniSat</span>
+							<img src=".//static/img/unisat-icon.png" alt="unisat-icon" /><span>UniSat</span>
 						</button>
 						<button className="btn-secondary">
-							<img src="./../../static/img/xverse-icon.png" alt="xverse-icon" /><span>Xverse</span>
+							<img src=".//static/img/xverse-icon.png" alt="xverse-icon" /><span>Xverse</span>
 						</button>
 						<button className="btn-secondary">
-							<img src="./../../static/img/okx-icon.png" alt="okx-icon" /><span>OKX</span>
+							<img src=".//static/img/okx-icon.png" alt="okx-icon" /><span>OKX</span>
 						</button>
 					</div>
 				</div>
@@ -164,7 +164,7 @@ export default function Home() {
 
 			<div className="modal faq-modal">
 				<div className="modal__content">
-					<button className="modal__btn"><img src="./../../static/svgs/close.svg" alt="close" /></button>
+					<button className="modal__btn"><img src=".//static/svgs/close.svg" alt="close" /></button>
 					<div className="faq">
 						<div className="faq__wrapper">
 							<h1 className="faq__heading">What tokens can I flip?</h1>
@@ -220,12 +220,12 @@ export default function Home() {
 
 			<div className="modal profile-modal">
 				<div className="modal__content">
-					<button className="modal__btn"><img src="./../../static/svgs/close.svg" alt="close" /></button>
+					<button className="modal__btn"><img src=".//static/svgs/close.svg" alt="close" /></button>
 					<div className="profile">
 						<div className="profile__grid">
 							<div className="profile__left">
 								<figure className="profile__figure">
-									<img src="./../../static/img/avatar.png" alt="avatar" />
+									<img src=".//static/img/avatar.png" alt="avatar" />
 								</figure>
 								<div className="profile__left-content">
 									<div className="profile__details">
