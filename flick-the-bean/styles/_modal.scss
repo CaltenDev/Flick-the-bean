@@ -1,0 +1,64 @@
+.modal {
+	position: fixed;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.8);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	display: none;
+
+	&.show {
+		display: flex;
+	}
+
+	&__content {
+		padding: 45px;
+		background-color: var(--modal-content-bg);
+		color: var(--white);
+		position: relative;
+	}
+
+	&__btn {
+		background-color: transparent;
+		border: none;
+		padding: 0;
+		outline: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		transform: translate(40%, -40%);
+		cursor: pointer;
+	}
+
+	&__heading {
+		font-size: 22px;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+
+	&__text {
+		font-size: 16px;
+		margin: 20px 0;
+	}
+
+	&__anchor {
+		text-decoration: none;
+		color: var(--white);
+		font-weight: bold;
+	}
+
+	&__seprator {
+		height: 3px;
+		width: 450px;
+		background-color: var(--white);
+		margin: 20px auto 0;
+	}
+
+	&__btn-wrapper {
+		display: grid;
+		padding: 30px 15px 0;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 30px 50px;
+	}
+}
