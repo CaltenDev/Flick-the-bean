@@ -8,7 +8,7 @@
 	width: 1070px;
 	margin: auto;
 
-	@media (min-width: 1440px){
+	@media (min-width: 1440px) {
 		font-size: 40px;
 	}
 }
@@ -304,7 +304,110 @@
 		background-color: var(--white);
 		margin-bottom: 20px;
 	}
+}
 
-	&__right {
+.btn-outline {
+	padding: 15px;
+	border: 1px solid var(--white);
+	background-color: transparent;
+	color: var(--white);
+	font-size: 16px;
+	font-weight: 400;
+	cursor: pointer;
+	outline: none;
+
+	&--big {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		border: 3px solid var(--white);
+		text-transform: uppercase;
+		font-size: 18px;
+	}
+
+	&--medium {
+		display: flex;
+		width: 130px;
+		padding: 30px 40px;
+		justify-content: center;
+		align-items: center;
+		border: 3px solid var(--white);
+		font-size: 25px;
+		background: var(--black);
+
+		&-active {
+			border: 8px solid var(--white);
+			box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.5);
+		}
+	}
+
+	&:hover {
+		background: rgba(255, 255, 255, 0.15);
+	}
+}
+
+.btn-white {
+	display: flex;
+	width: 220px;
+	padding: 20px;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 10px;
+	border: 3px solid var(--white);
+	background: var(--white);
+	cursor: pointer;
+	outline: 0;
+
+	&:hover {
+		border: 3px solid var(--white);
+		background: rgba(255, 255, 255, 0.15);
+		box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.35);
+	}
+
+	&--active {
+		border: 3px solid #fff;
+		background: #fff;
+		box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.35);
+	}
+
+	&--active:hover &__text {
+		color: var(--black);
+	}
+
+	&--active &__text {
+		font-weight: 900;
+	}
+
+	&:hover &__text {
+		color: var(--white);
+	}
+
+	&__avatar {
+		width: 34px;
+		height: 42px;
+	}
+
+	&__text {
+		color: var(--black);
+		font-size: 25px;
+		font-weight: 600;
+	}
+}
+
+.btn-arrow {
+	display: flex;
+	padding-bottom: 10px;
+	border: 0;
+	border-bottom: 3px solid var(--white);
+	background-color: var(--black);
+	color: var(--white);
+	gap: 10px;
+	text-transform: uppercase;
+	outline: 0;
+	cursor: pointer;
+
+	&__icon {
+		width: 15px;
 	}
 }
