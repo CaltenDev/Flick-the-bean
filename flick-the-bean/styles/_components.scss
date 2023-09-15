@@ -1,6 +1,7 @@
 .heading-primary {
 	color: var(--white);
 	text-align: center;
+	text-transform: uppercase;
 	font-size: 50px;
 	font-style: normal;
 	font-weight: 600;
@@ -32,12 +33,10 @@
 	align-items: center;
 	border: 3px solid var(--white);
 	background: var(--white);
-	outline: 0;
 	color: var(--black);
 	font-size: 25px;
 	font-weight: 600;
 	text-transform: uppercase;
-	cursor: pointer;
 	transition: all 0.25s;
 }
 
@@ -190,14 +189,14 @@
 }
 
 .arrow-down {
-	position: absolute;
-	top: -16px;
-	right: -110px;
-	width: 100px;
+	position: relative;
 }
 
 .arrow-down__figure {
-
+	position: absolute;
+	top: -50%;
+	left: 20px;
+	height: 90px;
 }
 
 .btn-secondary {
@@ -210,9 +209,6 @@
 	font-size: 25px;
 	font-weight: 700;
 	background: var(--black);
-	cursor: pointer;
-	border: none;
-	outline: 0;
 	box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.25);
 	transition: all 0.3s;
 }
@@ -313,8 +309,6 @@
 	color: var(--white);
 	font-size: 16px;
 	font-weight: 400;
-	cursor: pointer;
-	outline: none;
 
 	&--big {
 		display: flex;
@@ -329,7 +323,7 @@
 	&--medium {
 		display: flex;
 		width: 130px;
-		padding: 30px 40px;
+		padding: 25px 40px;
 		justify-content: center;
 		align-items: center;
 		border: 3px solid var(--white);
@@ -350,14 +344,12 @@
 .btn-white {
 	display: flex;
 	width: 220px;
-	padding: 20px;
+	padding: 15px;
 	justify-content: flex-start;
 	align-items: center;
 	gap: 10px;
 	border: 3px solid var(--white);
 	background: var(--white);
-	cursor: pointer;
-	outline: 0;
 
 	&:hover {
 		border: 3px solid var(--white);
@@ -398,16 +390,126 @@
 .btn-arrow {
 	display: flex;
 	padding-bottom: 10px;
-	border: 0;
 	border-bottom: 3px solid var(--white);
 	background-color: var(--black);
 	color: var(--white);
 	gap: 10px;
 	text-transform: uppercase;
-	outline: 0;
-	cursor: pointer;
 
 	&__icon {
 		width: 15px;
+	}
+}
+
+.exchange {
+	width: 455px;
+	padding: 20px;
+	background-color: var(--white);
+	color: var(--black);
+
+	&__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 0 20px;
+	}
+
+	&__title {
+		color: #3a3a3a;
+		font-size: 16px;
+		font-weight: 700;
+	}
+
+	&__panel {
+		display: flex;
+		justify-content: space-between;
+		background-color: #f4f4f4;
+		padding: 20px;
+		margin-bottom: 10px;
+	}
+
+	&__subtitle {
+		color: #afafaf;
+		font-size: 14px;
+		font-weight: 700;
+	}
+
+	&__score {
+		color: #3a3a3a;
+		font-size: 28px;
+		font-weight: 700;
+	}
+
+	&__btn {
+		width: 100%;
+		padding: 25px;
+		background: #f4f4f4;
+		color: #3a3a3a;
+		font-size: 20px;
+		font-weight: 700;
+		&:hover {
+			background-color: darken(#f4f4f4, 3%);
+		}
+	}
+
+	&__arrow-down {
+		display: flex;
+		justify-content: center;
+	}
+
+	&__margin-bottom {
+		margin-bottom: -25px;
+	}
+
+	&__margin-top {
+		margin-top: -25px;
+	}
+
+	&__arrow-btn {
+		width: 90px;
+		height: 60px;
+		background: #232323;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: 10px solid var(--white);
+	}
+
+	&__arrow-img {
+		height: 20px;
+	}
+
+	&__select {
+		padding: 18px 30px;
+		border: 0;
+		outline: 0;
+		font-size: 20px;
+		font-weight: 700;
+		text-transform: uppercase;
+		margin-bottom: 15px;
+		background: #fff;
+		box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.1);
+	}
+
+	&__panel-slim {
+		display: flex;
+		justify-content: space-between;
+		padding: 15px;
+		margin-bottom: 10px;
+		background-color: #f4f4f4;
+	}
+	&__total-wrapper {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
+	&__total-icon {
+		width: 15px;
+	}
+
+	&__total {
+		color: #afafaf;
+		font-size: 14px;
+		font-weight: 400;
 	}
 }

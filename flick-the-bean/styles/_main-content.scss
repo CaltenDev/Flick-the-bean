@@ -1,4 +1,4 @@
-.main {
+.center-area {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -14,7 +14,7 @@
 
 .btns-wrapper {
 	width: 600px;
-	margin: 70px auto 0;
+	margin: 20px auto 0;
 }
 
 .btns-inner-wrapper {
@@ -32,8 +32,9 @@
 
 .btns-grid {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(3, 1fr);
 	gap: 20px;
+	justify-items: center;
 }
 
 .btns-row {
@@ -45,5 +46,13 @@
 .btn-arrow-row {
 	display: flex;
 	justify-content: center;
-	margin-top: 40px;
+	margin-top: 25px;
+}
+
+.main-wrapper {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
