@@ -1,3 +1,5 @@
+import Footer from '@/components/footer/footer'
+import Navbar from '@/components/nav/nav'
 import type { Metadata } from 'next'
 import './../../styles/main.scss'
 
@@ -13,7 +15,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+      <div className="bg-wrapper">
+				<Navbar />
+				<main className="main-wrapper">
+          {children}
+				</main>
+				<Footer />
+			</div>
+      </body>
     </html>
   )
 }
