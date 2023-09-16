@@ -1,7 +1,12 @@
-import Footer from '@/components/footer/footer'
-import Navbar from '@/components/nav/nav'
-import type { Metadata } from 'next'
-import './../../styles/main.scss'
+"use client";
+
+import Footer from '@/components/footer/footer';
+import Navbar from '@/components/nav/nav';
+import { openSignatureRequestPopup } from '@stacks/connect';
+import { StacksMainnet } from '@stacks/network';
+import type { Metadata } from 'next';
+import { useEffect } from 'react';
+import './../../styles/main.scss';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -13,6 +18,25 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+  const message = 'Login';
+  const getSignature = () => {
+    openSignatureRequestPopup({
+      message,
+      network: new StacksMainnet(),
+      appDetails: {
+        name: "My App",
+        icon: window.location.origin
+      },
+      onFinish(data) {
+        console.log("Signature: ", data.signature);
+        console.log("Public Key: ", data.publicKey);
+      }
+    });
+  }
+
+  useEffect(getSignature)
+  
   return (
     <html lang="en">
       <body>
