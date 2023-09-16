@@ -53,3 +53,25 @@
 	margin-right: auto;
 	margin-left: auto;
 }
+
+.rotate {
+	animation: rotate 1.5s ease-in infinite;
+}
+
+.position-b-r {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+.text-success {
+	color: #52ff00;
+}
+
+.text-alert {
+	color: #d40000;
+}
+
+.h-100 {
+	height: 100px;
+}
