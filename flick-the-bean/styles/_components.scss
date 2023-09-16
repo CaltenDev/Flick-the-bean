@@ -189,14 +189,14 @@
 }
 
 .arrow-down {
-	position: relative;
+	position: absolute;
+	top: -16px;
+	right: -110px;
+	width: 100px;
 }
 
 .arrow-down__figure {
-	position: absolute;
-	top: -50%;
-	left: 20px;
-	height: 90px;
+
 }
 
 .btn-secondary {
@@ -323,6 +323,7 @@
 	&--medium {
 		display: flex;
 		width: 130px;
+		height: 70px;
 		padding: 25px 40px;
 		justify-content: center;
 		align-items: center;
@@ -511,5 +512,125 @@
 		color: #afafaf;
 		font-size: 14px;
 		font-weight: 400;
+	}
+}
+
+.btn-reward {
+	display: flex;
+	align-items: center;
+	gap: 17px;
+	padding: 15px 20px;
+	background: var(--white);
+	box-shadow: 0px 0px 12px 0px rgba(255, 255, 255, 0.55);
+	color: var(--black);
+
+	&__icon {
+		width: 36px;
+		height: 36px;
+	}
+
+	&__content {
+		text-align: left;
+	}
+
+	&__title {
+		font-size: 25px;
+		font-weight: 800;
+	}
+
+	&__subtitle {
+		font-size: 16px;
+		font-weight: 500;
+	}
+}
+
+.result {
+	color: var(--white);
+	text-align: center;
+	line-height: normal;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	&__title {
+		font-size: 25px;
+		font-weight: 900;
+	}
+
+	&__subtitle {
+		font-size: 25px;
+		font-weight: 700;
+	}
+}
+
+.refer {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+
+	&__title {
+		color: var(--white);
+		font-size: 32px;
+		font-weight: 900;
+		text-transform: uppercase;
+	}
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+
+	&__item {
+		padding: 15px;
+		background-color: var(--white);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		color: var(--black);
+	}
+
+	&__text {
+		font-size: 18px;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+
+	&__right-content {
+		display: flex;
+		align-items: center;
+		gap: 15px;
+
+		p {
+			font-size: 18px;
+		}
+
+		img {
+			width: 34px;
+			height: 34px;
+		}
+	}
+
+	&__btn {
+		width: 100%;
+		border: 3px solid var(--white);
+		color: var(--white);
+		text-transform: uppercase;
+		padding: 20px 150px;
+		background-color: var(--black);
+	}
+
+	&__social-list {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 40px;
+	}
+
+	&__social-item {
+	}
+
+	&__social-link {
 	}
 }

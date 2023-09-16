@@ -1,5 +1,3 @@
-
-
 .footer {
 	margin: 40px 0;
 	text-align: center;
@@ -20,4 +18,14 @@
 	color: var(--white);
 	font-size: 14px;
 	font-weight: 500;
+}
+
+.footer__container {
+	width: 1400px;
+	margin: auto;
+	position: relative;
+
+	@media (max-width: 1440px) {
+		width: 1200px;
+	}
 }
