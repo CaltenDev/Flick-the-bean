@@ -23,23 +23,21 @@ const getSignature = async () => {
   let hash = bitcoin.crypto.sha256(message).toString('hex');
   let publicKey = '';
   let sign = '';
+
   // @ts-ignore
   let uniSat =  window.unisat;
   try {
-    let res = await uniSat.signMessage(message);
-    sign = btoa(res);
+    sign = await uniSat.signMessage(hash);
   } catch (e) {
     console.log(e);
   }
 
   try {
-    let res = await uniSat.getPublicKey();
-    publicKey = res;
+    publicKey = await uniSat.getPublicKey();
   } catch (e) {
     console.log(e);
   }
-
-  const data = login(hash, message, sign, publicKey, 'Lucas');
+  const data = login(sign, publicKey, message, hash);
 
   console.log(data);
   

@@ -27,8 +27,8 @@ const getSignature = () => {
         console.log('data: ', data);
         console.log("Signature: ", data.signature);
         console.log("Public Key: ", data.publicKey);
-        localStorage.setItem('signature', data.signature);
-        localStorage.setItem('publicKey', data.publicKey);
+        localStorage.setItem('Signature', data.signature);
+        localStorage.setItem('PublicKey', data.publicKey);
       },
       userSession
     });
