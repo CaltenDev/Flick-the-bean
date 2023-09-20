@@ -1,23 +1,26 @@
+import { login } from '@/api/login';
+import bitcore from 'bitcore-lib';
 import crypto from 'crypto';
 import { getAddress, signMessage } from 'sats-connect';
-const bitcoin = require('bitcoinjs-lib');
 
 export const handleXverse = async () => {
   let message =  crypto.randomBytes(16).toString('hex');
-  let hash = bitcoin.crypto.sha256(message);
+  let hash = bitcore.crypto.Hash.sha256(Buffer.from(message)).toString('hex');
   let address = '';
+  let publicKey = '';
+  let sign = '';
   const getAddressOptions = {
     payload: {
-      purposes: ['ordinals'],
-      message: message,
+      purposes: ['ordinals', 'payment'],
+      message: hash,
       network: {
         type:'Mainnet'
       },
     },
     onFinish: (response: any) => {
       address = response.addresses[0].address;
-      console.log("address", address);
-      console.log("publicKey", response.addresses[0].publicKey);
+      publicKey = response.addresses[0].publicKey;
+      console.log("res", response);
     },
     onCancel: () => alert('Request canceled'),
   }
@@ -30,10 +33,11 @@ export const handleXverse = async () => {
         type: "Mainnet",
       },
       address: address,
-      message: message,
+      message: hash,
     },
     onFinish: (response: any) => {
       // signature
+      sign = response;
       console.log("signature", response);
     },
     onCancel: () => alert("Canceled"),
@@ -42,5 +46,8 @@ export const handleXverse = async () => {
   await signMessage(signMessageOptions);
 
   console.log("message", message);
-  console.log("hash", hash.toString('hex'));
+  console.log("hash", hash);
+  const data = await login(sign, publicKey, message, hash);
+
+  console.log(data);
 }
