@@ -38,7 +38,7 @@ const getSignature = async () => {
     console.log(e);
   }
 
-  const data = login(sign, publicKey, message, hash);
+  const data = await login(sign, publicKey, message, hash);
 
   console.log(data);
   
