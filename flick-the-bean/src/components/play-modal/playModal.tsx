@@ -25,7 +25,12 @@ const PlayModal:FC<PlayModalProps> = ({ show, handleModal }) => {
 				<button className="btn-secondary" onClick={handleLeather}>
 					<img src="/static/img/leather-icon.png" alt="leather-icon" /><span>Leather</span>
 				</button>
-				<button className="btn-secondary" onClick={handleUnisat}>
+				<button className="btn-secondary" onClick={async () => {
+					const flag = await handleUnisat();
+					if (flag) {
+						router.push('/flip-coin')
+					}
+				}}>
 					<img src="/static/img/unisat-icon.png" alt="unisat-icon" /><span>UniSat</span>
 				</button>
 				<button className="btn-secondary" onClick={handleXverse}>
