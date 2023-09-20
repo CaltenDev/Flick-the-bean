@@ -1,4 +1,6 @@
 import { login } from '@/api/login';
+import GetCookie from '@/hooks/cookies/getCookie';
+import SetCookie from '@/hooks/cookies/setCookie';
 import bitcore from 'bitcore-lib';
 import crypto from 'crypto';
 
@@ -6,15 +8,20 @@ import crypto from 'crypto';
 export const handleUnisat = async () => {
   // @ts-ignore
   let uniSat =  window.unisat;
-  if (typeof uniSat !== 'undefined') {
+  let cookie = GetCookie('userId');
+  console.log("cookie: ", cookie);
+  
+  if (typeof uniSat !== 'undefined' && cookie == undefined) {
     console.log('UniSat Wallet is installed!');
     try {
       let accounts = await uniSat.requestAccounts();
       console.log('connect success', accounts);
-      getSignature();
+      return getSignature();
     } catch (e) {
       console.log('connect failed');
     }
+  } else {
+    return true;
   }
 }
 
@@ -38,8 +45,10 @@ const getSignature = async () => {
     console.log(e);
   }
 
-  const data = await login(sign, publicKey, message, hash);
-
-  console.log(data);
-
+  let userId = '';
+  userId = await login(sign, publicKey, message, hash);
+  SetCookie('userId', userId);
+  if(userId) {
+    return true;
+  }
 }

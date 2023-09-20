@@ -7,6 +7,8 @@ export const login = async (sign: string, publicKey: string, message: string, ha
     userPublicKey: publicKey,
     signedMessage: sign,
     userName: "name"
+  }).then(function (res) {
+    return  res.data.data.userId && res.data.data.userId;
   }).catch(function (error) {
     console.log(error.toJSON());
   });

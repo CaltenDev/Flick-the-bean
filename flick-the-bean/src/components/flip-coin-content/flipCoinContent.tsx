@@ -1,3 +1,4 @@
+import { GetNounce } from "@/api/game";
 import { FC, useState } from "react";
 import AddFundModal from "../add-fund-modal/addFundModal";
 import RecentFlickersModal from "../recent-flickers-modal/recentFlickersModal";
@@ -42,7 +43,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 							<div className="score-area__text">Total balance: 0 ACD3</div>
 						</div>
 						<div className="btns-row mt-30">
-							<button className="btn-white" id="head-btn" onClick={handleAddFundModal}>
+							<button className="btn-white" id="head-btn" onClick={GetNounce}>
 								<img className="btn-white__avatar" src="/static/img/head.png" alt="head icon" />
 								<span className="btn-white__text">Flip Heads</span>
 							</button>
