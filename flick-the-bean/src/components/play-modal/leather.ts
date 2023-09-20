@@ -1,34 +1,33 @@
 
+import { login } from '@/api/login';
 import { AppConfig, UserSession, openSignatureRequestPopup, showConnect } from '@stacks/connect';
 import { StacksMainnet } from '@stacks/network';
+import bitcore from 'bitcore-lib';
 import crypto from 'crypto';
-const bitcoin = require('bitcoinjs-lib');
 
 const appConfig = new AppConfig();
 const userSession = new UserSession({ appConfig });
-let message =  '';
-let hash;
-if (!userSession.isUserSignedIn()) {
-  message =  crypto.randomBytes(16).toString('hex');
-  hash = bitcoin.crypto.sha256(message);
-}
 const getSignature = () => {
   let signature = localStorage.getItem('signature');
   let publickey = localStorage.getItem('publicKey');
+  let message =  crypto.randomBytes(16).toString('hex');
+  let hash = bitcore.crypto.Hash.sha256(Buffer.from(message)).toString('hex');
   if (userSession.isUserSignedIn()) {
     openSignatureRequestPopup({
-      message,
+      message: hash,
       network: new StacksMainnet(),
       appDetails: {
         name: "My App",
         icon: window.location.origin
       },
-      onFinish(data) {
+      async onFinish(data) {
         console.log('data: ', data);
         console.log("Signature: ", data.signature);
         console.log("Public Key: ", data.publicKey);
         localStorage.setItem('Signature', data.signature);
         localStorage.setItem('PublicKey', data.publicKey);
+        const res = await login(data.signature, data.publicKey, message, hash);
+        console.log("Res: ", res);
       },
       userSession
     });

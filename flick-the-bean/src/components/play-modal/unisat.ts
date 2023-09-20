@@ -1,6 +1,6 @@
 import { login } from '@/api/login';
+import bitcore from 'bitcore-lib';
 import crypto from 'crypto';
-const bitcoin = require('bitcoinjs-lib');
 
 
 export const handleUnisat = async () => {
@@ -19,8 +19,8 @@ export const handleUnisat = async () => {
 }
 
 const getSignature = async () => {
-  let message =  crypto.randomBytes(16).toString('hex');
-  let hash = bitcoin.crypto.sha256(message).toString('hex');
+  const message = crypto.randomBytes(16).toString('hex');
+  const hash = bitcore.crypto.Hash.sha256(Buffer.from(message)).toString('hex');
   let publicKey = '';
   let sign = '';
 
@@ -37,8 +37,9 @@ const getSignature = async () => {
   } catch (e) {
     console.log(e);
   }
-  const data = login(sign, publicKey, message, hash);
+
+  const data = await login(sign, publicKey, message, hash);
 
   console.log(data);
-  
+
 }
