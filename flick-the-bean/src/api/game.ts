@@ -25,7 +25,7 @@ export const gameReveal = async (gameNonce: string, choice: boolean, amount: num
     userPublicKey: publicKey,
     signedMessage: sign
   }).then(function (res) {
-    console.log(res);
+    return res.data.didWin;
   }).catch(function (error) {
     console.log(error.toJSON());
   });
