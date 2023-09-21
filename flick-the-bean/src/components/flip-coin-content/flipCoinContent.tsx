@@ -23,6 +23,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
   }
 
 	const startGame = async (choice: boolean) => {
+		setGameResult(0);
 		setLoading(true);
 		let {commitment, gameNonce}  = await GetNonce();
 		SetCookie('commitment', commitment);
@@ -30,7 +31,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 		const { publicKey, signature } = await signMessage(gameNonce)
 
 		if (publicKey != '' && signature != '') {
-			const didWin = await gameReveal(gameNonce, choice, 1, publicKey.toString('hex'), signature.toString('hex'));
+			const didWin = await gameReveal(gameNonce, choice, 1, publicKey, signature);
 			if (didWin != undefined) {
 				setLoading(false);
 			}
@@ -39,7 +40,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 				setGameResult(0);
 			}, 5000);
 		} else {
-			alert('No Public Key or signed Message');
+			setLoading(false);
 		}
 	}
 
