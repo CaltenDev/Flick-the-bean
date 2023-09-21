@@ -45,9 +45,13 @@ const getSignature = async () => {
     console.log(e);
   }
 
+  console.log(sign, publicKey);
+  
   let userId = '';
   userId = await login(sign, publicKey, message, hash);
   SetCookie('userId', userId);
+  SetCookie('sign', sign);
+  SetCookie('publicKey', publicKey);
   if(userId) {
     return true;
   }
