@@ -3,16 +3,30 @@ import axios from "axios";
 
 export const GetNounce = async () => {
   const val = GetCookie('userId');
-  const userId = parseInt(val != undefined ? val : '0');
+  const userId = parseInt(val != '' ? val : '0');
   if(userId !=  0) {
     return await axios.post('https://flickthebean.onrender.com/game/commitment', {
       userId: userId,
     }).then(function (res) {
-      console.log(res);
+      return res.data.data;
     }).catch(function (error) {
       console.log(error.toJSON());
     });
   } else {
     console.log('No User Id');
   }
+}
+
+export const gameReveal = async (gameNonce: string, choice: boolean, amount: number, publicKey: string, sign: string) => {
+  return await axios.post('https://flickthebean.onrender.com/game/reveal', {
+    gameNonceReceived: gameNonce,
+    choice: choice,
+    amount: amount,
+    userPublicKey: publicKey,
+    signedMessage: sign
+  }).then(function (res) {
+    console.log(res);
+  }).catch(function (error) {
+    console.log(error.toJSON());
+  });
 }
