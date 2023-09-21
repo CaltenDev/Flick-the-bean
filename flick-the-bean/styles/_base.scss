@@ -53,3 +53,10 @@ ul {
 	list-style: none;
 	margin: 0;
 }
+
+.coin-flip-animation {
+	width: 260px;
+	position: absolute;
+	z-index: -1;
+	bottom: -50px;
+}
