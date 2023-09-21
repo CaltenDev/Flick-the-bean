@@ -81,9 +81,11 @@ export const signMessage = async (value: string) => {
   console.log(sign, publicKey);
 
   let userId = '';
-  userId = await login(sign, publicKey, value, hash);
-  SetCookie('userId', userId);
-  if (userId) {
+  if(sign && publicKey && GetCookie('userId') == '') {
+    userId = await login(sign, publicKey, value, hash);
+    SetCookie('userId', userId);
+  }
+  if (userId || GetCookie('userId') != '') {
     return { publicKey: publicKey, signature: sign };
   }else{
     return { publicKey: "", signature:""};
