@@ -4,7 +4,7 @@ import axios from "axios";
 export const GetNounce = async () => {
   const val = GetCookie('userId');
   const userId = parseInt(val != undefined ? val : '0');
-  if(userId != undefined) {
+  if(userId !=  0) {
     return await axios.post('https://flickthebean.onrender.com/game/commitment', {
       userId: userId,
     }).then(function (res) {

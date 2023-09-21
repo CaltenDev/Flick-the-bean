@@ -11,7 +11,7 @@ export const handleUnisat = async () => {
   let cookie = GetCookie('userId');
   console.log("cookie: ", cookie);
   
-  if (typeof uniSat !== 'undefined' && cookie == undefined) {
+  if (typeof uniSat !== 'undefined' && cookie == '') {
     console.log('UniSat Wallet is installed!');
     try {
       let accounts = await uniSat.requestAccounts();
