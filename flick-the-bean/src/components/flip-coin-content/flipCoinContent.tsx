@@ -1,10 +1,10 @@
-import { GetNounce, gameReveal } from "@/api/game";
+import { GetNonce, gameReveal } from "@/api/game";
 import GetCookie from "@/hooks/cookies/getCookie";
 import SetCookie from "@/hooks/cookies/setCookie";
 import { FC, useState } from "react";
 import AddFundModal from "../add-fund-modal/addFundModal";
 import RecentFlickersModal from "../recent-flickers-modal/recentFlickersModal";
-
+import { signMessage }  from "../play-modal/unisat";
 interface FlipCoinContentProps {
 }
 
@@ -21,13 +21,13 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
   }
 
 	const startGame = async () => {
-		let {commitment, gameNonce}  = await GetNounce();
+		let {commitment, gameNonce}  = await GetNonce();
 		SetCookie('commitment', commitment);
 		SetCookie('gameNonce', gameNonce);
-		const sign = GetCookie('sign');
-		const publicKey = GetCookie('publicKey');
-		if (sign != '' && publicKey != '') {
-			await gameReveal(gameNonce, true, 10, publicKey , sign);
+		const { publicKey, signature } = await signMessage(gameNonce)
+
+		if (publicKey != '' && signature != '') {
+			await gameReveal(gameNonce, true, 10, publicKey.toString('hex'), signature.toString('hex'));
 		} else {
 			alert('No Public Key or signed Message');
 		}

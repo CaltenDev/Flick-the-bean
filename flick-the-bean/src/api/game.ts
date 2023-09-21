@@ -1,7 +1,7 @@
 import GetCookie from "@/hooks/cookies/getCookie";
 import axios from "axios";
 
-export const GetNounce = async () => {
+export const GetNonce = async () => {
   const val = GetCookie('userId');
   const userId = parseInt(val != '' ? val : '0');
   if(userId !=  0) {
