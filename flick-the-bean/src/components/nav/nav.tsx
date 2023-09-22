@@ -1,7 +1,10 @@
 "use client"
 
+import { useGlobalContext } from '@/app/layout';
+import GetCookie from '@/hooks/cookies/getCookie';
+import RemoveCookie from '@/hooks/cookies/removeCookie';
 import { usePathname, useRouter } from 'next/navigation';
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import FaqModal from '../faq-modal/faqModal';
 import ProfileModal from '../profile-modal/profileModal';
 
@@ -14,6 +17,13 @@ const Navbar:FC<NavbarProps> = () => {
   const[openNav, setOpneNav] = useState(false);
   const[showFaqModal, setShowFaqModal] = useState(false);
   const[showProfileModal, setShowProfileModal] = useState(false);
+  const[pubKey, setPubkey] = useState('');
+  const { isLoggedin, setIsLoggedIn } = useGlobalContext();
+
+  useEffect(() => {
+    const key = GetCookie('publicKey');
+    setPubkey(`${key.slice(0, 5)}....${key.slice(-8)}`);
+  }, [pubKey])
 
   const handleNavbar = () => {
     setOpneNav(!openNav);
@@ -26,6 +36,16 @@ const Navbar:FC<NavbarProps> = () => {
   const handleProfileModal = () => {
     setShowProfileModal(!showProfileModal);
   }
+
+  const logout = () => {
+		RemoveCookie('userId');
+    RemoveCookie('sign');
+    RemoveCookie('gameNonce');
+    RemoveCookie('commitment');
+    RemoveCookie('publicKey');
+    setIsLoggedIn(false);
+    router.push('/');
+	}
 
   return(
     <header className="header">
@@ -53,10 +73,10 @@ const Navbar:FC<NavbarProps> = () => {
                     />
                   </div>
                 </figure>
-                <p className="header__profile-text">0x71c....7656ec7a</p>
-                <a href="#" className="header__profile-share">
+                <p className="header__profile-text">{pubKey}</p>
+                <button className="header__profile-share" onClick={logout}>
                   <img src="/static/svgs/profile-share.svg" alt="share icon" />
-                </a>
+                </button>
               </div>
             </>
           )}

@@ -1,4 +1,9 @@
+"use client"
+
+import { GetReferral } from "@/api/referral";
+import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Modal from "../modal/modal";
 
 interface RewardModalProps {
@@ -7,6 +12,11 @@ interface RewardModalProps {
 }
 
 const RewardModal:FC<RewardModalProps> = ({ show, handleModal }) => {
+	const {data} = useQuery({
+    queryKey: ['referral'],
+    queryFn: async () => await GetReferral()
+  })
+
   return(
 		<Modal customClass={'rewards-modal'} show={show} handleModal={handleModal}>
 			<div className="refer">
@@ -15,15 +25,19 @@ const RewardModal:FC<RewardModalProps> = ({ show, handleModal }) => {
 						<li className="refer__item">
 							<p className="refer__text">Refer id</p>
 							<div className="refer__right-content">
-								<p>Arcd2_90039</p>
-								<img src="/static/svgs/copy.svg" alt="copy icon" />
+								<p>{data}</p>
+								<CopyToClipboard text={data} onCopy={() => alert('Copied')}>
+									<img src="/static/svgs/copy.svg" alt="copy icon" />
+								</CopyToClipboard>
 							</div>
 						</li>
 						<li className="refer__item">
 							<p className="refer__text">Refer link</p>
 							<div className="refer__right-content">
-								<p>https://www....433</p>
-								<img src="/static/svgs/copy.svg" alt="copy icon" />
+								<p>https://....{data}</p>
+								<CopyToClipboard text={`${window.location.origin}/${data}`} onCopy={() => alert('Copied')}>
+									<img src="/static/svgs/copy.svg" alt="copy icon" />
+								</CopyToClipboard>
 							</div>
 						</li>
 					</ul>

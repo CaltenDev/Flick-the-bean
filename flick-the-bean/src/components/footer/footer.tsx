@@ -1,13 +1,16 @@
+"use client";
+import { useGlobalContext } from "@/app/layout";
 import { FC } from "react";
 import UnlockRewards from "../unlock-rewards/unlockRewards";
 
 interface FooterProps {
 }
 
-const Footer:FC<FooterProps> = ({  }) => {
+const Footer:FC<FooterProps> = () => {
+  const { isLoggedin, setIsLoggedIn } = useGlobalContext();
   return(
   <footer className="footer mt-0">
-    <UnlockRewards />
+    { isLoggedin && <UnlockRewards /> }
     <h3 className="footer__heading">
       Game powered by ordinal <a href="#" className="footer__heading-number">12335432232</a>
     </h3>
