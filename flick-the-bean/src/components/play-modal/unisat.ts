@@ -9,7 +9,6 @@ export const handleUnisat = async () => {
   // @ts-ignore
   let uniSat =  window.unisat;
   let cookie = GetCookie('userId');
-  SetCookie('userId', '');
 
   console.log(cookie)
   console.log(uniSat)
