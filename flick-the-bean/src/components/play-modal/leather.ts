@@ -4,7 +4,12 @@ import { AppConfig, UserSession, openSignatureRequestPopup, showConnect } from '
 import { StacksMainnet } from '@stacks/network';
 import bitcore from 'bitcore-lib';
 import crypto from 'crypto';
-
+Object.defineProperty(global, "_bitcore", {
+  get() {
+    return undefined;
+  },
+  set() { },
+});
 const appConfig = new AppConfig();
 const userSession = new UserSession({ appConfig });
 const getSignature = () => {
