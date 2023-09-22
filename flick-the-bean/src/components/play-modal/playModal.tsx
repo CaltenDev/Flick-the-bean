@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalContext } from "@/app/layout";
+import { useGlobalContext } from "@/app/react-query-provider/reactQueryProvider";
 import { useRouter } from "next/navigation";
 import { FC, useState } from "react";
 import Modal from "../modal/modal";
