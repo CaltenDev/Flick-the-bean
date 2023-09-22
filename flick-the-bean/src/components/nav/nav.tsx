@@ -1,6 +1,6 @@
 "use client"
 
-import { useGlobalContext } from '@/app/layout';
+import { useGlobalContext } from '@/app/react-query-provider/reactQueryProvider';
 import GetCookie from '@/hooks/cookies/getCookie';
 import RemoveCookie from '@/hooks/cookies/removeCookie';
 import { usePathname, useRouter } from 'next/navigation';

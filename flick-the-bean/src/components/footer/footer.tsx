@@ -1,13 +1,25 @@
 "use client";
-import { useGlobalContext } from "@/app/layout";
-import { FC } from "react";
+
+import { useGlobalContext } from "@/app/react-query-provider/reactQueryProvider";
+import GetCookie from "@/hooks/cookies/getCookie";
+import { usePathname } from "next/navigation";
+import { FC, useEffect } from "react";
 import UnlockRewards from "../unlock-rewards/unlockRewards";
 
 interface FooterProps {
 }
 
 const Footer:FC<FooterProps> = () => {
+  const router = usePathname();
   const { isLoggedin, setIsLoggedIn } = useGlobalContext();
+  console.log("isLogged In",isLoggedin);
+  console.log("path",router);
+  useEffect(() => {
+    const userId = GetCookie('userId');
+    if(userId != '') {
+      setIsLoggedIn(true);
+    }
+  }, [])
   return(
   <footer className="footer mt-0">
     { isLoggedin && <UnlockRewards /> }
