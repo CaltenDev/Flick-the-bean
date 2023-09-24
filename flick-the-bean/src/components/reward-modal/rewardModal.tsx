@@ -35,7 +35,7 @@ const RewardModal:FC<RewardModalProps> = ({ show, handleModal }) => {
 							<p className="refer__text">Refer link</p>
 							<div className="refer__right-content">
 								<p>https://....{data}</p>
-								<CopyToClipboard text={`${window.location.origin}/${data}`} onCopy={() => alert('Copied')}>
+								<CopyToClipboard text={`${window.location.origin}/?ref=${data}`} onCopy={() => alert('Copied')}>
 									<img src="/static/svgs/copy.svg" alt="copy icon" />
 								</CopyToClipboard>
 							</div>
