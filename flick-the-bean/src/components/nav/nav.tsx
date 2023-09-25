@@ -1,6 +1,6 @@
 "use client"
 
-import { useGlobalContext } from '@/app/layout';
+import { useGlobalContext } from '@/app/react-query-provider/reactQueryProvider';
 import GetCookie from '@/hooks/cookies/getCookie';
 import RemoveCookie from '@/hooks/cookies/removeCookie';
 import { usePathname, useRouter } from 'next/navigation';
@@ -43,6 +43,7 @@ const Navbar:FC<NavbarProps> = () => {
     RemoveCookie('gameNonce');
     RemoveCookie('commitment');
     RemoveCookie('publicKey');
+    RemoveCookie('wallet');
     setIsLoggedIn(false);
     router.push('/');
 	}
@@ -50,7 +51,7 @@ const Navbar:FC<NavbarProps> = () => {
   return(
     <header className="header">
       <button className="flex-shrink-0">
-        <img src="/static/svgs/logo.svg" alt="logo" onClick={() => router.push('/')} />
+        <img src="/static/svgs/logo.svg" alt="logo" onClick={logout} />
       </button>
       <div className="header__wrap">
         <div className="header__wrap">

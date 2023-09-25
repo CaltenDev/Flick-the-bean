@@ -30,5 +30,6 @@ export const gameReveal = async (gameNonce: string, choice: boolean, amount: num
     return res.data.didWin;
   }).catch(function (error) {
     console.log(error.toJSON());
+    return error.status;
   });
 }

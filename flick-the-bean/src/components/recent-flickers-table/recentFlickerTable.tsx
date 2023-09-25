@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 interface tableData {
-  bet_amount: number;
+  bet_amount: string;
   outcome: string;
   timeAgo: string;
   public_key: string;
@@ -18,10 +18,10 @@ const RecentFlickersTable:FC<RecentFlickersTableProps> = ({ tableData }) => {
         tableData ? tableData.map((item, index) => (
           <li className="primary-list__item" key={index}>
             <div className="primary-list__col">{item?.public_key.slice(0, 5)}...{item?.public_key.slice(-5)}</div>
-            <div className="primary-list__col-2">flipped {item.bet_amount} ACD3 and {item.outcome}.</div>
+            <div className="primary-list__col-2">flipped {Math.round((parseInt(item.bet_amount) + Number.EPSILON) * 100) / 100} ACD3 and {item.outcome}.</div>
             <div className="primary-list__col">{item.timeAgo}</div>
           </li>
-        )) : <p style={{ textAlign: 'center', marginTop: 50 }}>No Data</p>
+        )) : <p style={{ textAlign: 'center', marginTop: 50 }}>Loading Data</p>
       }
     </ul>
   )
