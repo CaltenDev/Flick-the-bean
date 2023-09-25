@@ -2,6 +2,7 @@
 
 import { useGlobalContext } from "@/app/react-query-provider/reactQueryProvider";
 import { useRouter } from "next/navigation";
+import { enqueueSnackbar } from "notistack";
 import { FC, useState } from "react";
 import Modal from "../modal/modal";
 import { handleLeather } from "./leather";
@@ -40,6 +41,7 @@ const PlayModal: FC<PlayModalProps> = ({ show, handleModal }) => {
 						router.push('/flip-coin');
 						setIsLoggedIn(true);
 						setLoading(false);
+						enqueueSnackbar('Logged In', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 					} else {
 						setLoading(false);
 					}
@@ -53,6 +55,7 @@ const PlayModal: FC<PlayModalProps> = ({ show, handleModal }) => {
 						router.push('/flip-coin');
 						setIsLoggedIn(true);
 						setLoading(false);
+						enqueueSnackbar('Logged In', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 					} else {
 						setLoading(false);
 					}
@@ -66,6 +69,7 @@ const PlayModal: FC<PlayModalProps> = ({ show, handleModal }) => {
 						router.push('/flip-coin');
 						setIsLoggedIn(true);
 						setLoading(false);
+						enqueueSnackbar('Logged In', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 					} else {
 						setLoading(false);
 					}

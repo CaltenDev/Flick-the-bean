@@ -1,15 +1,32 @@
 import { GetrecentFlickers } from "@/api/recent-flickers";
 import { useQuery } from "@tanstack/react-query";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import PlayModal from "../play-modal/playModal";
 import RecentFlickersTable from "../recent-flickers-table/recentFlickerTable";
 
 const HomeContent:FC = () => {
   const[showModal, setShowModal] = useState(false);
-  const {data} = useQuery({
+  const {data, isLoading, isRefetching} = useQuery({
     queryKey: ['recent'],
-    queryFn: async () => await GetrecentFlickers()
-  })
+    queryFn:  GetrecentFlickers
+  });
+
+
+  useEffect(() => {
+    console.log("component mounted");
+  }, [])
+
+  if(isLoading) {
+    console.log("Loading");
+  }
+  if (data) {
+    console.log(data);
+  }
+
+  if(isRefetching) {
+    console.log('isRefetching');
+    
+  }
 
   const handleModal = () => {
     setShowModal(!showModal)

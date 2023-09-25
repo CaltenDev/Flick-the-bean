@@ -3,13 +3,20 @@
 import Footer from '@/components/footer/footer';
 import Navbar from '@/components/nav/nav';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { SnackbarProvider } from 'notistack';
 import React, { FC, createContext, useContext, useState } from 'react';
 
 interface ReactQueryProviderProps {
   children: React.ReactNode;
 }
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false, // default: true
+    },
+  }
+});
 
 
 export type LoginContext = {
@@ -34,7 +41,9 @@ const ReactQueryProvider:FC<ReactQueryProviderProps> = ({ children }) => {
             <div className="bg-wrapper">
               <Navbar />
               <main className="main-wrapper">
-                {children}
+                <SnackbarProvider autoHideDuration={2000}>
+                  {children}
+                </SnackbarProvider>
               </main>
               <Footer />
             </div>

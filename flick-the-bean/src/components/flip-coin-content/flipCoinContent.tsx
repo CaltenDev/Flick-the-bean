@@ -1,8 +1,12 @@
 import { GetNonce, gameReveal } from "@/api/game";
+import GetCookie from "@/hooks/cookies/getCookie";
 import SetCookie from "@/hooks/cookies/setCookie";
+import { enqueueSnackbar } from "notistack";
 import { FC, useState } from "react";
 import AddFundModal from "../add-fund-modal/addFundModal";
+import { getLeatherSignature } from "../play-modal/leather";
 import { signMessage } from "../play-modal/unisat";
+import { getXverseSign } from "../play-modal/xverse";
 import RecentFlickersModal from "../recent-flickers-modal/recentFlickersModal";
 interface FlipCoinContentProps {
 }
@@ -33,19 +37,65 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 		let {commitment, gameNonce}  = await GetNonce();
 		SetCookie('commitment', commitment);
 		SetCookie('gameNonce', gameNonce);
-		const { publicKey, signature } = await signMessage(gameNonce)
+		const wallet = GetCookie('wallet');
 
-		if (publicKey != '' && signature != '') {
-			const didWin = await gameReveal(gameNonce, choice, 100.00, publicKey, signature);
-			if (didWin != undefined) {
+		if (wallet == 'xverse') {
+			const { publicKey, signature } = await getXverseSign(gameNonce);
+
+			if (publicKey != '' && signature != '') {
+				const gameResponse = await gameReveal(gameNonce, choice, acd, publicKey, signature);
+				if (gameResponse != undefined && (gameResponse != 400 || gameResponse != 500)) {
+					setLoading(false);
+					setGameResult(gameResponse ? 1 : 2);
+					setTimeout(() => {
+						setGameResult(0);
+					}, 5000);
+				} else {
+					setLoading(false);
+					setGameResult(0);
+					enqueueSnackbar('Balance too low', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+				}
+			} else {
 				setLoading(false);
 			}
-			setGameResult(didWin ? 1 : 2);
-			setTimeout(() => {
-				setGameResult(0);
-			}, 5000);
-		} else {
-			setLoading(false);
+		} else if(wallet == 'unisat') {
+			const { publicKey, signature } = await signMessage(gameNonce)
+
+			if (publicKey != '' && signature != '') {
+				const gameResponse = await gameReveal(gameNonce, choice, acd, publicKey, signature);
+				if (gameResponse != undefined && (gameResponse != 400 || gameResponse != 500)) {
+					setLoading(false);
+					setGameResult(gameResponse ? 1 : 2);
+					setTimeout(() => {
+						setGameResult(0);
+					}, 5000);
+				} else {
+					setLoading(false);
+					setGameResult(0);
+					enqueueSnackbar('Balance too low', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+				}
+			} else {
+				setLoading(false);
+			}
+		} else if(wallet ==  'leather') {
+			const { publicKey, signature } = await getLeatherSignature(gameNonce);
+
+			if (publicKey != '' && signature != '') {
+				const gameResponse = await gameReveal(gameNonce, choice, acd, publicKey, signature);
+				if (gameResponse != undefined && (gameResponse != 400 || gameResponse != 500)) {
+					setLoading(false);
+					setGameResult(gameResponse ? 1 : 2);
+					setTimeout(() => {
+						setGameResult(0);
+					}, 5000);
+				} else {
+					setLoading(false);
+					setGameResult(0);
+					enqueueSnackbar('Balance too low', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+				}
+			} else {
+				setLoading(false);
+			}
 		}
 	}
 

@@ -2,14 +2,19 @@ import GetCookie from "@/hooks/cookies/getCookie";
 import axios from "axios";
 
 export const GetReferral = async () => {
-  const userId = parseInt(GetCookie('userId'));
-  if(userId) {
-    return await axios.post('https://flickthebean.onrender.com/ref', {
-      userId: userId,
-    }).then(function (res) {
-      return res.data.data.referral_code;
-    }).catch(function (error) {
-      console.log(error.toJSON());
-    });
+  try {
+    const userId = GetCookie('userId');
+    const userIdInNumber = userId != '' ? parseInt(userId) : 0;
+    if(userIdInNumber != 0 && typeof userIdInNumber != "string") {
+      return await axios.post('https://flickthebean.onrender.com/ref', {
+        userId: userIdInNumber,
+      }).then(function (res) {
+        return res.data.data.referral_code;
+      }).catch(function (error) {
+        console.log(error.toJSON());
+      });
+    }
+  } catch(error) {
+
   }
 }

@@ -2,6 +2,7 @@
 
 import { GetReferral } from "@/api/referral";
 import { useQuery } from "@tanstack/react-query";
+import { enqueueSnackbar } from "notistack";
 import { FC } from "react";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Modal from "../modal/modal";
@@ -14,7 +15,7 @@ interface RewardModalProps {
 const RewardModal:FC<RewardModalProps> = ({ show, handleModal }) => {
 	const {data} = useQuery({
     queryKey: ['referral'],
-    queryFn: async () => await GetReferral()
+    queryFn:  GetReferral
   })
 
   return(
@@ -26,7 +27,7 @@ const RewardModal:FC<RewardModalProps> = ({ show, handleModal }) => {
 							<p className="refer__text">Refer id</p>
 							<div className="refer__right-content">
 								<p>{data}</p>
-								<CopyToClipboard text={data} onCopy={() => alert('Copied')}>
+								<CopyToClipboard text={data} onCopy={() => enqueueSnackbar('Copied', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})}>
 									<img src="/static/svgs/copy.svg" alt="copy icon" />
 								</CopyToClipboard>
 							</div>
@@ -35,7 +36,7 @@ const RewardModal:FC<RewardModalProps> = ({ show, handleModal }) => {
 							<p className="refer__text">Refer link</p>
 							<div className="refer__right-content">
 								<p>https://....{data}</p>
-								<CopyToClipboard text={`${window.location.origin}/?ref=${data}`} onCopy={() => alert('Copied')}>
+								<CopyToClipboard text={`${window.location.origin}/?ref=${data}`} onCopy={() => enqueueSnackbar('Copied', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})}>
 									<img src="/static/svgs/copy.svg" alt="copy icon" />
 								</CopyToClipboard>
 							</div>

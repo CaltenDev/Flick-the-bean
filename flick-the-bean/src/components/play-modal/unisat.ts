@@ -3,18 +3,18 @@ import GetCookie from '@/hooks/cookies/getCookie';
 import SetCookie from '@/hooks/cookies/setCookie';
 import bitcore from 'bitcore-lib';
 import crypto from 'crypto';
+import { enqueueSnackbar } from 'notistack';
 
 
 export const handleUnisat = async () => {
   // @ts-ignore
   let uniSat = window.unisat;
-  let cookie = SetCookie('userId', '');
+  let cookie = GetCookie('userId');
 
-  if (typeof uniSat !== 'undefined' && cookie == undefined) {
+  if (typeof uniSat !== 'undefined' && cookie == '') {
     try {
-      SetCookie('wallet', 'unisat');
       await uniSat.requestAccounts();
-      return getSignature('undefined');
+      return getSignature();
     } catch (e) {
       console.log('connect failed');
     }
@@ -23,8 +23,10 @@ export const handleUnisat = async () => {
   }
 }
 
-export const getSignature = async (value:string) => {
-  const message = value || crypto.randomBytes(16).toString('hex');
+export const getSignature = async () => {
+  console.log("this is working");
+  
+  const message = crypto.randomBytes(16).toString('hex');
   const hash = bitcore.crypto.Hash.sha256(Buffer.from(message)).toString('hex');
   let publicKey = '';
   let sign = '';
@@ -33,23 +35,20 @@ export const getSignature = async (value:string) => {
   let uniSat =  window.unisat;
   try {
     sign = await uniSat.signMessage(hash);
-  } catch (e) {
-    console.log(e);
-  }
-
-  try {
     publicKey = await uniSat.getPublicKey();
+
+    let userId = '';
+    userId = await login(sign, publicKey, message, hash);
+    if(userId != '') {
+      SetCookie('userId', userId);
+      SetCookie('sign', sign);
+      SetCookie('publicKey', publicKey);
+      SetCookie('wallet', 'unisat');
+      return true;
+    }
   } catch (e) {
     console.log(e);
-  }
-  
-  let userId = '';
-  userId = await login(sign, publicKey, message, hash);
-  SetCookie('userId', userId);
-  SetCookie('sign', sign);
-  SetCookie('publicKey', publicKey);
-  if(userId) {
-    return true;
+    enqueueSnackbar('Dismissed', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
   }
 }
 
@@ -62,25 +61,20 @@ export const signMessage = async (value: string) => {
   let uniSat = window.unisat;
   try {
     sign = await uniSat.signMessage(hash);
-  } catch (e) {
-    console.log(e);
-  }
-
-  try {
     publicKey = await uniSat.getPublicKey();
+    let userId = '';
+    if(sign && publicKey && GetCookie('userId') == '') {
+      userId = await login(sign, publicKey, value, hash);
+      SetCookie('userId', userId);
+    }
+    if (userId || GetCookie('userId') != '') {
+      return { publicKey: publicKey, signature: sign };
+    }else{
+      return { publicKey: "", signature:""};
+    }
   } catch (e) {
     console.log(e);
-  }
-
-  let userId = '';
-  if(sign && publicKey && GetCookie('userId') == '') {
-    userId = await login(sign, publicKey, value, hash);
-    SetCookie('userId', userId);
-  }
-  if (userId || GetCookie('userId') != '') {
-    return { publicKey: publicKey, signature: sign };
-  }else{
-    return { publicKey: "", signature:""};
-
+    enqueueSnackbar('Dismissed', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+    return { publicKey: "", signature:""}
   }
 }
