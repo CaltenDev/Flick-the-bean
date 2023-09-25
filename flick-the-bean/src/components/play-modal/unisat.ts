@@ -7,16 +7,13 @@ import crypto from 'crypto';
 
 export const handleUnisat = async () => {
   // @ts-ignore
-  let uniSat =  window.unisat;
-  let cookie = GetCookie('userId');
+  let uniSat = window.unisat;
+  let cookie = SetCookie('userId', '');
 
-  console.log(cookie)
-  console.log(uniSat)
-  if (typeof uniSat !== 'undefined' && cookie == '') {
-    console.log('UniSat Wallet is installed!');
+  if (typeof uniSat !== 'undefined' && cookie == undefined) {
     try {
-      let accounts = await uniSat.requestAccounts();
-      console.log('connect success', accounts);
+      SetCookie('wallet', 'unisat');
+      await uniSat.requestAccounts();
       return getSignature('undefined');
     } catch (e) {
       console.log('connect failed');
@@ -45,8 +42,6 @@ export const getSignature = async (value:string) => {
   } catch (e) {
     console.log(e);
   }
-
-  console.log(sign, publicKey);
   
   let userId = '';
   userId = await login(sign, publicKey, message, hash);
@@ -76,8 +71,6 @@ export const signMessage = async (value: string) => {
   } catch (e) {
     console.log(e);
   }
-
-  console.log(sign, publicKey);
 
   let userId = '';
   if(sign && publicKey && GetCookie('userId') == '') {

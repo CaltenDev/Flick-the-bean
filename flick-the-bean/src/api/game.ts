@@ -15,7 +15,6 @@ export const GetNonce = async () => {
       console.log(error.toJSON());
     });
   } else {
-    console.log('No User Id');
     await handleUnisat()
   }
 }

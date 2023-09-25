@@ -3,29 +3,44 @@ import bitcore from 'bitcore-lib';
 import crypto from 'crypto';
 import { getAddress, signMessage } from 'sats-connect';
 
+
 export const handleXverse = async () => {
-  let message =  crypto.randomBytes(16).toString('hex');
+  let message = crypto.randomBytes(16).toString('hex');
   let hash = bitcore.crypto.Hash.sha256(Buffer.from(message)).toString('hex');
   let address = '';
   let publicKey = '';
-  let sign = '';
+
   const getAddressOptions = {
     payload: {
-      purposes: ['ordinals', 'payment'],
+      purposes: ['payment'],
       message: hash,
       network: {
-        type:'Mainnet'
+        type: 'Mainnet'
       },
     },
     onFinish: (response: any) => {
       address = response.addresses[0].address;
       publicKey = response.addresses[0].publicKey;
-      console.log("res", response);
     },
     onCancel: () => alert('Request canceled'),
-  }
+  };
+
   // @ts-ignore
   await getAddress(getAddressOptions);
+
+  // Now use the separate function to sign the message
+  const sign = await signMessageFunc(address, hash);
+
+  const data = await login(sign, publicKey, message, hash);
+
+  // TODO improve this
+  if (data) {
+    return true;
+  }
+};
+
+export const signMessageFunc = async (address: any, hash: any) => {
+  let sign = '';
 
   const signMessageOptions = {
     payload: {
@@ -38,16 +53,12 @@ export const handleXverse = async () => {
     onFinish: (response: any) => {
       // signature
       sign = response;
-      console.log("signature", response);
     },
     onCancel: () => alert("Canceled"),
   };
+
   // @ts-ignore
   await signMessage(signMessageOptions);
 
-  console.log("message", message);
-  console.log("hash", hash);
-  const data = await login(sign, publicKey, message, hash);
-
-  console.log(data);
-}
+  return sign;
+};
