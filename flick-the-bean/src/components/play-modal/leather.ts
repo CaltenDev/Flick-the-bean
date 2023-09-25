@@ -18,14 +18,12 @@ const getSignature = async () => {
         message: hash,
         async onFinish(data) {
           user = await login(data.signature, data.publicKey, message, hash);
-          console.log(user);
           resolve(user);  // Resolve the promise with the user data
         },
       });
     });
 
     if (userResult) {
-      console.log("user is not null");
       return true;
     } else {
       return false;
@@ -47,17 +45,13 @@ export const handleLeather = async () => {
       onFinish: async () => {
         userSession.loadUserData();
         const signatureData = await getSignature();
-        console.log(signatureData);
         resolve(signatureData);  // Resolve the promise
       },
       userSession: userSession,
     });
   });
 
-  console.log("done");
-
   if (data) {
-    console.log("data is not null");
     return true;
   } else {
     return false;

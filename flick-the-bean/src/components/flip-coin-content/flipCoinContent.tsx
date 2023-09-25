@@ -36,7 +36,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 		const { publicKey, signature } = await signMessage(gameNonce)
 
 		if (publicKey != '' && signature != '') {
-			const didWin = await gameReveal(gameNonce, choice, 1, publicKey, signature);
+			const didWin = await gameReveal(gameNonce, choice, 100.00, publicKey, signature);
 			if (didWin != undefined) {
 				setLoading(false);
 			}

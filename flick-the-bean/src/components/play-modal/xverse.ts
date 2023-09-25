@@ -21,7 +21,6 @@ export const handleXverse = async () => {
     onFinish: (response: any) => {
       address = response.addresses[0].address;
       publicKey = response.addresses[0].publicKey;
-      console.log("res", response);
     },
     onCancel: () => alert('Request canceled'),
   };

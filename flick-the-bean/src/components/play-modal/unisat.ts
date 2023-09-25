@@ -42,8 +42,6 @@ export const getSignature = async (value:string) => {
   } catch (e) {
     console.log(e);
   }
-
-  console.log(sign, publicKey);
   
   let userId = '';
   userId = await login(sign, publicKey, message, hash);
@@ -73,8 +71,6 @@ export const signMessage = async (value: string) => {
   } catch (e) {
     console.log(e);
   }
-
-  console.log(sign, publicKey);
 
   let userId = '';
   if(sign && publicKey && GetCookie('userId') == '') {
