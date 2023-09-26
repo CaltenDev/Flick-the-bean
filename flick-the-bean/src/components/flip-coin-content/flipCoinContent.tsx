@@ -2,7 +2,7 @@ import { GetNonce, gameReveal } from "@/api/game";
 import GetCookie from "@/hooks/cookies/getCookie";
 import SetCookie from "@/hooks/cookies/setCookie";
 import { enqueueSnackbar } from "notistack";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import AddFundModal from "../add-fund-modal/addFundModal";
 import { getLeatherSignature } from "../play-modal/leather";
 import { signMessage } from "../play-modal/unisat";
@@ -17,6 +17,23 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 	const[gameResult, setGameResult] = useState(0);
 	const[acd, setAcd] = useState(0.1);
 	const[loading, setLoading] = useState(false);
+	const[balance, setBalance] = useState(0);
+	const[startAnimation, setStartAnimation] = useState('coin_start.gif');
+
+	useEffect(() => {
+		if(loading) {
+			setTimeout(() => {
+				setStartAnimation('coin_loop.gif')
+			}, 100);
+		} else {
+			setStartAnimation('coin_start.gif')
+		}
+
+		const currentBalance = GetCookie('balance');
+		if (currentBalance != '') {
+			setBalance(Math.round((parseFloat(currentBalance) + Number.EPSILON) * 100) / 100);
+		}
+	}, [loading])
 
   const handleAddFundModal = () => {
     setShowAddFundModal(!showAddFundModal);
@@ -38,18 +55,23 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 		SetCookie('commitment', commitment);
 		SetCookie('gameNonce', gameNonce);
 		const wallet = GetCookie('wallet');
+		const winRandom = Math.floor(Math.random() * (4 - 1 + 1) + 1);
+		const lostRandom = Math.floor(Math.random() * (9 - 5 + 1) + 5);
 
 		if (wallet == 'xverse') {
 			const { publicKey, signature } = await getXverseSign(gameNonce);
-
 			if (publicKey != '' && signature != '') {
-				const gameResponse = await gameReveal(gameNonce, choice, acd, publicKey, signature);
+				const { gameResponse, newBalance } = await gameReveal(gameNonce, choice, acd, publicKey, signature);
 				if (gameResponse != undefined && (gameResponse != 400 || gameResponse != 500)) {
-					setLoading(false);
-					setGameResult(gameResponse ? 1 : 2);
 					setTimeout(() => {
-						setGameResult(0);
-					}, 5000);
+						setStartAnimation(`coin_${gameResponse ? winRandom : lostRandom}.gif`);
+						setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);
+					}, 1000);
+					setTimeout(() => {
+						setLoading(false);
+						setGameResult(gameResponse ? 1 : 2);
+					}, 3600);
+					SetCookie('balance', newBalance);
 				} else {
 					setLoading(false);
 					setGameResult(0);
@@ -62,13 +84,17 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 			const { publicKey, signature } = await signMessage(gameNonce)
 
 			if (publicKey != '' && signature != '') {
-				const gameResponse = await gameReveal(gameNonce, choice, acd, publicKey, signature);
+				const { gameResponse, newBalance } = await gameReveal(gameNonce, choice, acd, publicKey, signature);
 				if (gameResponse != undefined && (gameResponse != 400 || gameResponse != 500)) {
-					setLoading(false);
-					setGameResult(gameResponse ? 1 : 2);
 					setTimeout(() => {
-						setGameResult(0);
-					}, 5000);
+						setStartAnimation(`coin_${gameResponse ? winRandom : lostRandom}.gif`);
+						setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);
+					}, 1000);
+					setTimeout(() => {
+						setLoading(false);
+						setGameResult(gameResponse ? 1 : 2);
+					}, 3600);
+					SetCookie('balance', newBalance);
 				} else {
 					setLoading(false);
 					setGameResult(0);
@@ -81,13 +107,17 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 			const { publicKey, signature } = await getLeatherSignature(gameNonce);
 
 			if (publicKey != '' && signature != '') {
-				const gameResponse = await gameReveal(gameNonce, choice, acd, publicKey, signature);
+				const { gameResponse, newBalance } = await gameReveal(gameNonce, choice, acd, publicKey, signature);
 				if (gameResponse != undefined && (gameResponse != 400 || gameResponse != 500)) {
-					setLoading(false);
-					setGameResult(gameResponse ? 1 : 2);
 					setTimeout(() => {
-						setGameResult(0);
-					}, 5000);
+						setStartAnimation(`coin_${gameResponse ? winRandom : lostRandom}.gif`);
+						setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);
+					}, 1000);
+					setTimeout(() => {
+						setLoading(false);
+						setGameResult(gameResponse ? 1 : 2);
+					}, 3600);
+					SetCookie('balance', newBalance);
 				} else {
 					setLoading(false);
 					setGameResult(0);
@@ -113,17 +143,20 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 					<div className="result mb-20 h-100">
 						{
 							loading && (
-								<video className="coin-flip-animation" src="/video/coin-animation.mp4" controls={false} autoPlay loop />
+								// <video className="coin-flip-animation" src="/video/coin-animation.mp4" controls={false} autoPlay loop />
+								<img className="coin-start-animation" src={`/static/animations/${startAnimation}`} alt="" />
 							)
 						}
 						{
 							gameResult == 1 ? (
 								<>
+									{/* <img className="coin-start-animation" src={`/static/animations/${startAnimation}`} alt="" /> */}
 									<h2 className="result__title">CONGRATULATIONS <br />YOU WON!</h2>
 									<div className="result__subtitle text-success">+{acd} ACD3</div>
 								</>
 							) : gameResult == 2 ? (
 								<>
+									{/* <img className="coin-start-animation" src={`/static/animations/${startAnimation}`} alt="" /> */}
 									<h2 className="result__title">YOU LOST</h2>
 									<div className="result__subtitle text-alert">-{acd} ACD3</div>
 								</>
@@ -138,7 +171,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 					<div className="btns-inner-wrapper">
 						<div className="score-area">
 							<div className="score-area__text">Token used <span className="fw-bold">ACD3</span></div>
-							<div className="score-area__text">Total balance: 0 ACD3</div>
+							<div className="score-area__text">Total balance: {balance} ACD3</div>
 						</div>
 						<div className="btns-row mt-30">
 							<button className="btn-white" id="head-btn" disabled={loading} onClick={() => startGame(true)}>

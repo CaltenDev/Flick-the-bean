@@ -6,26 +6,34 @@ import GetCookie from "@/hooks/cookies/getCookie";
 import { useEffect, useState } from "react";
 
 export default function FlipCoin() {
-  const[isLoggedIn, setIsLoggedIn] = useState(false);
+  const[isError, setIsError] = useState(false);
+  const[show, setShow] = useState(false);
+  const userId = GetCookie('userId');
   useEffect(() => {
-    const userId = GetCookie('userId');
+    setTimeout(() => {
+      setShow(true)
+    }, 500);
 		if (userId == '') {
-      setIsLoggedIn(false);
+      setIsError(true);
 		} else {
-      setIsLoggedIn(true);
+      setIsError(false);
     }
   }, [])
   return (
     <>
-      {isLoggedIn ? (
-        <FlipCoinContent />
-      ) : (
-        <Error
-          message={'Please login first to access this page'}
-          route={'/'}
-          icon={'svgs/stop.svg'}
-        />
-      )}
+      {
+        show ? (
+          isError ? (
+            <Error
+              message={'Please login first to access this page'}
+              route={'/'}
+              icon={'svgs/stop.svg'}
+            />
+          ) : (
+            <FlipCoinContent />
+          )
+        ) : null
+      }
     </>
   )
 }

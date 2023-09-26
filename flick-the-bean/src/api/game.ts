@@ -10,6 +10,8 @@ export const GetNonce = async () => {
     return await axios.post('https://flickthebean.onrender.com/game/commitment', {
       userId: userId,
     }).then(function (res) {
+      console.log("commitment: ", res);
+      
       return res.data.data;
     }).catch(function (error) {
       console.log(error.toJSON());
@@ -27,7 +29,10 @@ export const gameReveal = async (gameNonce: string, choice: boolean, amount: num
     userPublicKey: publicKey,
     signedMessage: sign
   }).then(function (res) {
-    return res.data.didWin;
+
+    console.log("reveal: ", res);
+    
+    return { gameResponse: res.data.didWin, newBalance: res.data.newBalance }
   }).catch(function (error) {
     console.log(error.toJSON());
     return error.status;
