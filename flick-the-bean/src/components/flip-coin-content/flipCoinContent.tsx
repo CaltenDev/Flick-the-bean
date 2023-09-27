@@ -62,7 +62,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 			const { publicKey, signature } = await getXverseSign(gameNonce);
 			if (publicKey != '' && signature != '') {
 				const { gameResponse, newBalance } = await gameReveal(gameNonce, choice, acd, publicKey, signature);
-				if (gameResponse != undefined && (gameResponse != 400 || gameResponse != 500)) {
+				if (gameResponse != undefined && newBalance != '0.00') {
 					setTimeout(() => {
 						setStartAnimation(`coin_${gameResponse ? winRandom : lostRandom}.gif`);
 						setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);
@@ -85,7 +85,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 
 			if (publicKey != '' && signature != '') {
 				const { gameResponse, newBalance } = await gameReveal(gameNonce, choice, acd, publicKey, signature);
-				if (gameResponse != undefined && (gameResponse != 400 || gameResponse != 500)) {
+				if (gameResponse != undefined && newBalance != '0.00') {
 					setTimeout(() => {
 						setStartAnimation(`coin_${gameResponse ? winRandom : lostRandom}.gif`);
 						setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);
@@ -108,7 +108,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 
 			if (publicKey != '' && signature != '') {
 				const { gameResponse, newBalance } = await gameReveal(gameNonce, choice, acd, publicKey, signature);
-				if (gameResponse != undefined && (gameResponse != 400 || gameResponse != 500)) {
+				if (gameResponse != undefined && newBalance != '0.00') {
 					setTimeout(() => {
 						setStartAnimation(`coin_${gameResponse ? winRandom : lostRandom}.gif`);
 						setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);

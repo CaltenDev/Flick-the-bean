@@ -1,12 +1,31 @@
+import { GetProfile } from "@/api/profile";
+import { GetrecentFlickers } from "@/api/recent-flickers";
+import { useQuery } from "@tanstack/react-query";
 import { FC } from "react";
 import Modal from "../modal/modal";
+import RecentFlickersTable from "../recent-flickers-table/recentFlickerTable";
 
 interface ProfileModalProps {
 	show: boolean;
   handleModal: () => void;
 }
 
+const RecentTable = () => {
+	const {data} = useQuery({
+    queryKey: ['recent'],
+    queryFn: async () => await GetrecentFlickers()
+  })
+	return (
+		<RecentFlickersTable classname="auto" tableData={data} />
+	);
+}
+
 const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
+	const {data, isLoading} = useQuery({
+    queryKey: ['profile'],
+    queryFn:  GetProfile
+  });
+
   return(
 		<Modal customClass={'profile-modal'} show={show} handleModal={handleModal}>
 			<div className="profile">
@@ -22,8 +41,8 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 								<p className="profile__text">Start flipping on September 2023</p>
 							</div>
 							<div className="profile__stats">
-								<div className="profile__legend">Success in a row: 10</div>
-								<div className="profile__legend">Fails in a row: 230</div>
+								<div className="profile__legend">Total Bets: {Math.round((parseFloat(data?.data.data.insights.totalAmountBet) + Number.EPSILON) * 100) / 100}</div>
+								<div className="profile__legend">Total Earning: {Math.round((parseFloat(data?.data.data.insights.totalEarnings) + Number.EPSILON) * 100) / 100}</div>
 							</div>
 						</div>
 					</div>
@@ -64,48 +83,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 				<div className="profile__history">
 					<h2 className="profile__subheading">Flip History</h2>
 					<div className="profile__seprator"></div>
-					<ul className="primary-list primary-list--auto">
-						<li className="primary-list__item">
-							<div className="primary-list__col">8Y2M...QKrQ</div>
-							<div className="primary-list__col-2">flipped 0.1 eth and lost.</div>
-							<div className="primary-list__col">an hr ago</div>
-						</li>
-						<li className="primary-list__item">
-							<div className="primary-list__col">8Y2M...QKrQ</div>
-							<div className="primary-list__col-2">flipped 0.2 eth and doubled.</div>
-							<div className="primary-list__col">an hr ago</div>
-						</li>
-						<li className="primary-list__item">
-							<div className="primary-list__col">8Y2M...QKrQ</div>
-							<div className="primary-list__col-2">flipped 0.1 eth and lost.</div>
-							<div className="primary-list__col">an hr ago</div>
-						</li>
-						<li className="primary-list__item">
-							<div className="primary-list__col">8Y2M...QKrQ</div>
-							<div className="primary-list__col-2">flipped 0.2 eth and doubled.</div>
-							<div className="primary-list__col">an hr ago</div>
-						</li>
-						<li className="primary-list__item">
-							<div className="primary-list__col">8Y2M...QKrQ</div>
-							<div className="primary-list__col-2">flipped 0.1 eth and lost.</div>
-							<div className="primary-list__col">an hr ago</div>
-						</li>
-						<li className="primary-list__item">
-							<div className="primary-list__col">8Y2M...QKrQ</div>
-							<div className="primary-list__col-2">flipped 0.2 eth and doubled.</div>
-							<div className="primary-list__col">an hr ago</div>
-						</li>
-						<li className="primary-list__item">
-							<div className="primary-list__col">8Y2M...QKrQ</div>
-							<div className="primary-list__col-2">flipped 0.1 eth and lost.</div>
-							<div className="primary-list__col">an hr ago</div>
-						</li>
-						<li className="primary-list__item">
-							<div className="primary-list__col">8Y2M...QKrQ</div>
-							<div className="primary-list__col-2">flipped 0.2 eth and doubled.</div>
-							<div className="primary-list__col">an hr ago</div>
-						</li>
-					</ul>
+					<RecentTable />
 				</div>
 			</div>
 		</Modal>

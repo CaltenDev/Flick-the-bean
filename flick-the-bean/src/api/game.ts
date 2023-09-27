@@ -29,12 +29,10 @@ export const gameReveal = async (gameNonce: string, choice: boolean, amount: num
     userPublicKey: publicKey,
     signedMessage: sign
   }).then(function (res) {
-
     console.log("reveal: ", res);
-    
     return { gameResponse: res.data.didWin, newBalance: res.data.newBalance }
   }).catch(function (error) {
     console.log(error.toJSON());
-    return error.status;
+    return  { gameResponse: false, newBalance: "0.00" }
   });
 }
