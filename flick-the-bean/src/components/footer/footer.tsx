@@ -21,7 +21,7 @@ const Footer:FC<FooterProps> = () => {
     }
   }, [])
   return(
-  <footer className="footer mt-0">
+  <footer className="footer">
     { isLoggedin && <UnlockRewards /> }
     <h3 className="footer__heading">
       Game powered by ordinal <a href="#" className="footer__heading-number">12335432232</a>
