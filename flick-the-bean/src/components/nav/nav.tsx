@@ -58,7 +58,10 @@ const Navbar:FC<NavbarProps> = () => {
         <div className="header__wrap">
           { pathName === '/flip-coin' && (
             <>
-              <button className="btn-outline" onClick={() => router.push('/exchange')}>Exchange Token</button>
+              <div>
+                <button className="btn-outline" onClick={() => router.push('/deposit')}>Deposit</button>
+                <button className="btn-outline ml-10" onClick={() => router.push('/exchange')}>Exchange Token</button>
+              </div>
 
               <div className="header__profile">
                 <figure className="header__profile-figure">
