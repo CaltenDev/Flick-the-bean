@@ -40,6 +40,7 @@ export const handleXverse = async () => {
     SetCookie('sign', sign);
     SetCookie('publicKey', publicKey);
     SetCookie('wallet', 'xverse');
+    SetCookie('address', address)
     // TODO improve this
     if (userId) {
       return true;

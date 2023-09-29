@@ -13,7 +13,8 @@ export const handleUnisat = async () => {
 
   if (typeof uniSat !== 'undefined' && cookie == '') {
     try {
-      await uniSat.requestAccounts();
+      const address = await uniSat.requestAccounts();
+      SetCookie('address', address[0])
       return getSignature();
     } catch (e) {
       console.log('connect failed');
