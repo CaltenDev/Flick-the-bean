@@ -1,19 +1,23 @@
 import { GetrecentFlickers } from "@/api/recent-flickers";
 import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 import PlayModal from "../play-modal/playModal";
 import RecentFlickersTable from "../recent-flickers-table/recentFlickerTable";
 
 const HomeContent:FC = () => {
   const[showModal, setShowModal] = useState(false);
+  const searchParams = useSearchParams();
+  const search = searchParams.get('ref')
+
   const {data, isLoading, isRefetching} = useQuery({
     queryKey: ['recent'],
-    queryFn:  GetrecentFlickers
+    queryFn:  () => GetrecentFlickers(search)
   });
 
 
   useEffect(() => {
-    console.log("component mounted");
+    console.log("component mounted", search);
   }, [])
 
   if(isLoading) {

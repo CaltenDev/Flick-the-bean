@@ -283,7 +283,8 @@
 	&__stats {
 		display: flex;
 		gap: 15px;
-		margin-top: auto;
+		// margin-top: auto;
+		flex-direction: column;
 	}
 
 	&__legend {

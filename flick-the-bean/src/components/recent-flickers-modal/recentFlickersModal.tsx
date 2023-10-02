@@ -13,7 +13,7 @@ interface RecentFlickersModalProps {
 const RecentFlickersModal:FC<RecentFlickersModalProps> = ({ show, handleModal }) => {
 	const {data} = useQuery({
     queryKey: ['recent'],
-    queryFn: async () => await GetrecentFlickers()
+    queryFn: async () => await GetrecentFlickers(null)
   })
   return(
 		<Modal customClass={'flickers-modal'} show={show} handleModal={handleModal}>
