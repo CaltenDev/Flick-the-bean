@@ -1,12 +1,13 @@
 import { BTCToBRC, BrcToBTC, GetExchangeBalance } from "@/api/exchange";
 import { useQuery } from "@tanstack/react-query";
+import { enqueueSnackbar } from "notistack";
 import { ChangeEvent, useEffect, useState } from "react";
 import RecentFlickersModal from "../recent-flickers-modal/recentFlickersModal";
 
 const Exchange = () => {
 	const[refetching, setRefetching] = useState(false);
 	const[loading, setLoading] = useState(false);
-	const {data, refetch} = useQuery({
+	const {data, refetch, isError} = useQuery({
 		queryKey: ['getBalance'],
 		queryFn: GetExchangeBalance
 	});
@@ -14,6 +15,10 @@ const Exchange = () => {
 	useEffect(() => {
 
 	},[refetching]);
+
+	if(isError) {
+		enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+	}
 
   const[showRecentModal, setShowRecentModal] = useState(false);
 	const[btcToBrc, setBtcToBrc] = useState(true);
@@ -29,25 +34,33 @@ const Exchange = () => {
   }
 
 	const handleBtcToBrc = async () => {
-		setLoading(true);
-		const exchangeAmount = btc.includes('.') ? parseFloat(btc) : parseInt(btc);
-    const res = await BTCToBRC(exchangeAmount);
-		console.log(res);
-		setRefetching(!refetching);
-		refetch();
-		setBtc('');
-		setBrc('');
-		setLoading(false);
+		try {
+			setLoading(true);
+			const exchangeAmount = btc.includes('.') ? parseFloat(btc) : parseInt(btc);
+			const res = await BTCToBRC(exchangeAmount);
+			console.log(res);
+			setRefetching(!refetching);
+			refetch();
+			setBtc('');
+			setBrc('');
+			setLoading(false);
+		} catch(e) {
+			enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+		}
   }
 
 	const handleBrcToBtc = async () => {
-		setLoading(true);
-		const exchangeAmount = brc.includes('.') ? parseFloat(brc) : parseInt(brc);
-    const res = await BrcToBTC(exchangeAmount);
-		console.log(res);
-		setRefetching(!refetching);
-		refetch();
-		setLoading(false);
+		try {
+			setLoading(true);
+			const exchangeAmount = brc.includes('.') ? parseFloat(brc) : parseInt(brc);
+			const res = await BrcToBTC(exchangeAmount);
+			console.log(res);
+			setRefetching(!refetching);
+			refetch();
+			setLoading(false);
+		} catch(e) {
+			enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+		}
   }
 
 	const handleFieldBtc = (e: ChangeEvent<HTMLInputElement>) => {
