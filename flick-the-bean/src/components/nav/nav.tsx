@@ -69,8 +69,8 @@ const Navbar:FC<NavbarProps> = () => {
           { pathName === '/flip-coin' && (
             <>
               <div>
-                <button className="btn-outline" onClick={() => router.push('/deposit')}>Deposit</button>
-                <button className="btn-outline ml-10" onClick={() => router.push('/exchange')}>Exchange Token</button>
+                <button className="btn-outline" onClick={() => router.push('/exchange')}>Exchange token</button>
+                <button className="btn-outline ml-10" onClick={() => router.push('/deposit')}>Deposit / Withdraw</button>
               </div>
 
               <div className="header__profile">
@@ -88,7 +88,7 @@ const Navbar:FC<NavbarProps> = () => {
                     />
                   </div>
                 </figure>
-                <p className="header__profile-text">{pubKey}</p>
+                {/* <p className="header__profile-text">{pubKey}</p> */}
                 <button className="header__profile-share" onClick={logout}>
                   <img src="/static/svgs/profile-share.svg" alt="share icon" />
                 </button>

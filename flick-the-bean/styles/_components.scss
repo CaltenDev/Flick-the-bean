@@ -435,15 +435,17 @@
 
 .btn-outline {
 	padding: 15px;
-	border: 1px solid var(--white);
-	background-color: transparent;
+	border: 3px solid rgba(0, 0, 0, 1);
+	border-radius: 12px;
+	background: linear-gradient(180deg, #1D2A49 0%, #0B101D 100%);
 	color: var(--white);
-	font-size: 16px;
+	font-family: 'Play';
+	font-size: 20px;
 	font-weight: 400;
+	line-height: 23.14px;
 	&[disabled] {
 		border: 1px solid #f5f5f51c !important;
     color: #f5f5f51c;
-    box-shadow: none !important;
 		cursor: not-allowed;
 	}
 
