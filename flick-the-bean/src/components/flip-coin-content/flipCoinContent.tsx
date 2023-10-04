@@ -8,6 +8,9 @@ import { getLeatherSignature } from "../play-modal/leather";
 import { signMessage } from "../play-modal/unisat";
 import { getXverseSign } from "../play-modal/xverse";
 import RecentFlickersModal from "../recent-flickers-modal/recentFlickersModal";
+import {
+	useBalanceStore,
+} from '../../store'
 interface FlipCoinContentProps {
 }
 
@@ -19,6 +22,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 	const[loading, setLoading] = useState(false);
 	const[balance, setBalance] = useState(0);
 	const[startAnimation, setStartAnimation] = useState('coin_start.gif');
+	const updateBalance = useBalanceStore(state => state.updateBalance);
 
 	useEffect(() => {
 		if(loading) {
@@ -34,6 +38,10 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 			setBalance(Math.round((parseFloat(currentBalance) + Number.EPSILON) * 100) / 100);
 		}
 	}, [loading])
+
+	useEffect(() => {
+		updateBalance(balance)
+	}, [balance])
 
   const handleAddFundModal = () => {
     setShowAddFundModal(!showAddFundModal);

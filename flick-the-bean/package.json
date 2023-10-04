@@ -28,7 +28,8 @@
     "react-dom": "18.2.0",
     "sass": "^1.66.1",
     "sats-connect": "^1.1.1",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "zustand": "^4.4.2"
   },
   "devDependencies": {
     "@types/bitcore-lib": "^0.15.4",

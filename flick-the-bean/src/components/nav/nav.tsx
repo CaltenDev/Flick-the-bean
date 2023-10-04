@@ -7,7 +7,9 @@ import { usePathname, useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from "react";
 import FaqModal from '../faq-modal/faqModal';
 import ProfileModal from '../profile-modal/profileModal';
-
+import {
+  useBalanceStore,
+} from '../../store'
 interface NavbarProps {
 }
 
@@ -19,6 +21,7 @@ const Navbar:FC<NavbarProps> = () => {
   const[showProfileModal, setShowProfileModal] = useState(false);
   const[pubKey, setPubkey] = useState('');
   const { isLoggedin, setIsLoggedIn } = useGlobalContext();
+  let balance = useBalanceStore(state => state.balance);
 
   useEffect(() => {
     const key = GetCookie('publicKey');
@@ -57,7 +60,7 @@ const Navbar:FC<NavbarProps> = () => {
         </button>
         <div className='header__logo_separator'></div>
         <div className='header__logo_balance'>
-          0
+          {balance}
           <span>ACD3</span>
         </div>
       </div>
