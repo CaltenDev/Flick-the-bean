@@ -27,12 +27,11 @@ const PlayModal: FC<PlayModalProps> = ({ show, handleModal }) => {
 	const { isLoggedin, setIsLoggedIn } = useGlobalContext();
 	return (
 		<Modal customClass={'play-modal'} show={show} handleModal={handleModal}>
-			<h1 className="modal__heading text-center">Connect your wallet to play</h1>
+			<h1 className="modal__heading text-center">Connect your <br />wallet to play</h1>
 			<p className="modal__text text-center">
-				If you dont have a wallet, you can select a provider <br />
-				and <a href="#" className="modal__anchor">create one now</a>
+				If you dont have a wallet, you can select a <br /> provider 
+				and create one now
 			</p>
-			<div className="modal__seprator"></div>
 			<div className="modal__btn-wrapper">
 				<button disabled={loading} className="btn-secondary" onClick={async () => {
 					setLoading(true);

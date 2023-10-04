@@ -14,7 +14,7 @@
 	}
 
 	&__content {
-		padding: 45px;
+		padding: 45px 20px 20px;
 		background-color: var(--modal-content-bg);
 		color: var(--white);
 		position: relative;
@@ -33,14 +33,21 @@
 	}
 
 	&__heading {
-		font-size: 22px;
+		font-family: 'Play';
+		font-weight: 700;
+		font-size: 24px;
 		text-transform: uppercase;
-		font-weight: 600;
+		line-height: 27.77px;
+		color: rgba(253, 205, 0, 1);
 	}
 
 	&__text {
+		font-family: 'Play';
+		font-weight: 400;
 		font-size: 16px;
+		line-height: 18.51px;
 		margin: 20px 0;
+		color: rgba(255, 255, 255, 1)		;
 	}
 
 	&__anchor {
@@ -57,9 +64,18 @@
 	}
 
 	&__btn-wrapper {
-		display: grid;
-		padding: 30px 15px 0;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 30px 50px;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+
+		button {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			
+			img {
+				width: unset;
+			}
+		}
 	}
 }
