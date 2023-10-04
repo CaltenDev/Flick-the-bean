@@ -15,8 +15,10 @@
 
 	&__content {
 		padding: 45px 20px 20px;
-		background-color: var(--modal-content-bg);
+		background-color: rgba(14, 20, 37, 1);
+		border-radius: 16px;
 		color: var(--white);
+		border: 2px solid rgba(10, 14, 26, 1);
 		position: relative;
 	}
 
@@ -26,9 +28,9 @@
 		padding: 0;
 		outline: 0;
 		position: absolute;
-		right: 0;
-		top: 0;
-		transform: translate(40%, -40%);
+		right: 16px;
+		top: 16px;
+		// transform: translate(40%, -40%);
 		cursor: pointer;
 	}
 
@@ -69,11 +71,12 @@
 		gap: 10px;
 
 		button {
-			width: 100%;
+			width: 418px;
 			display: flex;
 			justify-content: center;
-			
-			img {
+			background-color: rgba(20, 29, 52, 1);
+			border-radius: 8.9px;
+						img {
 				width: unset;
 			}
 		}
