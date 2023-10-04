@@ -24,9 +24,10 @@ const Footer:FC<FooterProps> = () => {
   <footer className="footer">
     { isLoggedin && <UnlockRewards /> }
     <h3 className="footer__heading">
-      Game powered by ordinal <a href="#" className="footer__heading-number">12335432232</a>
+      3% fees apply for every flip. <br />
+      Refer to <a href="#" className="footer__heading-number">FAQ</a> for more information.
     </h3>
-    <h3 className="footer__subheading">All rights reserved to Flick the Bean ©</h3>
+    <h3 className="footer__subheading">Game powered by ordinal 12335432232  <br /> <span>All rights reserved to Flick the Bean</span></h3>
   </footer>
     
   )

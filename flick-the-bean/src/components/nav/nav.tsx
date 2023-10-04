@@ -52,7 +52,7 @@ const Navbar:FC<NavbarProps> = () => {
   return(
     <header className="header">
       <button className="flex-shrink-0">
-        <img src="/static/svgs/logo.svg" alt="logo" onClick={logout} />
+        <img src="/static/svgs/logo_new.svg" alt="logo" onClick={logout} />
       </button>
       <div className="header__wrap">
         <div className="header__wrap">

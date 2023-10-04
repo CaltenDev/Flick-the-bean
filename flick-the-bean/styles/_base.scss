@@ -6,23 +6,30 @@
 	box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Play';
+    src: url("../public/static/fonts/Play/Play-Regular.ttf");
+}
+
 :root {
 	--black: #000;
+	--background: #0B101D;
 	--white: #fff;
 	--primary-btn-hover-bg: rgba(255, 255, 255, 0.15);
 	--list-even-bg: #303030;
 	--modal-content-bg: #1c1c1c;
+	--gray: rgba(255, 255, 255, 0.4);
 }
 
 body {
-	background: var(--black);
+	background: var(--background);
 	color: var(--white);
 	font-family: sans-serif;
 	height: 100vh;
 }
 
 .bg-wrapper {
-	background-image: url(/static/img/bandana-guy-and-coins.png), url(/static/img/2-Beans-B.png);
+	// background-image: url(/static/img/bandana-guy-and-coins.png), url(/static/img/2-Beans-B.png);
 	background-position: left 100px bottom, right 100px bottom;
 	background-repeat: no-repeat, no-repeat;
 	height: 100%;
