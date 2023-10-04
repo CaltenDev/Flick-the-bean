@@ -47,7 +47,7 @@ const HomeContent:FC = () => {
           <span>
             #1 place to <br /> bean flick and <br /> coin flip
           </span>
-          <img src="/static/img/start_button.png" alt="start_button" onClick={handleModal}/>
+          <div className="start_button" onClick={handleModal}></div>
           <RecentFlickersTable tableData={data} />
         </section>
       </div>
