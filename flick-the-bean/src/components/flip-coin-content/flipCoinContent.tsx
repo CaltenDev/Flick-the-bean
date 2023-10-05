@@ -84,8 +84,10 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 		SetCookie('commitment', commitment);
 		SetCookie('gameNonce', gameNonce);
 		const wallet = GetCookie('wallet');
-		const winRandom = Math.floor(Math.random() * (4 - 1 + 1) + 1);
-		const lostRandom = Math.floor(Math.random() * (9 - 5 + 1) + 5);
+		let winAnimations = [23,22,20,13,11,9,6,5,3];
+		let lostAnimations = [1,4,8,10,12,14,15,16,18,19,21];
+		const winRandom = winAnimations[Math.floor(Math.random() * winAnimations.length)];
+		const lostRandom = lostAnimations[Math.floor(Math.random() * lostAnimations.length)];
 
 		if (wallet == 'xverse') {
 			const { publicKey, signature } = await getXverseSign(gameNonce);

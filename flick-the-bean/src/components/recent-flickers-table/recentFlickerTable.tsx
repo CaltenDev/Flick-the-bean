@@ -21,7 +21,7 @@ const RecentFlickersTable:FC<RecentFlickersTableProps> = ({ tableData, classname
       </li>
       <li>
         <ul>
-        {
+        {/* {
           tableData ? tableData.map((item, index) => (
             <li className="primary-list__item" key={index}>
               <div className="primary-list__col">{item?.public_key.slice(0, 5)}...{item?.public_key.slice(-5)}</div>
@@ -29,7 +29,7 @@ const RecentFlickersTable:FC<RecentFlickersTableProps> = ({ tableData, classname
               <div className="primary-list__col-3">{item.timeAgo}</div>
             </li>
           )) : <p style={{ textAlign: 'center', marginTop: 50 }}>Loading Data</p>
-        }  
+        }   */}
         </ul>  
       </li>
       
