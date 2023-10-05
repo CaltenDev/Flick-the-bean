@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "dep-netlify": "netlify deploy --build --prod"
   },
   "dependencies": {
+    "@netlify/plugin-nextjs": "^4.40.1",
     "@stacks/connect": "^7.4.0",
     "@stacks/network": "^6.5.5",
     "@tanstack/react-query": "^4.35.3",
@@ -32,6 +34,7 @@
   "devDependencies": {
     "@types/bitcore-lib": "^0.15.4",
     "@types/js-cookie": "^3.0.4",
-    "@types/react-copy-to-clipboard": "^5.0.4"
+    "@types/react-copy-to-clipboard": "^5.0.4",
+    "netlify-cli": "^16.3.1"
   }
 }
