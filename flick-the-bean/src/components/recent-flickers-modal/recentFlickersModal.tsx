@@ -7,7 +7,7 @@ import RecentFlickersTable from "../recent-flickers-table/recentFlickerTable";
 interface RecentFlickersModalProps {
 	show: boolean;
   handleModal: () => void;
-  data: Array;
+  data: Array<Object>;
 }
 
 
