@@ -99,12 +99,6 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 					setTimeout(() => {
 						setLoading(false);
 						setGameResult(gameResponse ? 1 : 2);
-						if(gameResponse == 1) {
-							setStartAnimation('coin_win.gif');
-						}
-						if(gameResponse == 2) {
-							setStartAnimation('coin_lose.gif');
-						}
 					}, 3600);
 					SetCookie('balance', newBalance);
 				} else {
