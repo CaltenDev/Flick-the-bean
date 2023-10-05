@@ -19,11 +19,49 @@
 	display: flex;
 }
 .result {
-	border: 1px solid blue;
 	background-image: url('../public/static/img/border.png');
 	background-repeat: no-repeat;
 	width: 683px;
 	height: 534px;
+	user-select: none;
+
+	img {
+		width: 400px;
+	}
+
+	&__title {
+		font-family: "Press Start 2P";
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 48px;
+
+		color: rgba(255, 255, 255, 1);
+		text-shadow: 0px 0px 24px rgba(255, 255, 255, 1) inset;
+		text-shadow: 0px 2px 12px rgba(255, 255, 255, 1);
+		text-shadow: 0px 2px 44px rgba(255, 255, 255, 1);
+	}
+
+	&__subtitle {
+		font-family: "Press Start 2P";
+		font-weight: 400;
+		font-size: 24px;
+		line-height: 24px;
+
+	}
+	
+	.text-success {
+		color: rgba(91, 239, 67, 1);
+		text-shadow: 0px 0px 24px rgba(91, 239, 67, 1) inset;
+		text-shadow: 0px 2px 12px rgba(91, 239, 67, 1);
+		text-shadow: 0px 2px 44px rgba(91, 239, 67, 1);
+	}
+
+	.text-alert {
+		color: rgba(239, 67, 67, 1);
+		text-shadow: 0px 0px 24px rgba(239, 67, 67, 1) inset;
+		text-shadow: 0px 2px 12px rgba(239, 67, 67, 1);
+		text-shadow: 0px 2px 44px rgba(239, 67, 67, 1);
+	}
 }
 
 .btns-inner-wrapper {

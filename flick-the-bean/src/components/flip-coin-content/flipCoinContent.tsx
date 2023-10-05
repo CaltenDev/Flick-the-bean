@@ -93,6 +93,12 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 					setTimeout(() => {
 						setLoading(false);
 						setGameResult(gameResponse ? 1 : 2);
+						if(gameResponse == 1) {
+							setStartAnimation('coin_win.gif');
+						}
+						if(gameResponse == 2) {
+							setStartAnimation('coin_lose.gif');
+						}
 					}, 3600);
 					SetCookie('balance', newBalance);
 				} else {
@@ -163,34 +169,26 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 				</div>
 				<section className="btns-wrapper">
 					{/* <button className="btn-outline btn-outline--big mb-20">Switch to 2x mode</button> */}
-					<div className="mb-20 h-100">
+					<div className="result mb-20 h-100">
 						{
 							loading && (
-								// <video className="coin-flip-animation" src="/video/coin-animation.mp4" controls={false} autoPlay loop />
 								<img className="coin-start-animation" src={`/static/animations/${startAnimation}`} alt="" />
 							)
 						}
 						{
 							gameResult == 1 ? (
 								<>
-									{/* <img className="coin-start-animation" src={`/static/animations/${startAnimation}`} alt="" /> */}
-									<h2 className="result__title">CONGRATULATIONS <br />YOU WON!</h2>
+									<img className="coin-start-animation" src={`/static/animations/${startAnimation}`} alt="" />
+									<h2 className="result__title">YOU WON!</h2>
 									<div className="result__subtitle text-success">+{acd} ACD3</div>
 								</>
 							) : gameResult == 2 ? (
 								<>
-									{/* <img className="coin-start-animation" src={`/static/animations/${startAnimation}`} alt="" /> */}
+									<img className="coin-start-animation" src={`/static/animations/${startAnimation}`} alt="" />
 									<h2 className="result__title">YOU LOST</h2>
 									<div className="result__subtitle text-alert">-{acd} ACD3</div>
 								</>
 							) : (<></>)
-						}
-					</div>
-					<div className="result mb-20 h-100">
-						{
-							loading && (
-								<img className="coin-start-animation" src={`/static/animations/${startAnimation}`} alt="" />
-							)
 						}
 					</div>
 					{/* <div className="result mb-20 h-100">
@@ -205,10 +203,10 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 						<div className="btns-control">
 							<div className="btns-control-left">
 								<div className="btns-row mt-30">
-									<button className="" id="head-btn" disabled={loading} onClick={() => {setStatus('heads'); setStartAnimation(true);}}>
+									<button className="" id="head-btn" disabled={loading} onClick={() => {setStatus('heads'); startGame(true);}}>
 										<img className="btn-white__avatar" src={`/static/img/heads${status == 'heads' ? '_active' : '_disable'}.png`} alt="head icon" />
 									</button>
-									<button className="" disabled={loading} onClick={() => {setStatus("tails"); setStartAnimation(false);}}>
+									<button className="" disabled={loading} onClick={() => {setStatus("tails"); startGame(false);}}>
 										<img className="btn-white__avatar" src={`/static/img/tails${status == 'tails' ? '_active' : '_disable'}.png`} alt="tail icon" />
 									</button>
 								</div>
