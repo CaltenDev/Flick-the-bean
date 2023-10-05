@@ -156,6 +156,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 				setLoading(false);
 			}
 		}
+		setStatus("");
 	}
 
   return(
@@ -227,7 +228,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 									<img className="switch-node" src="/static/img/switch_node.png" alt="switch"/>
 									<img className="switch-ball" src="/static/img/switch_ball.png" alt="switch"/>
 								</div>
-								<img src={`/static/img/arrow_${(idx+1)}.svg`} alt="switch"/>
+								<img src={`/static/img/arrow_${(idx+1)}.png`} alt="switch"/>
 							</div>
 						</div>
 						<div className="btns-display">
