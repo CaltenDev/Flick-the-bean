@@ -7,14 +7,11 @@ import RecentFlickersTable from "../recent-flickers-table/recentFlickerTable";
 interface RecentFlickersModalProps {
 	show: boolean;
   handleModal: () => void;
+  data: Array;
 }
 
 
-const RecentFlickersModal:FC<RecentFlickersModalProps> = ({ show, handleModal }) => {
-	const {data} = useQuery({
-    queryKey: ['recent'],
-    queryFn: async () => await GetrecentFlickers(null)
-  })
+const RecentFlickersModal:FC<RecentFlickersModalProps> = ({ show, handleModal, data }) => {
   return(
 		<Modal customClass={'flickers-modal'} show={show} handleModal={handleModal}>
 			<RecentFlickersTable tableData={data} />

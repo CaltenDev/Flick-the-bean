@@ -1,6 +1,8 @@
 import { GetNonce, gameReveal } from "@/api/game";
+import { GetrecentFlickers } from "@/api/recent-flickers";
 import GetCookie from "@/hooks/cookies/getCookie";
 import SetCookie from "@/hooks/cookies/setCookie";
+import { useQuery } from "@tanstack/react-query";
 import { enqueueSnackbar } from "notistack";
 import { FC, useEffect, useState } from "react";
 import AddFundModal from "../add-fund-modal/addFundModal";
@@ -15,6 +17,10 @@ interface FlipCoinContentProps {
 }
 
 const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
+	const {data} = useQuery({
+		queryKey: ['recent'],
+		queryFn: async () => await GetrecentFlickers(null)
+	  })
   const[showRecentModal, setShowRecentModal] = useState(false);
   const[showAddFundModal, setShowAddFundModal] = useState(false);
 	const[gameResult, setGameResult] = useState(0);
@@ -249,10 +255,16 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 									<span>See all</span>
 								</div>
 								<div className="btns-display-recent-value">
-									<img src="/static/img/recent.png" />
-									<div className="amount">
-										<span className="balance">8Y2M...QKrQ</span> just flipped <br /><span className="bold">0.1 eth</span> and <span className="lost">lost</span>
-									</div>
+									{
+										data ? <>
+											<img src={`/static/img/${data[0]?.outcome}.png`} />
+											<div className="amount">
+												<span className="balance">
+													{data[0]?.public_key.slice(0, 5)}...{data[0]?.public_key.slice(-5)}	
+												</span> just flipped <br /><span className="bold">{Math.round((parseFloat(data[0].bet_amount) + Number.EPSILON) * 100) / 100} ACD3</span> and <span className={data[0].outcome}>{data[0].outcome}</span>
+											</div>
+										</> : 'Loading Data'
+									}
 								</div>
 							</div>
 						</div>
@@ -269,7 +281,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 							</button>
 						</div> */}
 					</div>
-          <RecentFlickersModal show={showRecentModal} handleModal={handleRecentModal} />
+          <RecentFlickersModal show={showRecentModal} handleModal={handleRecentModal} data={data} />
           <AddFundModal show={showAddFundModal} handleModal={handleAddFundModal} />
 				</section>
     </>
