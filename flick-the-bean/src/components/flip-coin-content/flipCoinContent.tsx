@@ -186,8 +186,12 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 							) : (<></>)
 						}
 					</div>
-					<div className="result">
-
+					<div className="result mb-20 h-100">
+						{
+							loading && (
+								<img className="coin-start-animation" src={`/static/animations/${startAnimation}`} alt="" />
+							)
+						}
 					</div>
 					{/* <div className="result mb-20 h-100">
 						<h2 className="result__title">YOU LOST</h2>
@@ -201,10 +205,10 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 						<div className="btns-control">
 							<div className="btns-control-left">
 								<div className="btns-row mt-30">
-									<button className="" id="head-btn" disabled={loading} onClick={() => setStatus('heads')}>
+									<button className="" id="head-btn" disabled={loading} onClick={() => {setStatus('heads'); setStartAnimation(true);}}>
 										<img className="btn-white__avatar" src={`/static/img/heads${status == 'heads' ? '_active' : '_disable'}.png`} alt="head icon" />
 									</button>
-									<button className="" disabled={loading} onClick={() => setStatus("tails")}>
+									<button className="" disabled={loading} onClick={() => {setStatus("tails"); setStartAnimation(false);}}>
 										<img className="btn-white__avatar" src={`/static/img/tails${status == 'tails' ? '_active' : '_disable'}.png`} alt="tail icon" />
 									</button>
 								</div>
