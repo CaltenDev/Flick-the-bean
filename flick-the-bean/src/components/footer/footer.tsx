@@ -22,7 +22,7 @@ const Footer:FC<FooterProps> = () => {
   }, [])
   return(
   <footer className="footer">
-    { isLoggedin && <UnlockRewards /> }
+    {/* { isLoggedin && <UnlockRewards /> } */}
     <h3 className="footer__heading">
       3% fees apply for every flip. <br />
       Refer to <a href="#" className="footer__heading-number">FAQ</a> for more information.

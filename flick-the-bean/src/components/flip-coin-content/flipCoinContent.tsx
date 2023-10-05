@@ -21,6 +21,10 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 	const[acd, setAcd] = useState(0.1);
 	const[loading, setLoading] = useState(false);
 	const[balance, setBalance] = useState(0);
+	const[points, setPoints] = useState(625);
+	const[status, setStatus] = useState('');
+	const[start, setStart] = useState(false);
+	const[idx, setIdx] = useState(0);
 	const[startAnimation, setStartAnimation] = useState('coin_start.gif');
 	const updateBalance = useBalanceStore(state => state.updateBalance);
 
@@ -42,6 +46,17 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 	useEffect(() => {
 		updateBalance(balance)
 	}, [balance])
+
+	useEffect(() => {
+		const intervalId = setInterval(() => {
+			setIdx((beforeIdx) => {
+				return (beforeIdx + 1) % 3
+			})
+		}, 200)
+		return () => {
+			clearInterval(intervalId);
+		}
+	})
 
   const handleAddFundModal = () => {
     setShowAddFundModal(!showAddFundModal);
@@ -140,15 +155,15 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
   return(
     <>
       <div>
-					<p className="secondary-heading text-center m-0 mb-10">Flip Responsibly!</p>
+					{/* <p className="secondary-heading text-center m-0 mb-10">Flip Responsibly!</p>
 					<h1 className="heading-primary">
 						#1 PLACE TO <br /><span className="heading-primary__thick">BEAN</span> FLICK AND
 						<span className="heading-primary__thick">COIN</span> FLIP
-					</h1>
+					</h1> */}
 				</div>
 				<section className="btns-wrapper">
 					{/* <button className="btn-outline btn-outline--big mb-20">Switch to 2x mode</button> */}
-					<div className="result mb-20 h-100">
+					<div className="mb-20 h-100">
 						{
 							loading && (
 								// <video className="coin-flip-animation" src="/video/coin-animation.mp4" controls={false} autoPlay loop />
@@ -171,48 +186,85 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 							) : (<></>)
 						}
 					</div>
+					<div className="result">
 
+					</div>
 					{/* <div className="result mb-20 h-100">
 						<h2 className="result__title">YOU LOST</h2>
 						<div className="result__subtitle text-alert">-0.25 ACD3</div>
 					</div> */}
 					<div className="btns-inner-wrapper">
-						<div className="score-area">
+						{/* <div className="score-area">
 							<div className="score-area__text">Token used <span className="fw-bold">ACD3</span></div>
 							<div className="score-area__text">Total balance: {balance} ACD3</div>
+						</div> */}
+						<div className="btns-control">
+							<div className="btns-control-left">
+								<div className="btns-row mt-30">
+									<button className="" id="head-btn" disabled={loading} onClick={() => setStatus('heads')}>
+										<img className="btn-white__avatar" src={`/static/img/heads${status == 'heads' ? '_active' : '_disable'}.png`} alt="head icon" />
+									</button>
+									<button className="" disabled={loading} onClick={() => setStatus("tails")}>
+										<img className="btn-white__avatar" src={`/static/img/tails${status == 'tails' ? '_active' : '_disable'}.png`} alt="tail icon" />
+									</button>
+								</div>
+								<div className="btns-grid mt-30">
+									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 0.1 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(0.1)}>
+										0.1
+									</button>
+									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 0.25 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(0.25)}>0.25</button>
+									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 0.5 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(0.5)}>0.5</button>
+									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 1 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(1)}>1</button>
+									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 2 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(2)}>2</button>
+									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 3 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(3)}>3</button>
+								</div>
+							</div>
+							<div className="btns-control-right">
+								<div className={`switch ${start ? 'active' : ''}`} onClick={() => setStart(!start)}>
+									<img className="switch-fix" src="/static/img/switch_fix.png" alt="switch"/>
+									<img className="switch-node" src="/static/img/switch_node.png" alt="switch"/>
+									<img className="switch-ball" src="/static/img/switch_ball.png" alt="switch"/>
+								</div>
+								<img src={`/static/img/arrow_${(idx+1)}.svg`} alt="switch"/>
+							</div>
 						</div>
-						<div className="btns-row mt-30">
-							<button className="btn-white" id="head-btn" disabled={loading} onClick={() => startGame(true)}>
-								<img className="btn-white__avatar" src="/static/img/head.png" alt="head icon" />
-								<span className="btn-white__text">Flip Heads</span>
-							</button>
-							<button className="btn-white btn-white--active" disabled={loading} onClick={() => startGame(false)}>
-								<img className="btn-white__avatar" src="/static/img/tails.png" alt="tail icon" />
-								<span className="btn-white__text">Flip Tails</span>
-							</button>
+						<div className="btns-display">
+							<div className="btns-display-points">
+								<div className="btns-display-points-title">
+									XP points
+								</div>
+								<div className="btns-display-points-value">
+									{
+										("000000").substring(0, 6-points.toString().length)
+									}
+									<span>{points}</span>
+								</div>
+							</div>
+							<div className="btns-display-recent">
+								<div className="btns-display-recent-title">
+									<span>Recent flickers</span>
+									<span>See all</span>
+								</div>
+								<div className="btns-display-recent-value">
+									<img src="/static/img/recent.png" />
+									<div className="amount">
+										<span className="balance">8Y2M...QKrQ</span> just flipped <br /><span className="bold">0.1 eth</span> and <span className="lost">lost</span>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div className="btns-grid mt-30">
-							<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 0.1 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(0.1)}>
-								0.1
-							</button>
-							<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 0.25 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(0.25)}>0.25</button>
-							<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 0.5 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(0.5)}>0.5</button>
-							<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 1 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(1)}>1</button>
-							<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 2 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(2)}>2</button>
-							<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 3 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(3)}>3</button>
-						</div>
-						<div className="text-center mt-30">
+						{/* <div className="text-center mt-30">
 							<p>
 								3% fees apply for every flip. Refer to <span className="fw-bold">FAQ</span> for more
 								information.
 							</p>
-						</div>
-						<div className="btn-arrow-row">
+						</div> */}
+						{/* <div className="btn-arrow-row">
 							<button className="btn-arrow" onClick={handleRecentModal}>
 								Recent Flickers
 								<img className="btn-arrow__icon" src="static/svgs/arrow-right.svg" alt="arrow icon" />
 							</button>
-						</div>
+						</div> */}
 					</div>
           <RecentFlickersModal show={showRecentModal} handleModal={handleRecentModal} />
           <AddFundModal show={showAddFundModal} handleModal={handleAddFundModal} />
