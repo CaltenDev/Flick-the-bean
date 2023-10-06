@@ -25,7 +25,7 @@ const RecentFlickersTable:FC<RecentFlickersTableProps> = ({ tableData, classname
           tableData ? tableData.map((item, index) => (
             <li className="primary-list__item" key={index}>
               <div className="primary-list__col">{item?.public_key.slice(0, 5)}...{item?.public_key.slice(-5)}</div>
-              <div className="primary-list__col-2">flipped <span>{Math.round((parseFloat(item.bet_amount) + Number.EPSILON) * 100) / 100} ACD3</span> and <span style={{color: item.outcome == 'lost' && '#EF4343'}}>{item.outcome}</span></div>
+              <div className="primary-list__col-2">flipped <span>{Math.round((parseFloat(item.bet_amount) + Number.EPSILON) * 100) / 100} ACD3</span> and <span style={{color: item.outcome == 'lost' ? '#EF4343' : '#5BEF43'}}>{item.outcome}</span></div>
               <div className="primary-list__col-3">{item.timeAgo}</div>
             </li>
           )) : <p style={{ textAlign: 'center', marginTop: 50 }}>Loading Data</p>
