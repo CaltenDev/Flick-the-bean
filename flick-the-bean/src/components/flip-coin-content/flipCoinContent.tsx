@@ -270,16 +270,17 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 									<span>See all</span>
 								</div>
 								{
-									data.length ? <>
-										<div className="btns-display-recent-value">
-											<img src={`/static/img/${data[0]?.outcome}.png`} />
+									data.length ? <div className="btns-display-recent-value">
+									{
+										data.map(item => <div className="btns-display-recent-value-row">
 											<div className="amount">
 												<span className="balance">
-													{data[0]?.public_key.slice(0, 5)}...{data[0]?.public_key.slice(-5)}	
-												</span> just flipped <br /><span className="bold">{Math.round((parseFloat(data[0].bet_amount) + Number.EPSILON) * 100) / 100} ACD3</span> and <span className={data[0].outcome}>{data[0].outcome}</span>
+													{item?.public_key.slice(0, 5)}...{item?.public_key.slice(-5)}	
+												</span> just flipped <span className="bold">{Math.round((parseFloat(item.bet_amount) + Number.EPSILON) * 100) / 100} ACD3</span> and <span className={item.outcome}>{item.outcome}</span>
 											</div>
-										</div>
-									</> : 'Loading Data'
+										</div>)
+									}
+									</div> : 'Loading Data'
 								}
 							</div>
 						</div>
