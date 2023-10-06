@@ -16,8 +16,14 @@ import {
 interface FlipCoinContentProps {
 }
 
+interface dataProps {
+	outcome: string,
+	public_key: string,
+	bet_amount: string,
+}
+
 const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
-	const [data, setData] = useState([]);
+	const [data, setData] = useState<dataProps[]>([]);
   	const[showRecentModal, setShowRecentModal] = useState(false);
   	const[showAddFundModal, setShowAddFundModal] = useState(false);
 	const[gameResult, setGameResult] = useState(0);
