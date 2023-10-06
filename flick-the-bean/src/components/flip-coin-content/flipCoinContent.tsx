@@ -17,12 +17,9 @@ interface FlipCoinContentProps {
 }
 
 const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
-	const {data} = useQuery({
-		queryKey: ['recent'],
-		queryFn: async () => await GetrecentFlickers(null)
-	  })
-  const[showRecentModal, setShowRecentModal] = useState(false);
-  const[showAddFundModal, setShowAddFundModal] = useState(false);
+	const [data, setData] = useState([]);
+  	const[showRecentModal, setShowRecentModal] = useState(false);
+  	const[showAddFundModal, setShowAddFundModal] = useState(false);
 	const[gameResult, setGameResult] = useState(0);
 	const[acd, setAcd] = useState(0.1);
 	const[loading, setLoading] = useState(false);
@@ -54,15 +51,21 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 	}, [balance])
 
 	useEffect(() => {
-		const intervalId = setInterval(() => {
+		const intervalId = setInterval(async () => {
 			setIdx((beforeIdx) => {
 				return (beforeIdx + 1) % 3
-			})
+			});
 		}, 200)
+
+		const fetchIntervalId = setInterval(async () => {
+			const recentData = await GetrecentFlickers(null)
+			setData(recentData)
+		}, 5000)
 		return () => {
 			clearInterval(intervalId);
+			clearInterval(fetchIntervalId);
 		}
-	})
+	}, [])
 
   const handleAddFundModal = () => {
     setShowAddFundModal(!showAddFundModal);
@@ -260,18 +263,18 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 									<span>Recent flickers</span>
 									<span>See all</span>
 								</div>
-								<div className="btns-display-recent-value">
-									{
-										data ? <>
+								{
+									data.length ? <>
+										<div className="btns-display-recent-value">
 											<img src={`/static/img/${data[0]?.outcome}.png`} />
 											<div className="amount">
 												<span className="balance">
 													{data[0]?.public_key.slice(0, 5)}...{data[0]?.public_key.slice(-5)}	
 												</span> just flipped <br /><span className="bold">{Math.round((parseFloat(data[0].bet_amount) + Number.EPSILON) * 100) / 100} ACD3</span> and <span className={data[0].outcome}>{data[0].outcome}</span>
 											</div>
-										</> : 'Loading Data'
-									}
-								</div>
+										</div>
+									</> : 'Loading Data'
+								}
 							</div>
 						</div>
 						{/* <div className="text-center mt-30">
