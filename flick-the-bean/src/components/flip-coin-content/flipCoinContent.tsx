@@ -84,8 +84,8 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 		SetCookie('commitment', commitment);
 		SetCookie('gameNonce', gameNonce);
 		const wallet = GetCookie('wallet');
-		let winAnimations = [23,22,20,13,11,9,6,5,3];
-		let lostAnimations = [1,4,8,10,12,14,15,16,18,19,21];
+		let winAnimations = [1,4,8,10,12,14,15,16,18,19,21];
+		let lostAnimations = [23,22,20,13,11,9,6,5,3];
 		const winRandom = winAnimations[Math.floor(Math.random() * winAnimations.length)];
 		const lostRandom = lostAnimations[Math.floor(Math.random() * lostAnimations.length)];
 
