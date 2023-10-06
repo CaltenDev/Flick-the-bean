@@ -42,9 +42,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 			setTimeout(() => {
 				setStartAnimation('coin_loop.gif')
 			}, 100);
-		} else {
-			setStartAnimation('coin_start.gif')
-		}
+		} 
 
 		const currentBalance = GetCookie('balance');
 		if (currentBalance != '') {
