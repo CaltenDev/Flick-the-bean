@@ -31,7 +31,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 	const[loading, setLoading] = useState(false);
 	const[balance, setBalance] = useState(0);
 	const[points, setPoints] = useState(625);
-	const[status, setStatus] = useState('');
+	const[status, setStatus] = useState('heads');
 	const[start, setStart] = useState(false);
 	const[idx, setIdx] = useState(0);
 	const[startAnimation, setStartAnimation] = useState('coin_start.gif');
@@ -166,7 +166,6 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 				setLoading(false);
 			}
 		}
-		setStatus("");
 		setStart(false);
 	}
 
