@@ -67,16 +67,19 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 			setData(recentData)
 		}, 5000);
 
-		(async () => {
-			const profileData = await GetProfile();
-			if(profileData.status == 200)
-				setPoints(profileData.data.data.points)
-		})();
 		return () => {
 			clearInterval(intervalId);
 			clearInterval(fetchIntervalId);
 		}
 	}, [])
+
+	useEffect(() => {
+		(async () => {
+			const profileData = await GetProfile();
+			if(profileData.status == 200)
+				setPoints(profileData.data.data.points)
+		})();	
+	}, [loading])
 
   const handleAddFundModal = () => {
     setShowAddFundModal(!showAddFundModal);
