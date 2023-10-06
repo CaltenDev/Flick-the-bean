@@ -78,6 +78,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
   }
 
 	const startGame = async (choice: boolean) => {
+		setStart(true);
 		setGameResult(0);
 		setLoading(true);
 		let {commitment, gameNonce}  = await GetNonce();
@@ -159,6 +160,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 			}
 		}
 		setStatus("");
+		setStart(false);
 	}
 
   return(
@@ -206,10 +208,10 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 						<div className="btns-control">
 							<div className="btns-control-left">
 								<div className="btns-row mt-30">
-									<button className="" id="head-btn" disabled={loading} onClick={() => {setStatus('heads'); startGame(true);}}>
+									<button className="" id="head-btn" disabled={loading} onClick={() => {setStatus('heads')}}>
 										<img className="btn-white__avatar" src={`/static/img/heads${status == 'heads' ? '_active' : '_disable'}.png`} alt="head icon" />
 									</button>
-									<button className="" disabled={loading} onClick={() => {setStatus("tails"); startGame(false);}}>
+									<button className="" disabled={loading} onClick={() => {setStatus("tails")}}>
 										<img className="btn-white__avatar" src={`/static/img/tails${status == 'tails' ? '_active' : '_disable'}.png`} alt="tail icon" />
 									</button>
 								</div>
@@ -225,7 +227,15 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 								</div>
 							</div>
 							<div className="btns-control-right">
-								<div className={`switch ${start ? 'active' : ''}`} onClick={() => setStart(!start)}>
+								<div className={`switch ${start ? 'active' : ''}`} onClick={() => {
+									if(status == 'heads') {
+										startGame(true);
+									}
+
+									if(status == 'tails') {
+										startGame(false);
+									}
+								}}>
 									<img className="switch-fix" src="/static/img/switch_fix.png" alt="switch"/>
 									<img className="switch-node" src="/static/img/switch_node.png" alt="switch"/>
 									<img className="switch-ball" src="/static/img/switch_ball.png" alt="switch"/>
