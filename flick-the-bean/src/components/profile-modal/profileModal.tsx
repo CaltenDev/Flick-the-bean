@@ -23,9 +23,9 @@ const RecentTable = () => {
 
 const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 	const {data, isLoading, error, isError} = useQuery({
-    queryKey: ['profile'],
-    queryFn:  GetProfile
-  });
+		queryKey: ['profile'],
+		queryFn:  GetProfile
+	});
 	
 	if(isError) {
 		enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})

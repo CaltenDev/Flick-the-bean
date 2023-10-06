@@ -1,4 +1,5 @@
 import { GetNonce, gameReveal } from "@/api/game";
+import { GetProfile } from "@/api/profile";
 import { GetrecentFlickers } from "@/api/recent-flickers";
 import GetCookie from "@/hooks/cookies/getCookie";
 import SetCookie from "@/hooks/cookies/setCookie";
@@ -30,7 +31,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 	const[acd, setAcd] = useState(0.1);
 	const[loading, setLoading] = useState(false);
 	const[balance, setBalance] = useState(0);
-	const[points, setPoints] = useState(625);
+	const[points, setPoints] = useState(0);
 	const[status, setStatus] = useState('heads');
 	const[start, setStart] = useState(false);
 	const[idx, setIdx] = useState(0);
@@ -64,7 +65,13 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 		const fetchIntervalId = setInterval(async () => {
 			const recentData = await GetrecentFlickers(null)
 			setData(recentData)
-		}, 5000)
+		}, 5000);
+
+		(async () => {
+			const profileData = await GetProfile();
+			if(profileData.status == 200)
+				setPoints(profileData.data.data.points)
+		})();
 		return () => {
 			clearInterval(intervalId);
 			clearInterval(fetchIntervalId);
