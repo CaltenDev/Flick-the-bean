@@ -108,15 +108,13 @@ const Navbar:FC<NavbarProps> = () => {
         </div>
         <nav className="header__nav">
           <ul className={`header__list  ${openNav ? 'open' : ''}`}>
-            <li className="header__item" onClick={handleFaqModal}><a id="faq-link" className="header__link">Faq</a></li>
-            {/* <li className="header__item"><a className="header__link">Stats</a></li>
-            <li className="header__item"><a className="header__link">Flip History</a></li> */}
+            {/* <li className="header__item" onClick={handleFaqModal}><a id="faq-link" className="header__link">Faq</a></li> */}
             {
-              isLoggedin && (
-              <li className="header__item" onClick={handleProfileModal}>
-                <a id="profile-link" className="header__link">Profile</a>
-              </li>
-            )}
+              // isLoggedin && (
+              // <li className="header__item" onClick={handleProfileModal}>
+              //   <a id="profile-link" className="header__link">Profile</a>
+              // </li>)
+            }
           </ul>
         </nav>
       </div>
