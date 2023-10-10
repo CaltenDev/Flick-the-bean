@@ -13,6 +13,21 @@
 	line-height: normal;
 	margin: auto;
 	flex: 60%;
+	position: relative;
+	// border: 1px solid red;
+
+	img {
+		&:nth-child(1) {
+			border-radius: 24px;
+		}
+
+		&:nth-child(2) {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
 
 	@media (min-width: 1440px) {
 		font-size: 32px;

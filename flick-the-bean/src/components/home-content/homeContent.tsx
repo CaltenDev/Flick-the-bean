@@ -40,6 +40,7 @@ const HomeContent:FC = () => {
       <div className="home-content">
         <section>
           <h1 className="heading-primary">
+            <img src="/static/img/border.png" alt="border"/>
             <img src="/static/img/landing.png" alt="landing"/>
           </h1>
         </section>
