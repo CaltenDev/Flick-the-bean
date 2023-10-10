@@ -10,8 +10,8 @@ interface ModalProps {
 const Modal:FC<ModalProps> = ({ show, handleModal, children, customClass }) => {
   return(
     <div className={`modal ${customClass}  ${show ? 'show' : ''}`}>
+      <div className="modal_back" onClick={handleModal}></div>
 			<div className="modal__content">
-				<button className="modal__btn" onClick={handleModal}><img src="/static/svgs/close.svg" alt="close" /></button>
 				{children}
 			</div>
 		</div>

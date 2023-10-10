@@ -366,6 +366,12 @@
 
 .profile {
 	width: 1200px;
+	position: fixed;
+	z-index: 2;
+	left: 0px;
+	top: 0px;
+	height: 100%;
+	background-color: #0B101D;
 
 	&__grid {
 		display: grid;
