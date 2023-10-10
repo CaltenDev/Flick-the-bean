@@ -1,9 +1,8 @@
 .footer {
-	display: flex;
-	margin: auto;
+	padding: 0px 60px;
 	gap: 60px;
-	width: 1200px;
 	position: relative;
+	text-align: center;
 }
 
 .footer__heading {
@@ -13,6 +12,7 @@
 	font-family: 'Play';
 	margin-bottom: 8px;
 	line-height: 18.51px;
+	float: left;
 }
 
 .footer__heading-number {
@@ -25,6 +25,10 @@
 	font-weight: 700;
 	font-family: 'Play';
 	line-height: 18.51px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 
 	span {
 		font-weight: 400;
@@ -32,7 +36,6 @@
 }
 
 .footer__container {
-	width: 1400px;
 	margin: auto;
 	position: relative;
 
