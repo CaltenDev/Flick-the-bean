@@ -10,7 +10,7 @@
 .header__logo {
 	display: flex;
 	align-items: center;
-	gap: 20px;
+	gap: 12px;
 
 	&_separator {
 		width: 2px;
@@ -72,7 +72,7 @@
 .header__wrap {
 	display: flex;
 	align-items: center;
-	gap: 50px;
+	gap: 20px;
 }
 
 .header__box {
@@ -112,6 +112,6 @@
 	}
 
 	&__profile-share {
-		margin-left: 30px;
+		margin-left: 10px;
 	}
 }
