@@ -46,7 +46,7 @@ const HomeContent:FC = () => {
         </section>
         <section className="center-area">
           <span>
-            #1 place to <br /> bean flick and <br /> coin flip
+            #1 place to <br /> tug the nug and <br /> coin flip
           </span>
           <div className="start_button" onClick={handleModal}></div>
           <RecentFlickersTable tableData={data} />
