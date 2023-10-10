@@ -34,7 +34,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
   return(
 		<Modal customClass={'profile-modal'} show={show} handleModal={handleModal}>
 			<div className="profile">
-				Proflie
+				
 			</div>
 		</Modal>
   )
