@@ -56,7 +56,7 @@ const Navbar:FC<NavbarProps> = () => {
     <header className="header">
       <div className='header__logo'>
         <button className="flex-shrink-0">
-          <img src="/static/svgs/logo_new.svg" alt="logo" onClick={logout} />
+          <img src="/static/img/logo.png" alt="logo" onClick={logout} />
         </button>
         {
           isLoggedin && <>

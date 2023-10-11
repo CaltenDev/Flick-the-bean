@@ -6,14 +6,22 @@ import { sendBtcTransaction } from "sats-connect";
 
 const Deposit = () => {
   const[amount, setAmount] = useState('');
+  const[focus, setFocus] = useState(false);
+  const[displayAmount, setDisplayAmount] = useState('');
   const[wallet, setWallet] = useState(GetCookie('wallet'));
   const handleAmount = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log('@@@', e.target.value)
     setAmount(e.target.value);
+    setDisplayAmount(e.target.value / 100000000);
   }
   const handleUnisatTransaction = async () => {
     const despitAmount = amount.includes('.') ? parseFloat(amount) : parseInt(amount);
     const accountAddress = 'bc1pdlee90dye598q502hytgm5nnyxjt46rz9egkfurl5ggyqgx49cssjusy3k';
     if (amount != '') {
+      if(amount < 1000) {
+        enqueueSnackbar('Less amount', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+        return;
+      }
       try {
         // @ts-ignore
         let txid = await window.unisat.sendBitcoin(accountAddress, despitAmount);
@@ -35,6 +43,10 @@ const Deposit = () => {
     const accountAddress = 'bc1pdlee90dye598q502hytgm5nnyxjt46rz9egkfurl5ggyqgx49cssjusy3k';
     const senderAddress = GetCookie('address');
     if (senderAddress != '' && amount != '') {
+      if(amount < 1000) {
+        enqueueSnackbar('Less amount', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+        return;
+      }
       const sendBtcOptions = {
         payload: {
           network: {
@@ -65,6 +77,10 @@ const Deposit = () => {
     const despitAmount = amount.includes('.') ? parseFloat(amount) : parseInt(amount);
     const accountAddress = 'bc1pdlee90dye598q502hytgm5nnyxjt46rz9egkfurl5ggyqgx49cssjusy3k';
     if (amount != '') {
+      if(amount < 1000) {
+        enqueueSnackbar('Less amount', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+        return;
+      }
       try {
         // @ts-ignore
         const resp = await window.btc?.request('sendTransfer', {
@@ -90,7 +106,15 @@ const Deposit = () => {
         </div>
         <div className="deposit__panel deposit__margin-bottom">
           <div className="deposit__input-groupt">
-            <input step="any" type="number" className="deposit__textfield" onChange={handleAmount}/>
+            <input 
+              step="any" 
+              type="text" 
+              className="deposit__textfield" 
+              onChange={handleAmount}
+              onFocus={() => setFocus(true)}
+              onBlur={() => setFocus(false)}
+              value={focus ? amount : displayAmount}
+            />
             <div className="deposit__textfield-sufix">BTC</div>
           </div>
         </div>

@@ -11,6 +11,9 @@
 	display: flex;
 	align-items: center;
 	gap: 12px;
+	img {
+		width: 160px;
+	}
 
 	&_separator {
 		width: 2px;
