@@ -96,7 +96,7 @@ const Exchange = () => {
 					<div className="exchange__header">
 						<h3 className="exchange__title">Exchange</h3>
 						<div>
-							<button><img src="/static/svgs/settings.svg" alt="settings icon" /></button>
+							{/* <button><img src="/static/svgs/settings.svg" alt="settings icon" /></button> */}
 						</div>
 					</div>
 					{
