@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 
 interface tableData {
   bet_amount: string;
@@ -13,6 +13,9 @@ interface RecentFlickersTableProps {
 }
 
 const RecentFlickersTable:FC<RecentFlickersTableProps> = ({ tableData, classname }) => {
+  useEffect(() => {
+  //  console.log('@@@', tableData) 
+  })
   return(
     <ul className={`primary-list primary-list--${classname ? classname : 'home'}`}>
       <li className="primary-list__header">

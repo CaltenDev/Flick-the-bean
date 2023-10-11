@@ -1,4 +1,5 @@
 import { BTCToBRC, BrcToBTC, GetExchangeBalance } from "@/api/exchange";
+import { GetrecentFlickers } from "@/api/recent-flickers";
 import { useQuery } from "@tanstack/react-query";
 import { enqueueSnackbar } from "notistack";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -11,6 +12,14 @@ const Exchange = () => {
 		queryKey: ['getBalance'],
 		queryFn: GetExchangeBalance
 	});
+	const {data: recentData} = useQuery({
+		queryKey: ['recent'],
+		queryFn:  () => GetrecentFlickers(null)
+	});
+
+	useEffect(() => {
+		console.log('@@@', recentData)
+	})
 
 	useEffect(() => {
 
@@ -214,7 +223,11 @@ const Exchange = () => {
 					</button>
 				</div>
 
-      <RecentFlickersModal show={showRecentModal} handleModal={handleRecentModal} />
+      <RecentFlickersModal 
+	  	show={showRecentModal} 
+		handleModal={handleRecentModal} 
+		tableData={recentData}
+	  />
     </>
   )
 }
