@@ -254,6 +254,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 								}}>
 									<img className="switch-fix" src="/static/img/switch_fix.png" alt="switch"/>
 									<img className="switch-node" src="/static/img/switch_node.png" alt="switch"/>
+									<img className="switch-ball" src="/static/img/switch_ball.png" alt="switch"/>
 								</div>
 								<img src={`/static/img/arrow_${(idx+1)}.png`} alt="switch"/>
 							</div>

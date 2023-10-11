@@ -111,12 +111,26 @@
 
 			&-node {
 				position: absolute;
-				width: 150px;
-				height: 180px;
+				width: 29.44px;
+				height: 100px;
 				left: 54px;
 				bottom: 194px;
 				transform: translate(-50%,-10%);
-				transition: all 0.5s;
+				transition: all 20s;
+
+				&:hover {
+					
+				}
+			}
+
+			&-ball {
+				position: absolute;
+				width: 106px;
+				height: 106px;
+				left: 54px;
+				bottom: 194px;
+				transform: translate(-50%,-80%);
+				transition: all 20s;
 
 				&:hover {
 					
@@ -130,7 +144,7 @@
 			}
 
 			.switch-ball {
-				transform: translate(-50%,180%) rotateX(180deg);
+				transform: translate(-50%,180%);
 			}
 		}
 
