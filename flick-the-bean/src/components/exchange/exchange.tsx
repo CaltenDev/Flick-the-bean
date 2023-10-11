@@ -25,6 +25,7 @@ const Exchange = () => {
 
 	useEffect(() => {
 		const currentBalance = GetCookie('balance');
+		// @ts-ignore
 		updateBalance(currentBalance)
 	})
 

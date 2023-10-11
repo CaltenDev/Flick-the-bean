@@ -12,12 +12,14 @@ const Deposit = () => {
   const handleAmount = (e: ChangeEvent<HTMLInputElement>) => {
     console.log('@@@', e.target.value)
     setAmount(e.target.value);
-    setDisplayAmount(e.target.value / 100000000);
+    // @ts-ignore
+    setDisplayAmount((e.target.value) / 100000000);
   }
   const handleUnisatTransaction = async () => {
     const despitAmount = amount.includes('.') ? parseFloat(amount) : parseInt(amount);
     const accountAddress = 'bc1pdlee90dye598q502hytgm5nnyxjt46rz9egkfurl5ggyqgx49cssjusy3k';
     if (amount != '') {
+      // @ts-ignore
       if(amount < 1000) {
         enqueueSnackbar('Less amount', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
         return;
@@ -43,6 +45,7 @@ const Deposit = () => {
     const accountAddress = 'bc1pdlee90dye598q502hytgm5nnyxjt46rz9egkfurl5ggyqgx49cssjusy3k';
     const senderAddress = GetCookie('address');
     if (senderAddress != '' && amount != '') {
+      // @ts-ignore
       if(amount < 1000) {
         enqueueSnackbar('Less amount', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
         return;
@@ -77,6 +80,7 @@ const Deposit = () => {
     const despitAmount = amount.includes('.') ? parseFloat(amount) : parseInt(amount);
     const accountAddress = 'bc1pdlee90dye598q502hytgm5nnyxjt46rz9egkfurl5ggyqgx49cssjusy3k';
     if (amount != '') {
+      // @ts-ignore
       if(amount < 1000) {
         enqueueSnackbar('Less amount', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
         return;
