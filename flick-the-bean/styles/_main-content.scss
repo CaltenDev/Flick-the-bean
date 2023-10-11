@@ -111,25 +111,11 @@
 
 			&-node {
 				position: absolute;
-				width: 29.44px;
-				height: 100px;
+				width: 150px;
+				height: 180px;
 				left: 54px;
 				bottom: 194px;
 				transform: translate(-50%,-10%);
-				transition: all 0.5s;
-
-				&:hover {
-					
-				}
-			}
-
-			&-ball {
-				position: absolute;
-				width: 106px;
-				height: 106px;
-				left: 54px;
-				bottom: 194px;
-				transform: translate(-50%,-80%);
 				transition: all 0.5s;
 
 				&:hover {
