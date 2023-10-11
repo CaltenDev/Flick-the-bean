@@ -3,11 +3,17 @@ import { GetrecentFlickers } from "@/api/recent-flickers";
 import { useQuery } from "@tanstack/react-query";
 import { enqueueSnackbar } from "notistack";
 import { ChangeEvent, useEffect, useState } from "react";
+import GetCookie from "@/hooks/cookies/getCookie";
+import SetCookie from "@/hooks/cookies/setCookie";
 import RecentFlickersModal from "../recent-flickers-modal/recentFlickersModal";
+import {
+	useBalanceStore,
+} from '../../store'
 
 const Exchange = () => {
 	const[refetching, setRefetching] = useState(false);
 	const[loading, setLoading] = useState(false);
+	const updateBalance = useBalanceStore(state => state.updateBalance);
 	const {data, refetch, isError} = useQuery({
 		queryKey: ['getBalance'],
 		queryFn: GetExchangeBalance
@@ -18,7 +24,8 @@ const Exchange = () => {
 	});
 
 	useEffect(() => {
-		console.log('@@@', recentData)
+		const currentBalance = GetCookie('balance');
+		updateBalance(currentBalance)
 	})
 
 	useEffect(() => {
