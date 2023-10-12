@@ -101,11 +101,11 @@ const Navbar:FC<NavbarProps> = () => {
             </>
           )}
         </div>
-        <div className={`hamburger ${openNav ? 'open' : ''}`} onClick={handleNavbar}>
+        {/* <div className={`hamburger ${openNav ? 'open' : ''}`} onClick={handleNavbar}>
           <span></span>
           <span></span>
           <span></span>
-        </div>
+        </div> */}
         <nav className="header__nav">
           <ul className={`header__list  ${openNav ? 'open' : ''}`}>
             {/* <li className="header__item" onClick={handleFaqModal}><a id="faq-link" className="header__link">Faq</a></li> */}
