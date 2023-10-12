@@ -4,8 +4,10 @@ import { useSearchParams } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 import PlayModal from "../play-modal/playModal";
 import RecentFlickersTable from "../recent-flickers-table/recentFlickerTable";
+import RecentFlickersModal from "../recent-flickers-modal/recentFlickersModal";
 
 const HomeContent:FC = () => {
+  const[showRecentModal, setShowRecentModal] = useState(false);
   const[showModal, setShowModal] = useState(false);
   const searchParams = useSearchParams();
   const search = searchParams.get('ref')

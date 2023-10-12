@@ -274,7 +274,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 							<div className="btns-display-recent">
 								<div className="btns-display-recent-title">
 									<span>Recent flickers</span>
-									<span>See all</span>
+									<span onClick={handleRecentModal}>See all</span>
 								</div>
 								{
 									data.length ? <div className="btns-display-recent-value">
@@ -304,7 +304,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 							</button>
 						</div> */}
 					</div>
-          <RecentFlickersModal show={showRecentModal} handleModal={handleRecentModal} tableData={[]}/>
+          <RecentFlickersModal show={showRecentModal} handleModal={handleRecentModal} tableData={data}/>
           <AddFundModal show={showAddFundModal} handleModal={handleAddFundModal} />
 				</section>
     </>
