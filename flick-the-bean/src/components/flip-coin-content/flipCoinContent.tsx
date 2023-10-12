@@ -21,6 +21,7 @@ interface dataProps {
 	outcome: string,
 	public_key: string,
 	bet_amount: string,
+	timeAgo: string
 }
 
 const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
@@ -304,6 +305,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 							</button>
 						</div> */}
 					</div>
+					
           <RecentFlickersModal show={showRecentModal} handleModal={handleRecentModal} tableData={data}/>
           <AddFundModal show={showAddFundModal} handleModal={handleAddFundModal} />
 				</section>

@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FC, useEffect } from "react";
 import Modal from "../modal/modal";
 import RecentFlickersTable from "../recent-flickers-table/recentFlickerTable";
-
+// ts-ignore
 interface tableData {
 	bet_amount: string;
 	outcome: string;
