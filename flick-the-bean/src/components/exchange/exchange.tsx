@@ -2,6 +2,7 @@ import { BTCToBRC, BrcToBTC, GetExchangeBalance } from "@/api/exchange";
 import { GetrecentFlickers } from "@/api/recent-flickers";
 import { useQuery } from "@tanstack/react-query";
 import { enqueueSnackbar } from "notistack";
+import { useRouter } from 'next/navigation';
 import { ChangeEvent, useEffect, useState } from "react";
 import GetCookie from "@/hooks/cookies/getCookie";
 import SetCookie from "@/hooks/cookies/setCookie";
@@ -13,6 +14,7 @@ import {
 const Exchange = () => {
 	const[refetching, setRefetching] = useState(false);
 	const[loading, setLoading] = useState(false);
+	const router = useRouter();
 	const updateBalance = useBalanceStore(state => state.updateBalance);
 	const {data, refetch, isError} = useQuery({
 		queryKey: ['getBalance'],
@@ -102,7 +104,7 @@ const Exchange = () => {
     <>
       <section className="exchange">
 					<div className="exchange__header">
-						<h3 className="exchange__title">Exchange</h3>
+						<h3 className="exchange__title"><img src="/static/img/arrow_left.png" alt="settings icon" onClick={() => router.back()}/>Exchange</h3>
 						<div>
 							{/* <button><img src="/static/svgs/settings.svg" alt="settings icon" /></button> */}
 						</div>
