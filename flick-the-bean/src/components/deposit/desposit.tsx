@@ -1,14 +1,18 @@
 import { DepositBTC } from "@/api/deposit";
 import GetCookie from "@/hooks/cookies/getCookie";
 import { enqueueSnackbar } from "notistack";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import { sendBtcTransaction } from "sats-connect";
+import {
+	useBalanceStore,
+} from '../../store'
 
 const Deposit = () => {
   const[amount, setAmount] = useState('');
   const[focus, setFocus] = useState(false);
   const[displayAmount, setDisplayAmount] = useState('');
   const[wallet, setWallet] = useState(GetCookie('wallet'));
+  const updateBalance = useBalanceStore(state => state.updateBalance);
   const handleAmount = (e: ChangeEvent<HTMLInputElement>) => {
     console.log('@@@', e.target.value)
     setAmount(e.target.value);
@@ -101,6 +105,11 @@ const Deposit = () => {
     }
   }
 
+  useEffect(() => {
+    const currentBalance = GetCookie('balance');
+		// @ts-ignore
+		updateBalance(currentBalance)
+  })
 
   return(
     <>
