@@ -48,6 +48,10 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 		enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 	}
 
+	useEffect(() => {
+		console.log('@@@', data);
+	}, [data])
+
   return(
 		<Modal customClass={'profile-modal'} show={show} handleModal={handleModal}>
 			<div className="profile">
