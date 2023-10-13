@@ -1,8 +1,9 @@
 import { GetProfile } from "@/api/profile";
+import GetCookie from '@/hooks/cookies/getCookie';
 import { GetrecentFlickers } from "@/api/recent-flickers";
 import { useQuery } from "@tanstack/react-query";
 import { enqueueSnackbar } from "notistack";
-import { FC, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import Modal from "../modal/modal";
 import RecentFlickersTable from "../recent-flickers-table/recentFlickerTable";
 
@@ -22,6 +23,7 @@ const RecentTable = () => {
 }
 
 const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
+	const[pubKey, setPubkey] = useState('');
 	const badges_array = [
 		"badge_1",
 		"badge_2",
@@ -50,6 +52,8 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 
 	useEffect(() => {
 		console.log('@@@', data);
+		const key = GetCookie('publicKey');
+    	setPubkey(`${key.slice(0, 5)}....${key.slice(-8)}`);
 	}, [data])
 
   return(
@@ -63,7 +67,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 								David <br /> Copperfield
 							</span>
 							<span>
-								0x71C.....765483920
+								{pubKey}
 							</span>
 							<span>
 								Flipping since <a>Sep 2023</a>
