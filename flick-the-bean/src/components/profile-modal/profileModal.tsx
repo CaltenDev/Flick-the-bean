@@ -170,7 +170,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 									<div className="primary-list__header__col-2">See all</div> */}
 								</li>
 								<li>
-									<ul>
+									<ul >
 									{
 									recentData ? recentData.map((item, index) => (
 										<li className="primary-list__item" key={index}>
