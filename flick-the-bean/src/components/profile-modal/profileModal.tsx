@@ -2,7 +2,7 @@ import { GetProfile } from "@/api/profile";
 import { GetrecentFlickers } from "@/api/recent-flickers";
 import { useQuery } from "@tanstack/react-query";
 import { enqueueSnackbar } from "notistack";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import Modal from "../modal/modal";
 import RecentFlickersTable from "../recent-flickers-table/recentFlickerTable";
 
@@ -22,11 +22,28 @@ const RecentTable = () => {
 }
 
 const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
+	const badges_array = [
+		"badge_1",
+		"badge_2",
+		"badge_3",
+		"badge_4",
+		"badge_5",
+		"badge_blank",
+		"badge_blank",
+		"badge_blank",
+		"badge_blank"
+	]
+
 	const {data, isLoading, error, isError} = useQuery({
 		queryKey: ['profile'],
 		queryFn:  GetProfile
 	});
 	
+	const {data: recentData} = useQuery({
+		queryKey: ['recent'],
+		queryFn: async () => await GetrecentFlickers(null)
+	  })
+
 	if(isError) {
 		enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 	}
@@ -147,14 +164,28 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 							Flip history
 						</div>
 						<div className="content">
-							<div className="row">
-								<div className="desc">
-									flipped 0.1 eth and won
+							<ul className={`primary-list`}>
+								<li className="primary-list__header">
+									{/* <div className="primary-list__header__col">Most recent been flickers</div>
+									<div className="primary-list__header__col-2">See all</div> */}
+								</li>
+								<li>
+									<ul>
+									{
+									recentData ? recentData.map((item, index) => (
+										<li className="primary-list__item" key={index}>
+										{/* <div className="primary-list__col">{item?.public_key.slice(0, 5)}...{item?.public_key.slice(-5)}</div> */}
+										<div className="primary-list__col-2">flipped <span>{Math.round((parseFloat(item.bet_amount) + Number.EPSILON) * 100) / 100} ACD3</span> and <span style={{color: item.outcome == 'lost' ? '#EF4343' : '#5BEF43'}}>{item.outcome}</span></div>
+										<div className="primary-list__col-3">{item.timeAgo}</div>
+										</li>
+									)) : <p style={{ textAlign: 'center', marginTop: 50 }}>Loading Data</p>
+									}  
+									</ul>  
+								</li>
+								
+								<div>
 								</div>
-								<div className="time">
-									1h
-								</div>
-							</div>
+							</ul>
 						</div>
 					</div>
 					<div className="referrals">
@@ -163,14 +194,32 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						</div>
 						<div className="content">
 							<div className="code">
-
+								<div>
+									<span>
+										Referral code
+									</span>
+									<span>
+										mnHBqlOONO
+									</span>
+								</div>
+								<img src="/static/img/copy.png" />
 							</div>
 							<div className="statistics">
 								<div className="user_number">
-									8
+									<span>
+										Number of users referred
+									</span>
+									<span>
+										8
+									</span>
 								</div>
 								<div className="total_earned">
-									24
+									<span>
+										Total earned
+									</span>
+									<span>
+										24
+									</span>
 								</div>
 							</div>
 						</div>
@@ -178,6 +227,13 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 					<div className="badges">
 						<div className="title">
 							Badges
+						</div>
+						<div className="content">
+							{
+								badges_array.map(item => <div className="item">
+									<img src={`/static/img/${item}.png`} />
+								</div>)
+							}
 						</div>
 					</div>
 				</div>

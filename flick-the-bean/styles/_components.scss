@@ -567,16 +567,144 @@
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
 		gap: 8px;
+		margin-top: 30px;
 
 		& > div {
-			border: 1px solid red;
+			border: 3px solid #000000;
+			background: #070A12;
+			padding: 16px 16px 0px;
+			border-radius: 8px;
+
+			.title {
+				font-family: "Play";
+				font-size: 16px;
+				font-weight: 400;
+				line-height: 19px;
+				letter-spacing: 0em;
+				text-align: left;
+				color:  #FFFFFFBF;
+
+				margin-bottom: 16px;
+			}
 		}
 
 		.history {
 			.title {
 				
 			}
-			.content {}
+			.content {
+				.primary-list {
+					border: 0px;
+					background-color: transparent;
+					box-shadow: none;
+
+					&__header {
+						padding: 0px;
+					}
+				}
+
+				.primary-list__item {
+					padding: 4px 0px;
+				}
+			}
+		}
+
+		.referrals {
+			.content {
+				.code {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					background: #141D34;
+					padding: 12px 16px;
+					border-radius: 8px;
+
+					div {
+						display: flex;
+						flex-direction: column;
+						gap: 8px;
+
+						span {
+							&:first-child {
+								font-family: "Play";
+								font-size: 16px;
+								font-weight: 400;
+								line-height: 19px;
+								letter-spacing: 0em;
+
+								color: #FFFFFF80;
+							}
+
+							&:last-child {
+								font-family: "Play";
+								font-size: 16px;
+								font-weight: 700;
+								line-height: 20px;
+								letter-spacing: 0em;
+								text-align: left;
+							}
+						}
+					}
+
+					img {
+						width: 32px;
+						height: 32px;
+					}
+				}
+
+				.statistics {
+					display: flex;
+					gap: 12px;
+					margin-top: 12px;
+
+					div {
+						flex: 50%;
+						background: #FFFFFF08;
+						border-radius: 8px;
+						padding: 16px;
+						display: flex;
+						flex-direction: column;
+						justify-content: space-between;
+
+						span {
+							&:first-child {
+								font-family: "Play";
+								font-size: 16px;
+								font-weight: 400;
+								line-height: 19px;
+								letter-spacing: 0em;		
+								color: #FFFFFF80;				
+							}
+
+							&:last-child {
+								font-family: Play;
+								font-size: 24px;
+								font-weight: 700;
+								line-height: 28px;
+								letter-spacing: 0em;
+								color: #FFFFFF;
+							}
+						}
+					}
+
+					.user_number {
+
+					}
+
+					.total_earned {
+
+					}
+				}
+			}
+		}
+
+		.badges {
+			.content {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 16px;
+			}
+			padding-bottom: 12px;
 		}
 	}
 
