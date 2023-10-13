@@ -84,6 +84,7 @@ const Navbar:FC<NavbarProps> = () => {
                     className="header__profile-image"
                     src="/static/svgs/profile.svg"
                     alt="profile icon"
+                    onClick={handleProfileModal}
                   />
                   <div className="header__profile-notification">
                     <img

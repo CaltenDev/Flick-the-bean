@@ -387,6 +387,7 @@
 	top: 0px;
 	height: 100%;
 	background-color: #0B101D;
+	padding: 16px 32px;
 
 	&-header {
 		display: flex;
@@ -403,11 +404,58 @@
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
+				align-items: flex-start;
 				padding: 12px 0px;
+				gap: 8px;
 
 				span {
 					&:first-child {
 						margin-bottom: auto;
+
+						font-family: "Press Start 2P";
+						font-size: 24px;
+						font-weight: 400;
+						line-height: 24px;
+						letter-spacing: 0em;
+						text-align: left;
+						color: #FDCD00;
+
+						text-shadow: 0px 0px 24px #FDCD00 inset;
+						text-shadow: 0px 2px 12px #FDCD00;
+						text-shadow: 0px 2px 44px #FDCD00;
+					}
+
+					&:nth-child(2) {
+						background-color: #1D2A49;
+						border-radius: 8px;
+						padding: 10px;
+
+						font-family: "Play";
+						font-size: 16px;
+						font-weight: 400;
+						line-height: 19px;
+						letter-spacing: 0em;
+						text-align: left;
+						color: #FFFFFF;
+					}
+
+					&:nth-child(3) {						
+						font-family: "Play";
+						font-size: 16px;
+						font-weight: 400;
+						line-height: 19px;
+						letter-spacing: 0em;
+						text-align: left;
+
+						color: #FFFFFF66;
+						a {
+							font-family: "Play";
+							font-size: 16px;
+							font-weight: 700;
+							line-height: 19px;
+							letter-spacing: 0em;
+							text-align: left;
+						}
 					}
 				}
 			}
@@ -416,10 +464,59 @@
 		&-right {
 			display: flex;
 			flex-direction: column;
+			border-radius: 8px;
+			border: 3px solid #070A12;
 
 			div {
+				padding: 16px 16px 8px;
 				span {
 					display: block;
+
+					&:first-child {
+						font-family: "Play";
+						font-size: 16px;
+						font-weight: 400;
+						line-height: 19px;
+						letter-spacing: 0em;
+						text-align: left;
+
+						color: #FFFFFFBF;		
+						
+						display: inline-block;
+						margin-bottom: 8px;
+					}
+
+					&:last-child {
+						font-family: "Press Start 2P";
+						font-size: 24px;
+						font-weight: 400;
+						line-height: 24px;
+						letter-spacing: 0em;
+						text-align: left;
+					}
+				}
+
+				&:first-child {
+					span {
+						&:last-child {
+							text-shadow: 0px 0px 24px #FFFFFF inset;
+							text-shadow: 0px 2px 12px #FFFFFF;
+							text-shadow: 0px 2px 44px #FFFFFF;
+						}
+					}
+
+					border-bottom: 2px solid black;
+				}
+
+				&:last-child {
+					span {
+						&:last-child {
+							color: #FDCD00;
+							text-shadow: 0px 0px 24px #FDCD00 inset;
+							text-shadow: 0px 2px 12px #FDCD00;
+							text-shadow: 0px 2px 44px #FDCD00;
+						}
+					}
 				}
 			}
 		}

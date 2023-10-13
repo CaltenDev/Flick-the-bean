@@ -45,7 +45,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 								0x71C.....765483920
 							</span>
 							<span>
-								Flipping since Sep 2023
+								Flipping since <a>Sep 2023</a>
 							</span>
 						</div>
 					</div>
