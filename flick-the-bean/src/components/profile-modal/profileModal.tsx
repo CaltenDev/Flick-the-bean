@@ -207,7 +207,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 							<div className="statistics">
 								<div className="user_number">
 									<span>
-										Number of users referred
+										Number <br /> of users <br /> referred
 									</span>
 									<span>
 										8
@@ -215,7 +215,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 								</div>
 								<div className="total_earned">
 									<span>
-										Total earned
+										Total <br /> earned
 									</span>
 									<span>
 										24
