@@ -73,45 +73,35 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						<span>
 							Success in a row
 						</span>
-						<span>
+						<span style={{
+							color: '#5BEF43'
+						}}>
 							10
 						</span>
 					</div>
 					<div className="profile-value-item">
 						<span>
-							Success in a row
+							Fails in a row
 						</span>
-						<span>
-							10
-						</span>
-					</div>
-					<div className="profile-value-item">
-						<span>
-							Success in a row
-						</span>
-						<span>
-							10
+						<span style={{
+							color: '#EF4343'
+						}}>
+							8
 						</span>
 					</div>
 					<div className="profile-value-item">
 						<span>
-							Success in a row
+							XP points
 						</span>
-						<span>
-							10
-						</span>
-					</div>
-					<div className="profile-value-item">
-						<span>
-							Success in a row
-						</span>
-						<span>
-							10
+						<span style={{
+							color: '#FDCD00'
+						}}>
+							625
 						</span>
 					</div>
 					<div className="profile-value-item">
 						<span>
-							Success in a row
+							Number of games
 						</span>
 						<span>
 							10
@@ -119,7 +109,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 					</div>
 					<div className="profile-value-item">
 						<span>
-							Success in a row
+							Total amount bet
 						</span>
 						<span>
 							10
@@ -127,7 +117,23 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 					</div>
 					<div className="profile-value-item">
 						<span>
-							Success in a row
+							Winning percentage
+						</span>
+						<span>
+							10
+						</span>
+					</div>
+					<div className="profile-value-item">
+						<span>
+							Total earnings
+						</span>
+						<span>
+							10
+						</span>
+					</div>
+					<div className="profile-value-item">
+						<span>
+							Avg. bet amount
 						</span>
 						<span>
 							10

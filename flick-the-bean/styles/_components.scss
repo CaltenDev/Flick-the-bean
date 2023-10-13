@@ -465,7 +465,8 @@
 			display: flex;
 			flex-direction: column;
 			border-radius: 8px;
-			border: 3px solid #070A12;
+			border: 3px solid black;
+			background: #070A12;
 
 			div {
 				padding: 16px 16px 8px;
@@ -528,14 +529,36 @@
 		gap: 8px;
 
 		&-item {
-			border: 1px solid red;
+			border: 3px solid #000000;
+			background: #070A12;
 			display: flex;
 			flex-direction: column;
 			justify-content: space-between;
 			height: 112px;
+			padding: 16px;
+			border-radius: 8px;
 
 			span {
 				display: block;
+
+				&:first-child {
+					font-family: "Play";
+					font-size: 16px;
+					font-weight: 400;
+					line-height: 19px;
+					letter-spacing: 0em;
+					text-align: left;
+
+					color: #FFFFFFBF;
+				}
+
+				&:last-child {
+					font-family: "Play";
+					font-size: 24px;
+					font-weight: 700;
+					line-height: 28px;
+					letter-spacing: 0em;
+				}
 			}
 		}
 	}
