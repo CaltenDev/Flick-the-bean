@@ -180,6 +180,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 								<li>
 									<ul >
 									{
+										// @ts-ignore
 									recentData ? recentData.map((item, index) => (
 										<li className="primary-list__item" key={index}>
 										{/* <div className="primary-list__col">{item?.public_key.slice(0, 5)}...{item?.public_key.slice(-5)}</div> */}
