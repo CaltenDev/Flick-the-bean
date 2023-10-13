@@ -88,7 +88,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 								Highest
 							</span>
 							<span>
-								2
+								{data?.data.data.insights.highestNumberOfFlips}
 							</span>
 						</div>
 					</div>
@@ -121,7 +121,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						<span style={{
 							color: '#FDCD00'
 						}}>
-							625
+							{data?.data.data.points}
 						</span>
 					</div>
 					<div className="profile-value-item">
@@ -137,7 +137,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 							Total amount bet
 						</span>
 						<span>
-							10
+							{Math.round((parseFloat(data?.data.data.insights.totalAmountBet) + Number.EPSILON) * 100) / 100}
 						</span>
 					</div>
 					<div className="profile-value-item">
@@ -145,7 +145,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 							Winning percentage
 						</span>
 						<span>
-							10
+							{data?.data.data.insights.winningPercentage}
 						</span>
 					</div>
 					<div className="profile-value-item">
@@ -153,7 +153,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 							Total earnings
 						</span>
 						<span>
-							10
+							{Math.round((parseFloat(data?.data.data.insights.totalEarnings) + Number.EPSILON) * 100) / 100}
 						</span>
 					</div>
 					<div className="profile-value-item">
@@ -161,7 +161,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 							Avg. bet amount
 						</span>
 						<span>
-							10
+							{Math.round((parseFloat(data?.data.data.insights.averageBetAmount) + Number.EPSILON) * 100) / 100}
 						</span>
 					</div>
 					
@@ -207,7 +207,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 										Referral code
 									</span>
 									<span>
-										mnHBqlOONO
+										{data?.data.data.referrals.referral_code}
 									</span>
 								</div>
 								<img src="/static/img/copy.png" />
@@ -218,7 +218,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 										Number <br /> of users <br /> referred
 									</span>
 									<span>
-										8
+										{data?.data.data.referrals.total_number_of_users_referred}
 									</span>
 								</div>
 								<div className="total_earned">
@@ -226,7 +226,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 										Total <br /> earned
 									</span>
 									<span>
-										24
+										{data?.data.data.referrals.total_earned_through_referrals}
 									</span>
 								</div>
 							</div>
