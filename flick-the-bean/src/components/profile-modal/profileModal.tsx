@@ -6,6 +6,7 @@ import { enqueueSnackbar } from "notistack";
 import { FC, useState, useEffect } from "react";
 import Modal from "../modal/modal";
 import RecentFlickersTable from "../recent-flickers-table/recentFlickerTable";
+import { create } from "domain";
 
 interface ProfileModalProps {
 	show: boolean;
@@ -24,6 +25,8 @@ const RecentTable = () => {
 
 const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 	const[pubKey, setPubkey] = useState('');
+	const[createDate, setCreateDate] = useState('');
+	
 	const badges_array = [
 		"badge_1",
 		"badge_2",
@@ -50,10 +53,19 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 		enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 	}
 
+	const copyReferralLink = () => {
+		navigator.clipboard.writeText(window.location.origin+`?ref=${data?.data.data.referrals.referral_code}`)
+		enqueueSnackbar('Copied', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+	}
+
 	useEffect(() => {
 		console.log('@@@', data);
 		const key = GetCookie('publicKey');
     	setPubkey(`${key.slice(0, 5)}....${key.slice(-8)}`);
+		
+		const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+		const stringDate = months[(new Date(data?.data.data.accountCreation)).getMonth()] + " " + (new Date(data?.data.data.accountCreation)).getFullYear()
+		setCreateDate(stringDate)
 	}, [data])
 
   return(
@@ -64,13 +76,13 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						<img src={"/static/img/avatar.png"} />
 						<div>
 							<span>
-								David <br /> Copperfield
+								{data?.data.data.userName}
 							</span>
 							<span>
-								{pubKey}
+								{data?.data.data.publicKey.slice(0, 5)}....{data?.data.data.publicKey.slice(-8)}
 							</span>
 							<span>
-								Flipping since <a>Sep 2023</a>
+								Flipping since <a>{createDate}</a>
 							</span>
 						</div>
 					</div>
@@ -80,7 +92,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 								Current rank
 							</span>
 							<span>
-								14
+								{data?.data.data.leaderboard.current}
 							</span>
 						</div>
 						<div>
@@ -88,7 +100,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 								Highest
 							</span>
 							<span>
-								{data?.data.data.insights.highestNumberOfFlips}
+								{data?.data.data.leaderboard.best}
 							</span>
 						</div>
 					</div>
@@ -101,7 +113,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						<span style={{
 							color: '#5BEF43'
 						}}>
-							10
+							{data?.data.data.streaks.success}
 						</span>
 					</div>
 					<div className="profile-value-item">
@@ -111,7 +123,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						<span style={{
 							color: '#EF4343'
 						}}>
-							8
+							{data?.data.data.streaks.failure}
 						</span>
 					</div>
 					<div className="profile-value-item">
@@ -129,7 +141,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 							Number of games
 						</span>
 						<span>
-							10
+							{data?.data.data.gamesPlayed}
 						</span>
 					</div>
 					<div className="profile-value-item">
@@ -211,7 +223,10 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 										{data?.data.data.referrals.referral_code}
 									</span>
 								</div>
-								<img src="/static/img/copy.png" />
+								<img 
+									src="/static/svgs/copy.svg" 
+									onClick={copyReferralLink}
+								/>
 							</div>
 							<div className="statistics">
 								<div className="user_number">
