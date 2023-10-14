@@ -3,7 +3,7 @@ import Modal from "../modal/modal";
 // ts-ignore
 
 interface BadgeModalProps {
-	badge: string,
+	badge: Object,
 	show: boolean;
     handleModal: () => void;
 }
@@ -20,10 +20,10 @@ const BadgeModal:FC<BadgeModalProps> = ({ badge, show, handleModal }) => {
 				You got a new badge!
 			</div>
 			<div className="badge_image">
-				<img src={`/static/svgs/${badge}.svg`} />
+				<img src={`/static/svgs/${badge.name}.svg`} />
 			</div>
 			<div className="desc">
-				5-game win streak
+				{badge.count}-game {badge.name.split('_').join(' ')}
 			</div>
 		</Modal>
   )

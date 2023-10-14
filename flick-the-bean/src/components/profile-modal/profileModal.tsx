@@ -28,7 +28,11 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 	const[pubKey, setPubkey] = useState('');
 	const[createDate, setCreateDate] = useState('');
 	const[showBadgeModal, setShowBadgeModal] = useState(false);
-	const[showBadge, setShowBadge] = useState('');
+	const[showBadge, setShowBadge] = useState({
+		name: '',
+		count: 0
+	});
+	const[badges, setBadges] = useState([]);
 
 	const badges_array = [
 		"first_flip",
@@ -40,6 +44,14 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 		"blank_badge",
 		"blank_badge",
 		"blank_badge",
+	]
+
+	const existing_badges = [
+		"first_flip",
+		"high_roller",
+		"hot_streak",
+		"intermediate_streak",
+		"beginner_streak",
 	]
 
 	const {data, isLoading, error, isError} = useQuery({
@@ -56,9 +68,12 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 		enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 	}
 
-	const handleBadgeModal = (badge: string) => {
+	const handleBadgeModal = (name: string, count: number) => {
 		setShowBadgeModal(!showBadgeModal);
-		setShowBadge(badge);
+		setShowBadge({
+			name,
+			count,
+		});
 	}
 
 	const copyReferralLink = () => {
@@ -73,7 +88,33 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 		
 		const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 		const stringDate = months[(new Date(data?.data.data.accountCreation)).getMonth()] + " " + (new Date(data?.data.data.accountCreation)).getFullYear()
-		setCreateDate(stringDate)
+		setCreateDate(stringDate);
+
+		let res = data?.data.data.achievements.map(item => {
+			let name = item.achievement_name.toLowerCase();
+			name = name.split(' ').join('_');
+			if(existing_badges.includes(name)) {
+				return {
+					name,
+					count: item.achievement_count
+				}
+			}
+		}).filter(item => {
+			if(item == undefined) return false;
+			return true;
+		})
+
+		console.log('@@@', res)
+
+		let temp = res ? [...res] : [];
+		for(let i = 0; i < (9 - res?.length); i++) {
+			temp.push({
+				name: 'blank_badge',
+				count: 0
+			})
+		}
+
+		setBadges(temp);
 	}, [data])
 
   return(
@@ -262,8 +303,8 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						</div>
 						<div className="content">
 							{
-								badges_array.map(item => <div className="item" onClick={() => handleBadgeModal(item)}>
-									<img src={`/static/svgs/${item}.svg`} className={`${item === 'blank_badge' && 'blank'}`}/>
+								badges?.map(item => <div className="item" onClick={() => item.name !== 'blank_badge' && handleBadgeModal(item.name, item.count)}>
+									<img src={`/static/svgs/${item.name}.svg`} className={`${item.name === 'blank_badge' && 'blank'}`}/>
 								</div>)
 							}
 						</div>
@@ -272,7 +313,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 			</div>
 			<BadgeModal 
 				show={showBadgeModal}
-				handleModal={() => handleBadgeModal('')}
+				handleModal={() => handleBadgeModal("", 0)}
 				badge={showBadge}
 			/>
 		</Modal>
