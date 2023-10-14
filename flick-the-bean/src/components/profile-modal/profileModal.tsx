@@ -28,15 +28,15 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 	const[createDate, setCreateDate] = useState('');
 	
 	const badges_array = [
-		"badge_1",
-		"badge_2",
-		"badge_3",
-		"badge_4",
-		"badge_5",
-		"badge_blank",
-		"badge_blank",
-		"badge_blank",
-		"badge_blank"
+		"first_flip",
+		"high_roller",
+		"hot_streak",
+		"intermediate_streak",
+		"beginner_streak",
+		"blank_badge",
+		"blank_badge",
+		"blank_badge",
+		"blank_badge",
 	]
 
 	const {data, isLoading, error, isError} = useQuery({
@@ -255,7 +255,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						<div className="content">
 							{
 								badges_array.map(item => <div className="item">
-									<img src={`/static/img/${item}.png`} />
+									<img src={`/static/svgs/${item}.svg`} className={`${item === 'blank_badge' && 'blank'}`}/>
 								</div>)
 							}
 						</div>
