@@ -6,6 +6,7 @@ import { enqueueSnackbar } from "notistack";
 import { FC, useState, useEffect } from "react";
 import Modal from "../modal/modal";
 import RecentFlickersTable from "../recent-flickers-table/recentFlickerTable";
+import BadgeModal from "../badge-modal/badge-modal";
 import { create } from "domain";
 
 interface ProfileModalProps {
@@ -26,7 +27,9 @@ const RecentTable = () => {
 const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 	const[pubKey, setPubkey] = useState('');
 	const[createDate, setCreateDate] = useState('');
-	
+	const[showBadgeModal, setShowBadgeModal] = useState(false);
+	const[showBadge, setShowBadge] = useState('');
+
 	const badges_array = [
 		"first_flip",
 		"high_roller",
@@ -51,6 +54,11 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 
 	if(isError) {
 		enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+	}
+
+	const handleBadgeModal = (badge) => {
+		setShowBadgeModal(!showBadgeModal);
+		setShowBadge(badge);
 	}
 
 	const copyReferralLink = () => {
@@ -254,7 +262,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						</div>
 						<div className="content">
 							{
-								badges_array.map(item => <div className="item">
+								badges_array.map(item => <div className="item" onClick={() => handleBadgeModal(item)}>
 									<img src={`/static/svgs/${item}.svg`} className={`${item === 'blank_badge' && 'blank'}`}/>
 								</div>)
 							}
@@ -262,6 +270,11 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 					</div>
 				</div>
 			</div>
+			<BadgeModal 
+				show={showBadgeModal}
+				handleModal={() => handleBadgeModal('')}
+				badge={showBadge}
+			/>
 		</Modal>
   )
 }
