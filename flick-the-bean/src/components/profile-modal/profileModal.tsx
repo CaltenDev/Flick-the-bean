@@ -56,7 +56,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 		enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 	}
 
-	const handleBadgeModal = (badge) => {
+	const handleBadgeModal = (badge: string) => {
 		setShowBadgeModal(!showBadgeModal);
 		setShowBadge(badge);
 	}
