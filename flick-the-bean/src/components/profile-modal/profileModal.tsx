@@ -28,6 +28,7 @@ const RecentTable = () => {
 const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 	const[data, setData] = useState(null);
 	const[isError, setIsError] = useState(null);
+	const[error, setError] = useState(null);
 	const[pubKey, setPubkey] = useState('');
 	const[createDate, setCreateDate] = useState('');
 	const[showBadgeModal, setShowBadgeModal] = useState(false);
@@ -50,11 +51,11 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 	]
 
 	const existing_badges = [
-		"first_flip",
+		"first_win",
 		"high_roller",
 		"hot_streak",
 		"intermediate_streak",
-		"beginner_streak",
+		"lucky_bean",
 	]
 	
 	const {data: recentData} = useQuery({
@@ -75,6 +76,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 	}
 
 	const copyReferralLink = () => {
+		// @ts-ignore
 		navigator.clipboard.writeText(window.location.origin+`?ref=${data?.data.data.referrals.referral_code}`)
 		enqueueSnackbar('Copied', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 	}
@@ -82,6 +84,11 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 	const getProfileData = async () => {
 		console.log('###')
 		const profileData = await GetProfile();
+		if(profileData?.data.data.referrals?.error) {
+			// @ts-ignore
+			// enqueueSnackbar(profileData.data.data.referrals.error, {variant: 'error', anchorOrigin: {horizontal: 'center', vertical: 'center'}})
+			setError(profileData.data.data.referrals.error)
+		}
 		console.log('###', profileData)
 		// @ts-ignore
 		setData(profileData);
@@ -99,9 +106,11 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
     	setPubkey(`${key.slice(0, 5)}....${key.slice(-8)}`);
 		
 		const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+		// @ts-ignore
 		const stringDate = months[(new Date(data?.data.data.accountCreation)).getMonth()] + " " + (new Date(data?.data.data.accountCreation)).getFullYear()
 		setCreateDate(stringDate);
 
+		// @ts-ignore
 		let res = data?.data.data.achievements.map((item: any) => {
 			let name = item.achievement_name.toLowerCase();
 			name = name.split(' ').join('_');
@@ -137,9 +146,11 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						<img src={"/static/img/avatar.png"} />
 						<div>
 							<span>
-								{data?.data.data.userName}
+								{/* @ts-ignore */}
+								{data && data?.data.data.userName}
 							</span>
 							<span>
+								{/* @ts-ignore */}
 								{data?.data.data.publicKey.slice(0, 5)}....{data?.data.data.publicKey.slice(-8)}
 							</span>
 							<span>
@@ -153,6 +164,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 								Current rank
 							</span>
 							<span>
+								{/* @ts-ignore */}
 								{data?.data.data.leaderboard.current}
 							</span>
 						</div>
@@ -161,6 +173,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 								Highest
 							</span>
 							<span>
+								{/* @ts-ignore */}
 								{data?.data.data.leaderboard.best}
 							</span>
 						</div>
@@ -174,6 +187,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						<span style={{
 							color: '#5BEF43'
 						}}>
+							{/* @ts-ignore */}
 							{data?.data.data.streaks.success}
 						</span>
 					</div>
@@ -184,6 +198,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						<span style={{
 							color: '#EF4343'
 						}}>
+							{/* @ts-ignore */}
 							{data?.data.data.streaks.failure}
 						</span>
 					</div>
@@ -194,6 +209,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						<span style={{
 							color: '#FDCD00'
 						}}>
+							{/* @ts-ignore */}
 							{data?.data.data.points}
 						</span>
 					</div>
@@ -202,6 +218,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 							Number of games
 						</span>
 						<span>
+							{/* @ts-ignore */}
 							{data?.data.data.gamesPlayed}
 						</span>
 					</div>
@@ -210,6 +227,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 							Total amount bet
 						</span>
 						<span>
+							{/* @ts-ignore */}
 							{Math.round((parseFloat(data?.data.data.insights.totalAmountBet) + Number.EPSILON) * 100) / 100}
 						</span>
 					</div>
@@ -218,6 +236,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 							Winning percentage
 						</span>
 						<span>
+							{/* @ts-ignore */}
 							{data?.data.data.insights.winningPercentage}
 						</span>
 					</div>
@@ -226,6 +245,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 							Total earnings
 						</span>
 						<span>
+							{/* @ts-ignore */}
 							{Math.round((parseFloat(data?.data.data.insights.totalEarnings) + Number.EPSILON) * 100) / 100}
 						</span>
 					</div>
@@ -234,6 +254,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 							Avg. bet amount
 						</span>
 						<span>
+							{/* @ts-ignore */}
 							{Math.round((parseFloat(data?.data.data.insights.averageBetAmount) + Number.EPSILON) * 100) / 100}
 						</span>
 					</div>
@@ -275,12 +296,22 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 							Referrals
 						</div>
 						<div className="content">
+							{
+								error && <div className="error">
+									<span>
+										Referrals are not currently available in this region
+									</span>
+								</div>
+							}
+							{
+								!error && <>
 							<div className="code">
 								<div>
 									<span>
 										Referral code
 									</span>
 									<span>
+										{/* @ts-ignore */}
 										{data?.data.data.referrals.referral_code}
 									</span>
 								</div>
@@ -295,6 +326,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 										Number <br /> of users <br /> referred
 									</span>
 									<span>
+										{/* @ts-ignore */}
 										{data?.data.data.referrals.total_number_of_users_referred}
 									</span>
 								</div>
@@ -303,10 +335,12 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 										Total <br /> earned
 									</span>
 									<span>
+										{/* @ts-ignore */}
 										{data?.data.data.referrals.total_earned_through_referrals}
 									</span>
 								</div>
 							</div>
+							</>}
 						</div>
 					</div>
 					<div className="badges">

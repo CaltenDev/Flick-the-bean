@@ -673,6 +673,20 @@
 			.content {
 				display: flex;
 				flex-direction: column;
+				gap: 8px;
+				.error {
+					font-family: "Play";
+					font-size: 16px;
+					font-weight: 400;
+					line-height: 19px;
+					letter-spacing: 0em;
+
+					padding: 8px;
+					background: #ff5555;
+					color: #FFFFFF;
+					border-radius: 8px;
+				}
+
 				.code {
 					display: flex;
 					align-items: center;

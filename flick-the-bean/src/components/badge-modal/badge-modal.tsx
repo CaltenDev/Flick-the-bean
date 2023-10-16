@@ -26,7 +26,7 @@ const BadgeModal:FC<BadgeModalProps> = ({ badge, show, handleModal }) => {
 				<img src={`/static/svgs/${badge.name}.svg`} />
 			</div>
 			<div className="desc">
-				{badge.count}-game {badge.name.split('_').join(' ')}
+				5-game {badge.name.split('_').join(' ')}
 			</div>
 		</Modal>
   )
