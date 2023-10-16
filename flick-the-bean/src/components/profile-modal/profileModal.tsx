@@ -8,6 +8,7 @@ import Modal from "../modal/modal";
 import RecentFlickersTable from "../recent-flickers-table/recentFlickerTable";
 import BadgeModal from "../badge-modal/badge-modal";
 import { create } from "domain";
+import { profile } from "console";
 
 interface ProfileModalProps {
 	show: boolean;
@@ -25,6 +26,8 @@ const RecentTable = () => {
 }
 
 const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
+	const[data, setData] = useState(null);
+	const[isError, setIsError] = useState(null);
 	const[pubKey, setPubkey] = useState('');
 	const[createDate, setCreateDate] = useState('');
 	const[showBadgeModal, setShowBadgeModal] = useState(false);
@@ -32,7 +35,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 		name: '',
 		count: 0
 	});
-	const[badges, setBadges] = useState([]);
+	const[badges, setBadges] = useState<any[]>([]);
 
 	const badges_array = [
 		"first_flip",
@@ -53,11 +56,6 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 		"intermediate_streak",
 		"beginner_streak",
 	]
-
-	const {data, isLoading, error, isError} = useQuery({
-		queryKey: ['profile'],
-		queryFn:  GetProfile
-	});
 	
 	const {data: recentData} = useQuery({
 		queryKey: ['recent'],
@@ -81,6 +79,20 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 		enqueueSnackbar('Copied', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 	}
 
+	const getProfileData = async () => {
+		console.log('###')
+		const profileData = await GetProfile();
+		console.log('###', profileData)
+		// @ts-ignore
+		setData(profileData);
+		// @ts-ignore
+		setIsError(tempError);
+	}
+
+	useEffect(() => {
+		getProfileData();
+	}, [show])
+
 	useEffect(() => {
 		console.log('@@@', data);
 		const key = GetCookie('publicKey');
@@ -90,7 +102,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 		const stringDate = months[(new Date(data?.data.data.accountCreation)).getMonth()] + " " + (new Date(data?.data.data.accountCreation)).getFullYear()
 		setCreateDate(stringDate);
 
-		let res = data?.data.data.achievements.map(item => {
+		let res = data?.data.data.achievements.map((item: any) => {
 			let name = item.achievement_name.toLowerCase();
 			name = name.split(' ').join('_');
 			if(existing_badges.includes(name)) {
@@ -99,14 +111,14 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 					count: item.achievement_count
 				}
 			}
-		}).filter(item => {
+		}).filter((item: any) => {
 			if(item == undefined) return false;
 			return true;
 		})
 
 		console.log('@@@', res)
 
-		let temp = res ? [...res] : [];
+		let temp: any[] = res ? [...res] : [];
 		for(let i = 0; i < (9 - res?.length); i++) {
 			temp.push({
 				name: 'blank_badge',

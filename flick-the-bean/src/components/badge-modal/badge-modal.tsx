@@ -3,7 +3,10 @@ import Modal from "../modal/modal";
 // ts-ignore
 
 interface BadgeModalProps {
-	badge: Object,
+	badge: {
+		name: string,
+		count: number
+	},
 	show: boolean;
     handleModal: () => void;
 }
