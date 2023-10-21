@@ -866,6 +866,76 @@
 	}
 }
 
+.faq {
+	width: 613px;
+	position: fixed;
+	z-index: 2;
+	left: 0px;
+	top: 0px;
+	height: 100%;
+	background-color: #0B101D;
+	padding: 32px 48px;
+
+	.content {
+		margin-top: 40px;
+
+		div {
+			margin-top: 12px;
+		}
+		.item {}
+	}
+
+	.close {
+		float: right;
+		img {
+			width: 20px;
+			height: 20px;
+		}
+	}
+
+	.strong {
+		color: #83BDF3;
+	}
+
+	.text-yellow {
+		font-family: "Play";
+		font-size: 18px;
+		font-weight: 700;
+		line-height: 21px;
+		letter-spacing: 0em;		
+		color: #FDCD00;
+
+		text-shadow: 0px 2px 4px #FDCD0080;
+	}
+
+	.text-white {
+		font-family: "Play";
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 19px;
+		letter-spacing: 0em;		
+		color: #FFFFFF;
+	}
+
+	.title {
+		font-family: "Press Start 2P";
+		font-size: 24px;
+		font-weight: 400;
+		line-height: 24px;
+		letter-spacing: 0em;
+		
+		text-shadow: 0px 0px 24px #FDCD00 inset;
+		text-shadow: 0px 2px 12px #FDCD00;
+		text-shadow: 0px 2px 44px #FDCD00;
+	}
+
+	.separator {
+		background: black;
+		height: 2px;
+		width: 100%;
+	}
+}
+
 .btn-deposit {
 	display: flex;
 	justify-content: center;
