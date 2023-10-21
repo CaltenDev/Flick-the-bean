@@ -74,29 +74,32 @@ const Navbar:FC<NavbarProps> = () => {
           { pathName === '/flip-coin' && (
             <>
               <div>
-                <button className="btn-outline" onClick={() => router.push('/exchange')}>Exchange token</button>
-                <button className="btn-outline ml-10" onClick={() => router.push('/deposit')}>Deposit / Withdraw</button>
+                <button className="btn-outline btn-deposit" onClick={() => router.push('/exchange')}><img src="/static/svgs/deposit.svg" />Deposit</button>
+                {/* <button className="btn-outline ml-10" onClick={() => router.push('/deposit')}>Deposit / Withdraw</button> */}
               </div>
 
               <div className="header__profile">
-                <figure className="header__profile-figure">
+                <figure className="btn-outline">
                   <img
                     className="header__profile-image"
                     src="/static/svgs/profile.svg"
                     alt="profile icon"
                     onClick={handleProfileModal}
                   />
-                  <div className="header__profile-notification">
+                  {/* <div className="header__profile-notification">
                     <img
                       className="header__profile-notification-image"
                       src="/static/svgs/leahter-circular.png"
                       alt="icon"
                     />
-                  </div>
+                  </div> */}
                 </figure>
+                <button className="btn-outline" onClick={logout}>
+                  <img src="/static/svgs/qa.svg" alt="share icon" />
+                </button>
                 {/* <p className="header__profile-text">{pubKey}</p> */}
-                <button className="header__profile-share" onClick={logout}>
-                  <img src="/static/svgs/profile-share.svg" alt="share icon" />
+                <button className="btn-outline" onClick={logout}>
+                  <img src="/static/svgs/exit.svg" alt="share icon" />
                 </button>
               </div>
             </>

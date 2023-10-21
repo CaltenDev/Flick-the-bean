@@ -866,7 +866,14 @@
 	}
 }
 
+.btn-deposit {
+	display: flex;
+	justify-content: center;
+	gap: 12px;
+}
+
 .btn-outline {
+	position: relative;
 	padding: 15px;
 	border: 3px solid rgba(0, 0, 0, 1);
 	border-radius: 12px;
@@ -925,6 +932,11 @@
 
 	&:hover {
 		background: rgba(255, 255, 255, 0.15);
+	}
+
+	img {
+		width: 24px;
+		height: 24px;
 	}
 }
 
