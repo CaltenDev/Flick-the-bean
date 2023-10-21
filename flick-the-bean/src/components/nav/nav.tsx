@@ -5,7 +5,7 @@ import GetCookie from '@/hooks/cookies/getCookie';
 import RemoveCookie from '@/hooks/cookies/removeCookie';
 import { usePathname, useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from "react";
-import FaqModal from '../faq-modal/faqModal';
+import FAQModal from '../faq-modal/FAQModal';
 import ProfileModal from '../profile-modal/profileModal';
 import {
   useBalanceStore,
@@ -122,7 +122,7 @@ const Navbar:FC<NavbarProps> = () => {
           </ul>
         </nav>
       </div>
-      <FaqModal show={showFaqModal} handleModal={handleFaqModal} />
+      <FAQModal show={showFaqModal} handleModal={handleFaqModal} />
       { isLoggedin && <ProfileModal show={showProfileModal} handleModal={handleProfileModal} /> }
     </header>
   )
