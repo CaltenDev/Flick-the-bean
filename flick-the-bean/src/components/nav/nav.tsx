@@ -94,7 +94,7 @@ const Navbar:FC<NavbarProps> = () => {
                     />
                   </div> */}
                 </figure>
-                <button className="btn-outline" onClick={logout}>
+                <button className="btn-outline" onClick={() => {handleFaqModal()}}>
                   <img src="/static/svgs/qa.svg" alt="share icon" />
                 </button>
                 {/* <p className="header__profile-text">{pubKey}</p> */}
