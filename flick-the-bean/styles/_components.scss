@@ -942,6 +942,90 @@
 	gap: 12px;
 }
 
+.btn-item {
+	display: flex;
+	justify-content: center;
+	align-items: center;	
+
+	font-family: "Play";
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 23px;
+	letter-spacing: 0em;
+	text-align: center;
+	color: #404349;
+
+	width: 74px;
+	height: 50px;
+	border-radius: 8px;
+	position: relative;
+	background: conic-gradient(from 173.54deg at 50% 50%, rgba(177, 179, 185, 0.79) -4.21deg, rgba(89, 96, 106, 0.81) 9.02deg, rgba(85, 91, 105, 0.81) 21.83deg, rgba(176, 176, 176, 0.82) 41.43deg, rgba(95, 101, 115, 0.64) 62.99deg, rgba(169, 171, 179, 0.86) 83.06deg, rgba(182, 185, 192, 0.83) 120.42deg, rgba(242, 243, 245, 0.81) 149.35deg, rgba(98, 107, 116, 0.76) 185.93deg, rgba(142, 149, 157, 0.87) 218.85deg, rgba(239, 239, 241, 0.85) 245.1deg, rgba(105, 112, 122, 0.74) 269.35deg, rgba(87, 93, 107, 0.83) 283.73deg, rgba(99, 106, 116, 0.8) 300.99deg, rgba(241, 241, 243, 0.78) 337.05deg, rgba(151, 154, 163, 0.73) 349.31deg, rgba(177, 179, 185, 0.79) 355.79deg, rgba(89, 96, 106, 0.81) 369.02deg),
+				conic-gradient(from 173.54deg at 50% 50%, rgba(177, 179, 185, 0.79) -4.21deg, #59606A 9.02deg, rgba(85, 91, 105, 0.81) 21.83deg, rgba(176, 176, 176, 0.98) 41.43deg, #5F6573 62.99deg, rgba(169, 171, 179, 0.86) 83.06deg, #B1B3B7 120.42deg, rgba(242, 243, 245, 0.81) 149.35deg, rgba(98, 107, 116, 0.9) 185.93deg, rgba(142, 149, 157, 0.91) 218.85deg, #EFEFF1 245.1deg, rgba(105, 112, 122, 0.74) 269.35deg, rgba(87, 93, 107, 0.95) 283.73deg, rgba(99, 106, 116, 0.98) 300.99deg, rgba(241, 241, 243, 0.95) 337.05deg, rgba(151, 154, 163, 0.9) 349.31deg, rgba(177, 179, 185, 0.79) 355.79deg, #59606A 369.02deg),
+				linear-gradient(0deg, rgba(255, 255, 255, 0.37), rgba(255, 255, 255, 0.37));
+	outline: 7px solid black;
+
+	box-shadow: 8px 8px 4px 5px #00000059;
+
+	&::before {
+		background: conic-gradient(from 173.54deg at 50% 50%, rgba(177, 179, 185, 0.79) -4.21deg, #59606A 9.02deg, rgba(85, 91, 105, 0.81) 21.83deg, rgba(176, 176, 176, 0.98) 41.43deg, #5F6573 62.99deg, rgba(169, 171, 179, 0.86) 83.06deg, #B1B3B7 120.42deg, rgba(242, 243, 245, 0.81) 149.35deg, rgba(98, 107, 116, 0.9) 185.93deg, rgba(142, 149, 157, 0.91) 218.85deg, #EFEFF1 245.1deg, rgba(105, 112, 122, 0.74) 269.35deg, rgba(87, 93, 107, 0.95) 283.73deg, rgba(99, 106, 116, 0.98) 300.99deg, rgba(241, 241, 243, 0.95) 337.05deg, rgba(151, 154, 163, 0.9) 349.31deg, rgba(177, 179, 185, 0.79) 355.79deg, #59606A 369.02deg);
+		border-radius: 12px;
+		content: "";
+		display: block;
+		position: absolute;
+		top: -3px;
+		left: -3px;
+		right: -3px;
+		bottom: -3px;
+		pointer-events: none;
+	}
+
+	span {
+		z-index: 1;
+	}
+
+	&-active {
+		color: rgba(253, 205, 0, 1);
+		text-shadow: 0px 0px 10px rgba(253, 205, 0, 1) inset;
+		text-shadow: 0px 2px 10px rgba(253, 205, 0, 1);
+		text-shadow: 0px 2px 10px rgba(253, 205, 0, 1);
+		outline: 11px solid black;
+		
+		&[disabled] {
+			border: 1px solid #f5f5f51c !important;
+			color: #f5f5f51c;
+			box-shadow: none !important;
+			cursor: not-allowed;
+		}
+
+		&::before {
+			background: conic-gradient(from 173.54deg at 50% 50%, rgba(177, 179, 185, 0.79) -4.21deg, #59606A 9.02deg, rgba(85, 91, 105, 0.81) 21.83deg, rgba(176, 176, 176, 0.98) 41.43deg, #5F6573 62.99deg, rgba(169, 171, 179, 0.86) 83.06deg, #B1B3B7 120.42deg, rgba(242, 243, 245, 0.81) 149.35deg, rgba(98, 107, 116, 0.9) 185.93deg, rgba(142, 149, 157, 0.91) 218.85deg, #EFEFF1 245.1deg, rgba(105, 112, 122, 0.74) 269.35deg, rgba(87, 93, 107, 0.95) 283.73deg, rgba(99, 106, 116, 0.98) 300.99deg, rgba(241, 241, 243, 0.95) 337.05deg, rgba(151, 154, 163, 0.9) 349.31deg, rgba(177, 179, 185, 0.79) 355.79deg, #59606A 369.02deg);
+			border-radius: 12px;
+			content: "";
+			display: block;
+			position: absolute;
+			top: -3px;
+			left: -3px;
+			right: -3px;
+			bottom: -3px;
+			pointer-events: none;
+			// border: 3px solid;
+			// border-image-source: conic-gradient(from 173.54deg at 50% 50%, rgba(177, 179, 185, 0.79) -4.21deg, #59606A 9.02deg, rgba(85, 91, 105, 0.81) 21.83deg, rgba(176, 176, 176, 0.98) 41.43deg, #5F6573 62.99deg, rgba(169, 171, 179, 0.86) 83.06deg, #B1B3B7 120.42deg, rgba(242, 243, 245, 0.81) 149.35deg, rgba(98, 107, 116, 0.9) 185.93deg, rgba(142, 149, 157, 0.91) 218.85deg, #EFEFF1 245.1deg, rgba(105, 112, 122, 0.74) 269.35deg, rgba(87, 93, 107, 0.95) 283.73deg, rgba(99, 106, 116, 0.98) 300.99deg, rgba(241, 241, 243, 0.95) 337.05deg, rgba(151, 154, 163, 0.9) 349.31deg, rgba(177, 179, 185, 0.79) 355.79deg, #59606A 369.02deg);
+		}
+
+		&::after {
+			content: "";
+			display: block;
+			position: absolute;
+			top: -3px;
+			left: -3px;
+			right: -3px;
+			bottom: -3px;
+			opacity: 0.33;
+			background: black;
+		}
+	}
+}
+
 .btn-outline {
 	position: relative;
 	padding: 15px;

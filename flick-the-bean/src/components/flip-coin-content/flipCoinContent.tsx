@@ -233,14 +233,24 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 									</button>
 								</div>
 								<div className="btns-grid mt-30">
-									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 0.1 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(0.1)}>
-										0.1
+									<button disabled={loading} className={`btn-item ${acd == 0.1 && 'btn-item-active' }`} onClick={() => handleAcd(0.1)}>
+										<span>0.1</span>
 									</button>
-									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 0.25 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(0.25)}>0.25</button>
-									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 0.5 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(0.5)}>0.5</button>
-									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 1 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(1)}>1</button>
-									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 2 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(2)}>2</button>
-									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 3 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(3)}>3</button>
+									<button disabled={loading} className={`btn-item ${acd == 0.25 && 'btn-item-active' }`} onClick={() => handleAcd(0.25)}>
+										<span>0.25</span>
+									</button>
+									<button disabled={loading} className={`btn-item ${acd == 0.5 && 'btn-item-active' }`} onClick={() => handleAcd(0.5)}>
+										<span>0.5</span>
+									</button>
+									<button disabled={loading} className={`btn-item ${acd == 1 && 'btn-item-active' }`} onClick={() => handleAcd(1)}>
+										<span>1</span>
+									</button>
+									<button disabled={loading} className={`btn-item ${acd == 2 && 'btn-item-active' }`} onClick={() => handleAcd(2)}>
+										<span>2</span>
+									</button>
+									<button disabled={loading} className={`btn-item ${acd == 3 && 'btn-item-active' }`} onClick={() => handleAcd(3)}>
+										<span>3</span>
+									</button>
 								</div>
 							</div>
 							<div className="btns-control-right">
