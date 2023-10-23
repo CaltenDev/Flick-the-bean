@@ -14,6 +14,7 @@ import RecentFlickersModal from "../recent-flickers-modal/recentFlickersModal";
 import {
 	useBalanceStore,
 } from '../../store'
+import { stat } from "fs";
 interface FlipCoinContentProps {
 }
 
@@ -225,11 +226,13 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 						<div className="btns-control">
 							<div className="btns-control-left">
 								<div className="btns-row mt-30">
-									<button className="" id="head-btn" disabled={loading} onClick={() => {setStatus('heads')}}>
-										<img className="btn-white__avatar" src={`/static/img/heads${status == 'heads' ? '_active' : '_disable'}.png`} alt="head icon" />
+									<button className={`btn-item btn-heads_tails ${status == 'heads' && 'btn-heads_tails-active'}`} id="head-btn" disabled={loading} onClick={() => {setStatus('heads')}}>
+										<img style={status != 'heads' ? {width: '51px', height: '62px'} : {width: '116px', height: '142px', top: '-20px'}} className="btn-white__avatar" src={`/static/svgs/heads${status == 'heads' ? '_active' : '_inactive'}.svg`} alt="head icon" />
+										<span>Heads</span>
 									</button>
-									<button className="" disabled={loading} onClick={() => {setStatus("tails")}}>
-										<img className="btn-white__avatar" src={`/static/img/tails${status == 'tails' ? '_active' : '_disable'}.png`} alt="tail icon" />
+									<button className={`btn-item btn-heads_tails ${status == 'tails' && 'btn-heads_tails-active'}`} disabled={loading} onClick={() => {setStatus("tails")}}>
+										<img style={status != 'tails' ? {width: '51px', height: '62px'} : {width: '116px', height: '142px', top: '-20px'}} className="btn-white__avatar" src={`/static/svgs/tails${status == 'tails' ? '_active' : '_inactive'}.svg`} alt="tail icon" />
+										<span>Tails</span>
 									</button>
 								</div>
 								<div className="btns-grid mt-30">
