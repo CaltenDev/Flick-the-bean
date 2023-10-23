@@ -14,6 +14,7 @@ import RecentFlickersModal from "../recent-flickers-modal/recentFlickersModal";
 import {
 	useBalanceStore,
 } from '../../store'
+import UsernameModal from "../username-modal/usernameModal";
 interface FlipCoinContentProps {
 }
 
@@ -308,6 +309,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 					
           <RecentFlickersModal show={showRecentModal} handleModal={handleRecentModal} tableData={data}/>
           <AddFundModal show={showAddFundModal} handleModal={handleAddFundModal} />
+		  <UsernameModal show={true} handleModal={handleRecentModal}/>
 				</section>
     </>
   )
