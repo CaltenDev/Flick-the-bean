@@ -309,7 +309,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 					
           <RecentFlickersModal show={showRecentModal} handleModal={handleRecentModal} tableData={data}/>
           <AddFundModal show={showAddFundModal} handleModal={handleAddFundModal} />
-		  <UsernameModal show={true} handleModal={handleRecentModal}/>
+		  {/* <UsernameModal show={true} handleModal={handleRecentModal}/> */}
 				</section>
     </>
   )
