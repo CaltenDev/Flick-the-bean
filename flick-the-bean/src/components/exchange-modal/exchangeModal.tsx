@@ -16,7 +16,7 @@ const ExchangeModal:FC<ExchangeModalProps> = ({ show, handleModal }) => {
 	})
   return(
 		<Modal customClass={'exchange-modal'} show={show} handleModal={handleModal}>
-			Deposit
+			<Exchange />
 		</Modal>
   )
 }

@@ -15,7 +15,7 @@ import {
 	useBalanceStore,
 } from '../../store'
 import UsernameModal from "../username-modal/usernameModal";
-import DepositModal from "../deposit-modal/depositModal";
+import DepositModal from "../exchange-modal/exchangeModal";
 interface FlipCoinContentProps {
 }
 
