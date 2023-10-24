@@ -15,6 +15,7 @@ import {
 	useBalanceStore,
 } from '../../store'
 import UsernameModal from "../username-modal/usernameModal";
+import DepositModal from "../deposit-modal/depositModal";
 interface FlipCoinContentProps {
 }
 
@@ -29,6 +30,8 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 	const [data, setData] = useState<dataProps[]>([]);
   	const[showRecentModal, setShowRecentModal] = useState(false);
   	const[showAddFundModal, setShowAddFundModal] = useState(false);
+	const[showUsernameModal, setShowUsernameModal] = useState(false);
+	const[showDepositModal, setShowDepositModal] = useState(false);
 	const[gameResult, setGameResult] = useState(0);
 	const[acd, setAcd] = useState(0.1);
 	const[loading, setLoading] = useState(false);
@@ -85,6 +88,14 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 
   const handleAddFundModal = () => {
     setShowAddFundModal(!showAddFundModal);
+  }
+
+  const handleUsernameModal = () => {
+    setShowUsernameModal(!showUsernameModal);
+  }
+
+  const handleDepositModal = () => {
+    setShowDepositModal(!showDepositModal);
   }
 
   const handleRecentModal = () => {
@@ -309,7 +320,6 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 					
           <RecentFlickersModal show={showRecentModal} handleModal={handleRecentModal} tableData={data}/>
           <AddFundModal show={showAddFundModal} handleModal={handleAddFundModal} />
-		  {/* <UsernameModal show={true} handleModal={handleRecentModal}/> */}
 				</section>
     </>
   )

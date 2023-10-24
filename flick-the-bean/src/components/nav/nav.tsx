@@ -7,6 +7,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from "react";
 import FAQModal from '../faq-modal/FAQModal';
 import ProfileModal from '../profile-modal/profileModal';
+import UsernameModal from "../username-modal/usernameModal";
+import DepositModal from "../deposit-modal/depositModal";
 import {
   useBalanceStore,
 } from '../../store'
@@ -19,6 +21,8 @@ const Navbar:FC<NavbarProps> = () => {
   const[openNav, setOpneNav] = useState(false);
   const[showFaqModal, setShowFaqModal] = useState(false);
   const[showProfileModal, setShowProfileModal] = useState(false);
+  const[showUsernameModal, setShowUsernameModal] = useState(false);
+	const[showDepositModal, setShowDepositModal] = useState(false);
   const[pubKey, setPubkey] = useState('');
   const { isLoggedin, setIsLoggedIn } = useGlobalContext();
   let balance = useBalanceStore(state => state.balance);
@@ -38,6 +42,14 @@ const Navbar:FC<NavbarProps> = () => {
 
   const handleProfileModal = () => {
     setShowProfileModal(!showProfileModal);
+  }
+
+  const handleUsernameModal = () => {
+    setShowUsernameModal(!showUsernameModal);
+  }
+
+  const handleDepositModal = () => {
+    setShowDepositModal(!showDepositModal);
   }
 
   const logout = () => {
@@ -74,7 +86,7 @@ const Navbar:FC<NavbarProps> = () => {
           { pathName === '/flip-coin' && (
             <>
               <div>
-                <button className="btn-outline btn-deposit" onClick={() => router.push('/exchange')}><img src="/static/svgs/deposit.svg" />Deposit</button>
+                <button className="btn-outline btn-deposit" onClick={() => {handleDepositModal()}}><img src="/static/svgs/deposit.svg" />Deposit</button>
                 {/* <button className="btn-outline ml-10" onClick={() => router.push('/deposit')}>Deposit / Withdraw</button> */}
               </div>
 
@@ -126,6 +138,8 @@ const Navbar:FC<NavbarProps> = () => {
       </div>
       <FAQModal show={showFaqModal} handleModal={handleFaqModal} />
       { isLoggedin && <ProfileModal show={showProfileModal} handleModal={handleProfileModal} /> }
+      <UsernameModal show={showUsernameModal} handleModal={handleUsernameModal}/>
+		  <DepositModal show={showDepositModal} handleModal={handleDepositModal}/>
     </header>
   )
 }

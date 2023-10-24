@@ -36,7 +36,7 @@ const Exchange = () => {
 	},[refetching]);
 
 	if(isError) {
-		enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+		// enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 	}
 
   const[showRecentModal, setShowRecentModal] = useState(false);
@@ -104,7 +104,8 @@ const Exchange = () => {
     <>
       <section className="exchange">
 					<div className="exchange__header">
-						<h3 className="exchange__title"><img src="/static/img/arrow_left.png" alt="settings icon" onClick={() => router.back()}/>Exchange</h3>
+						<h3 className="exchange__title">Exchange</h3>
+						<img src="/static/svgs/close.svg" className="close"/>
 						<div>
 							{/* <button><img src="/static/svgs/settings.svg" alt="settings icon" /></button> */}
 						</div>
@@ -226,18 +227,6 @@ const Exchange = () => {
 						) : 'Exchange'}
 					</button>
 				</section>
-				<div className="mt-30">
-					<button className="btn-arrow" id="flickersBtn" onClick={handleRecentModal}>
-						Recent Flickers
-						<img className="btn-arrow__icon" src="/static/svgs/arrow-right.svg" alt="arrow icon" />
-					</button>
-				</div>
-
-      <RecentFlickersModal 
-	  	show={showRecentModal} 
-		handleModal={handleRecentModal} 
-		tableData={recentData}
-	  />
     </>
   )
 }

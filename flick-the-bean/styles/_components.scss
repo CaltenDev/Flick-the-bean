@@ -1128,8 +1128,15 @@
 .exchange, .deposit {
 	width: 455px;
 	padding: 20px;
-	background-color: var(--white);
 	color: var(--black);
+	position: relative;
+	.close {
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		right: 0px;
+		top: 0px;
+	}
 	&__right {
     display: flex;
     flex-direction: column;
