@@ -1127,7 +1127,7 @@
 
 .exchange, .deposit {
 	width: 455px;
-	padding: 20px;
+	padding: 0px 10px;
 	color: var(--black);
 	position: relative;
 	.close {
@@ -1178,29 +1178,25 @@
 		align-items: center;
 		justify-content: space-between;
 		padding: 0 0 20px;
+		color: white;
 	}
 
 	&__title {
-		color: #3a3a3a;
+		// colorv: #3a3a3a;
 		font-size: 16px;
-		font-weight: 700;
+		font-weight: 400;
 		display: flex;
 		align-items: center;
 		gap: 12px;
-
-		img {
-			width: 16px;
-			height: 10px;
-			cursor: pointer;
-		}
 	}
 
 	&__panel {
 		display: flex;
 		justify-content: space-between;
-		background-color: #f4f4f4;
+		background-color: #141D34;
 		padding: 30px 20px;
 		margin-bottom: 10px;
+		border-radius: 8.9px;
 	}
 
 	&__subtitle {
@@ -1213,7 +1209,7 @@
 		&-field {
 			border: 0;
 			font-size: 28px;
-			color: #3a3a3a;
+			color: #FFFFFF;
 			font-weight: 700;
 			width: 200px;
 			outline: 0 none;
