@@ -1298,6 +1298,76 @@
 	}
 }
 
+.deposit {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+
+	& > img {
+		position: absolute;
+		width: 20px;
+		height: 20px;
+		right: 0px;
+		top: 0px;
+	}
+
+	.title {
+		font-family: "Play";
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 19px;
+		letter-spacing: 0em;
+		
+		color: #FFFFFF;
+	}
+
+	.content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background: #141D34;
+		border-radius: 8.9px;
+		padding: 16px;
+
+		input {
+			width: 200px;
+			background-color: transparent;
+			outline: unset;
+			border: 0px;
+
+			font-family: "Play";
+			font-size: 28px;
+			font-weight: 700;
+			line-height: 32px;
+			letter-spacing: 0em;
+
+			color: #FFFFFF;
+		}
+
+		.coin-box {
+			font-family: "Play";
+			font-size: 20px;
+			font-weight: 400;
+			line-height: 23px;
+			letter-spacing: 0em;
+			color: #FFFFFF;
+			position: relative;
+
+			&-display {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 16px 32px;
+				
+				gap: 16px;
+				background-color: #1C294A;
+				border-radius: 8.9px;
+			}
+		}
+	}
+}
+
 .btn-reward {
 	display: flex;
 	align-items: center;
