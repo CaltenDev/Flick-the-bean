@@ -1,4 +1,5 @@
 import { GetrecentFlickers } from "@/api/recent-flickers";
+import SetCookie from "@/hooks/cookies/setCookie";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { FC, useEffect, useState } from "react";
@@ -14,13 +15,17 @@ const HomeContent:FC = () => {
 
   const {data, isLoading, isRefetching} = useQuery({
     queryKey: ['recent'],
-    queryFn:  () => GetrecentFlickers(search)
+    queryFn:  GetrecentFlickers
   });
 
 
   useEffect(() => {
     console.log("component mounted", search);
   }, [])
+
+  if(search != null) {
+    SetCookie('refCode', search)
+  }
 
   if(isLoading) {
     console.log("Loading");

@@ -127,11 +127,12 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 				if (gameResponse != undefined && newBalance != '0.00') {
 					setTimeout(() => {
 						setStartAnimation(`coin_${gameResponse ? winRandom : lostRandom}.gif`);
-						setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);
+						// setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);
 					}, 1000);
 					setTimeout(() => {
 						setLoading(false);
 						setGameResult(gameResponse ? 1 : 2);
+						setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);
 					}, 3600);
 					SetCookie('balance', newBalance);
 				} else {
@@ -150,11 +151,12 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 				if (gameResponse != undefined && newBalance != '0.00') {
 					setTimeout(() => {
 						setStartAnimation(`coin_${gameResponse ? winRandom : lostRandom}.gif`);
-						setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);
+						// setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);
 					}, 1000);
 					setTimeout(() => {
 						setLoading(false);
 						setGameResult(gameResponse ? 1 : 2);
+						setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);
 					}, 3600);
 					SetCookie('balance', newBalance);
 				} else {
@@ -173,11 +175,12 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 				if (gameResponse != undefined && newBalance != '0.00') {
 					setTimeout(() => {
 						setStartAnimation(`coin_${gameResponse ? winRandom : lostRandom}.gif`);
-						setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);
+						// setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);
 					}, 1000);
 					setTimeout(() => {
 						setLoading(false);
 						setGameResult(gameResponse ? 1 : 2);
+						setBalance(Math.round((parseFloat(newBalance) + Number.EPSILON) * 100) / 100);
 					}, 3600);
 					SetCookie('balance', newBalance);
 				} else {

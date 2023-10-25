@@ -1,8 +1,10 @@
+import GetCookie from "@/hooks/cookies/getCookie";
 import SetCookie from "@/hooks/cookies/setCookie";
 import axios from "axios";
 
 export const login = async (sign: string, publicKey: string, message: string, hash:string) => {
-  return await axios.post('https://flickthebean.onrender.com/login', {
+  const refCode = GetCookie('refCode');
+  return await axios.post(`https://flickthebean.onrender.com/login${refCode != '' ? '?ref=' + refCode : ''}`, {
     hash: hash,
     value: message,
     userPublicKey: publicKey,

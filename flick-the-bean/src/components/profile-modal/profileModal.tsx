@@ -18,7 +18,7 @@ interface ProfileModalProps {
 const RecentTable = () => {
 	const {data} = useQuery({
     queryKey: ['recent'],
-    queryFn: async () => await GetrecentFlickers(null)
+	queryFn: GetrecentFlickers
   })
 	return (
 		<RecentFlickersTable classname="auto" tableData={data} />
