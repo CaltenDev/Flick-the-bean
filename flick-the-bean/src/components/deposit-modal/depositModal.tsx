@@ -18,7 +18,7 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 				<div className="title">
 					Deposit
 				</div>
-				<img src="/static/svgs/close.svg" />
+				<img src="/static/svgs/close.svg" onClick={handleModal}/>
 				<div className="content">
 					<input type="text" />
 					<div className="coin-box">
