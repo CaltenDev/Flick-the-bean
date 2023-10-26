@@ -78,13 +78,14 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 			  ],
 			  senderAddress: accountAddress,
 			},
-			onFinish: (response: any) => {
-				if(response?.status == 200) {
-					enqueueSnackbar('Transaction Success', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
-					handleModal();
-				} else {
-					enqueueSnackbar('Transaction Failure', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
-				}
+			onFinish: async (response: any) => {
+				// let result = await DepositBTC(response?., accountAddress);
+				// if(result?.status == 200) {
+				// 	enqueueSnackbar('Transaction Success', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+				//   handleModal();
+				// } else {
+				//   enqueueSnackbar('Transaction Failure', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+				// }
 			},
 			onCancel: () =>  enqueueSnackbar('Dismissed', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}}),
 		  };
