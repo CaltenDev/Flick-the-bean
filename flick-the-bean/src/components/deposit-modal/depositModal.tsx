@@ -140,8 +140,8 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 						</div>
 					</div>
 				</div>
-				<div 
-					className="btn-outline text-center" 
+				<button 
+					className="deposit__btn btn-outline text-center" 
 					onClick={() => {
 						const wallet = GetCookie('wallet');
 						wallet == 'unisat' ?
@@ -154,7 +154,7 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 					disabled={amount == "" ? true : false}
 				>
 					Deposit
-				</div>
+				</button>
 			</div>
 		</Modal>
   )
