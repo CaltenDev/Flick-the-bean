@@ -43,7 +43,7 @@ const Deposit = () => {
         let txid = await window.unisat.sendBitcoin(accountAddress, despitAmount);
         if(txid) {
           // DepositBTC(false, txid);
-          let result = await DepositBTC(false, txid);
+          let result = await DepositBTC(txid, accountAddress);
           console.log(result)
         }
         console.log(txid)

@@ -37,7 +37,7 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 			  // DepositBTC(false, txid);
 			  let result = await DepositBTC(txid, accountAddress);
 			  console.log("@@@@", result)
-			  if(result?.status == 200) {
+			  if(result?.status == 202) {
 			  	enqueueSnackbar('Transaction Success', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 				handleModal();
 			  } else {
@@ -79,13 +79,13 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 			  senderAddress: accountAddress,
 			},
 			onFinish: async (response: any) => {
-				// let result = await DepositBTC(response?., accountAddress);
-				// if(result?.status == 200) {
-				// 	enqueueSnackbar('Transaction Success', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
-				//   handleModal();
-				// } else {
-				//   enqueueSnackbar('Transaction Failure', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
-				// }
+				let result = await DepositBTC(response?.txId, accountAddress);
+				if(result?.status == 202) {
+					enqueueSnackbar('Transaction Success', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+				  handleModal();
+				} else {
+				  enqueueSnackbar('Transaction Failure', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+				}
 			},
 			onCancel: () =>  enqueueSnackbar('Dismissed', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}}),
 		  };
@@ -122,7 +122,7 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 
 			if(resp.result.txid) {
 				let result = await DepositBTC(resp.result.txid, accountAddress);
-				if(result?.status == 200) {
+				if(result?.status == 202) {
 					enqueueSnackbar('Transaction Success', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 					handleModal();
 				} else {
