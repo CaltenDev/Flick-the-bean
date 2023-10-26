@@ -23,7 +23,7 @@ const UsernameModal:FC<UsernameModalProps> = ({ show, handleModal, handleUserNam
   return(
 		<Modal customClass={'username-modal'} show={show} handleModal={handleModal}>
 			<div className="username">
-				<img src="/static/svgs/close.svg" />
+				<img src="/static/svgs/close.svg" onClick={handleModal}/>
 				<div className="username-title">
 					Choose a your <br />username
 				</div>

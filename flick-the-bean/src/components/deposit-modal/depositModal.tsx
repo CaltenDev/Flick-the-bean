@@ -4,6 +4,7 @@ import { GetrecentFlickers } from "@/api/recent-flickers";
 import { useQuery } from "@tanstack/react-query";
 import { FC, useState, useEffect } from "react";
 import GetCookie from "@/hooks/cookies/getCookie";
+import { sendBtcTransaction } from "sats-connect";
 import { enqueueSnackbar } from "notistack";
 import Modal from "../modal/modal";
 interface DepositModalProps {
@@ -30,10 +31,17 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 		  try {
 			// @ts-ignore
 			let txid = await window.unisat.sendBitcoin(accountAddress, despitAmount);
+			console.log("@@@@", txid)
 			if(txid) {
 			  // DepositBTC(false, txid);
 			  let result = await DepositBTC(false, txid);
-			  console.log(result)
+			  console.log("@@@@", result)
+			  if(result?.status == 200) {
+			  	enqueueSnackbar('Transaction Success', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+				handleModal();
+			  } else {
+			    enqueueSnackbar('Transaction Failure', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+			  }
 			}
 			console.log(txid)
 		  } catch (e) {
@@ -69,7 +77,12 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 			  senderAddress: accountAddress,
 			},
 			onFinish: (response: any) => {
-			  alert(response);
+				if(response?.status == 200) {
+					enqueueSnackbar('Transaction Success', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+					handleModal();
+				} else {
+					enqueueSnackbar('Transaction Failure', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+				}
 			},
 			onCancel: () =>  enqueueSnackbar('Dismissed', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}}),
 		  };
@@ -102,7 +115,17 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 			  address: accountAddress,
 			  amount: despitAmount
 			});
-			console.log(resp.result.txid)
+			console.log("@@@@", resp.result.txid)
+
+			if(resp.result.txid) {
+				let result = await DepositBTC(false, resp.result.txid);
+				if(result?.status == 200) {
+					enqueueSnackbar('Transaction Success', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+					handleModal();
+				} else {
+					enqueueSnackbar('Transaction Failure', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+				}
+			}
 		  } catch(e) {
 			console.log(e);
 			enqueueSnackbar('Dismissed', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});

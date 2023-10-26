@@ -36,7 +36,8 @@ const PlayModal: FC<PlayModalProps> = ({ show, handleModal }) => {
 
 	const handleUserName = async (value: any) => {
 		let res = await setUserName(value, user_id);
-		if(res?.data.status == 200 && res?.data.data == "OK") {
+		console.log("@@@", res)
+		if(res?.status == 200 && res?.data.data == "OK") {
 			handleUsernameModal();
 			router.push('/flip-coin');
 			setIsLoggedIn(true);
@@ -71,6 +72,7 @@ const PlayModal: FC<PlayModalProps> = ({ show, handleModal }) => {
 							// setIsLoggedIn(true);
 							setLoading(false);
 							setUserId(userId);
+							console.log('@@@@', newUser)
 							if(newUser) {
 								handleUsernameModal();
 							} else {

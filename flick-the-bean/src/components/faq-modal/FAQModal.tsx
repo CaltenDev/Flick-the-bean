@@ -20,7 +20,7 @@ const FaqModal:FC<FaqModalProps> = ({ show, handleModal }) => {
 		<Modal customClass={'faq-modal'} show={show} handleModal={handleModal}>
 			<div className="faq">
 				<div className="close">
-					<img src="/static/svgs/close.svg" />
+					<img src="/static/svgs/close.svg" onClick={handleModal}/>
 				</div>
 				<div className="faq-title text-yellow title">
 					FAQ
