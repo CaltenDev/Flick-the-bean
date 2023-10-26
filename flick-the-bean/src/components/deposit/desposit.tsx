@@ -1,5 +1,5 @@
 import { DepositBTC } from "@/api/deposit";
-import { WithdrawBtc } from "@/api/withdraw";
+// import { WithdrawBtc } from "@/api/withdraw";
 import GetCookie from "@/hooks/cookies/getCookie";
 import { useRouter } from "next/navigation";
 import { enqueueSnackbar } from "notistack";
@@ -26,7 +26,7 @@ const Deposit = () => {
 
   const handleWithdraw = () => {
     const withdrawAmount = amount.includes('.') ? parseFloat(amount) : parseInt(amount);
-    WithdrawBtc(withdrawAmount);
+    // WithdrawBtc(withdrawAmount);
   }
 
   const handleUnisatTransaction = async () => {
