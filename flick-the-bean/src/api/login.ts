@@ -13,7 +13,10 @@ export const login = async (sign: string, publicKey: string, message: string, ha
   }).then(function (res) {
     console.log(res);
     SetCookie('balance', res.data.data.balance);
-    return  res.data.data.userId && res.data.data.userId;
+    return  {
+      userId: res.data.data.userId && res.data.data.userId,
+      newUser: res.data.data.newUser && res.data.data.newUser
+    };
   }).catch(function (error) {
     console.log(error.toJSON());
   });

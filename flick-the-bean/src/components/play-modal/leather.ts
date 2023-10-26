@@ -16,26 +16,21 @@ const getSignature = async () => {
   if (userSession.isUserSignedIn()) {
     // Wrap the signature request in a Promise so we can await it
     const userResult = await new Promise((resolve) => {
-      try {
-        openSignatureRequestPopup({
-          message: hash,
-          async onFinish(data) {
-            user = await login(data.signature, data.publicKey, message, hash);
-            SetCookie('userId', user);
-            SetCookie('sign', data.signature);
-            SetCookie('publicKey', data.publicKey);
-            SetCookie('wallet', 'leather');
-            resolve(user);  // Resolve the promise with the user data
-          },
-          onCancel: () => {
-            resolve(false);
-            enqueueSnackbar('Dismissed', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
-          }
-        });
-      } catch(e) {
-        console.log(e);
-      }
-
+      openSignatureRequestPopup({
+        message: hash,
+        async onFinish(data) {
+          user = await login(data.signature, data.publicKey, message, hash);
+          SetCookie('userId', user.userId);
+          SetCookie('sign', data.signature);
+          SetCookie('publicKey', data.publicKey);
+          SetCookie('wallet', 'leather');
+          resolve(user);  // Resolve the promise with the user data
+        },
+        onCancel: () => {
+          resolve(false);
+          enqueueSnackbar('Dismissed', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+        }
+      });
     });
 
     console.log("leather: ", userResult);
@@ -43,7 +38,10 @@ const getSignature = async () => {
     
 
     if (userResult) {
-      return true;
+      return {
+        flag: true,
+        payload: userResult
+      };
     } else {
       return false;
     }
@@ -80,7 +78,7 @@ export const handleLeather = async () => {
   console.log('data: ', data);
 
   if (data) {
-    return true;
+    return data;
   } else {
     return false;
   }

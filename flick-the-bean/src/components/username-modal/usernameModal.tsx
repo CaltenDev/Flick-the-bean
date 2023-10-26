@@ -1,15 +1,22 @@
 import { GetrecentFlickers } from "@/api/recent-flickers";
 import { useQuery } from "@tanstack/react-query";
-import { FC, useEffect } from "react";
+import { FC, userState, useEffect, useState } from "react";
 import Modal from "../modal/modal";
 
 interface UsernameModalProps {
 	show: boolean;
-  handleModal: () => void;
+  	handleModal: () => void;
+	handleUserName: (username: string) => void;
 }
 
 
-const UsernameModal:FC<UsernameModalProps> = ({ show, handleModal }) => {
+const UsernameModal:FC<UsernameModalProps> = ({ show, handleModal, handleUserName }) => {
+	const [username, setUserName] = useState('')
+
+	const changeUserName = (value: string) => {
+		setUserName(value)
+	}
+
 	useEffect(() => {
 		// console.log('@@@', tableData)
 	})
@@ -20,8 +27,14 @@ const UsernameModal:FC<UsernameModalProps> = ({ show, handleModal }) => {
 				<div className="username-title">
 					Choose a your <br />username
 				</div>
-				<input type="text" />
-				<button className="btn-outline">Done</button>
+				<input 
+					type="text" 
+					value={username}
+					onChange={(e) => {
+						changeUserName(e.target.value);
+					}}
+				/>
+				<button className="btn-outline" onClick={() => handleUserName(username)}>Done</button>
 			</div>
 		</Modal>
   )
