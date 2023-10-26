@@ -1,6 +1,10 @@
+import { DepositBTC } from "@/api/deposit";
+import { GetExchangeAddress } from "@/api/exchange";
 import { GetrecentFlickers } from "@/api/recent-flickers";
 import { useQuery } from "@tanstack/react-query";
-import { FC, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
+import GetCookie from "@/hooks/cookies/getCookie";
+import { enqueueSnackbar } from "notistack";
 import Modal from "../modal/modal";
 interface DepositModalProps {
 	show: boolean;
@@ -9,6 +13,105 @@ interface DepositModalProps {
 
 
 const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
+	const [amount, setAmount] = useState("");
+	const changeAmount = (value: string) => {
+		setAmount(value);
+	}
+
+	const handleUnisatTransaction = async () => {
+		const despitAmount = amount.includes('.') ? parseFloat(amount) : parseInt(amount);
+		const accountAddress = 'bc1pdlee90dye598q502hytgm5nnyxjt46rz9egkfurl5ggyqgx49cssjusy3k';
+		if (amount != '') {
+		  // @ts-ignore
+		  if(amount < 1000) {
+			enqueueSnackbar('Less amount', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+			return;
+		  }
+		  try {
+			// @ts-ignore
+			let txid = await window.unisat.sendBitcoin(accountAddress, despitAmount);
+			if(txid) {
+			  // DepositBTC(false, txid);
+			  let result = await DepositBTC(false, txid);
+			  console.log(result)
+			}
+			console.log(txid)
+		  } catch (e) {
+			enqueueSnackbar('Dismissed', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+		  }
+		} else {
+		  enqueueSnackbar('Wallet address missing', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+		}
+	
+	  }
+	
+	  const handleXverseTransaction = async () => {
+		const despitAmount = amount.includes('.') ? parseFloat(amount) : parseInt(amount);
+		const accountAddress = 'bc1pdlee90dye598q502hytgm5nnyxjt46rz9egkfurl5ggyqgx49cssjusy3k';
+		const senderAddress = GetCookie('address');
+		if (senderAddress != '' && amount != '') {
+		  // @ts-ignore
+		  if(amount < 1000) {
+			enqueueSnackbar('Less amount', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+			return;
+		  }
+		  const sendBtcOptions = {
+			payload: {
+			  network: {
+				type: "mainnet",
+			  },
+			  recipients: [
+				{
+				  address: accountAddress,
+				  amountSats: despitAmount,
+				},
+			  ],
+			  senderAddress: accountAddress,
+			},
+			onFinish: (response: any) => {
+			  alert(response);
+			},
+			onCancel: () =>  enqueueSnackbar('Dismissed', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}}),
+		  };
+		  // @ts-ignore
+		  await sendBtcTransaction(sendBtcOptions);
+		} else {
+		  enqueueSnackbar('Wallet address missing', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+		}
+	
+	  }
+	
+	  const handleLeatherTransaction = async () => {
+		const despitAmount = amount.includes('.') ? parseFloat(amount) : parseInt(amount);
+
+		// get wallet from /exchange/generate_address with payload userId
+		let res = await GetExchangeAddress();
+		let accountAddress = res.data.data;
+		console.log('@@@', accountAddress)
+		// --- end ---
+		// const accountAddress = 'bc1pdlee90dye598q502hytgm5nnyxjt46rz9egkfurl5ggyqgx49cssjusy3k';
+		if (amount != '') {
+		  // @ts-ignore
+		  if(amount < 1000) {
+			enqueueSnackbar('Less amount', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+			return;
+		  }
+		  try {
+			// @ts-ignore
+			const resp = await window.btc?.request('sendTransfer', {
+			  address: accountAddress,
+			  amount: despitAmount
+			});
+			console.log(resp.result.txid)
+		  } catch(e) {
+			console.log(e);
+			enqueueSnackbar('Dismissed', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+		  }
+		} else {
+		  enqueueSnackbar('Wallet address missing', {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}});
+		}
+	  }
+
 	useEffect(() => {
 		
 	})
@@ -20,7 +123,13 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 				</div>
 				<img src="/static/svgs/close.svg" onClick={handleModal}/>
 				<div className="content">
-					<input type="text" />
+					<input 
+						type="text" 
+						value={amount}
+						onChange={(e) => {
+							changeAmount(e.target.value);
+						}}
+					/>
 					<div className="coin-box">
 						<div className="coin-box-display">
 							<div>SATS</div>
@@ -31,7 +140,19 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 						</div>
 					</div>
 				</div>
-				<div className="btn-outline text-center">
+				<div 
+					className="btn-outline text-center" 
+					onClick={() => {
+						const wallet = GetCookie('wallet');
+						wallet == 'unisat' ?
+						  handleUnisatTransaction() :
+						  wallet == 'xverse' ?
+							handleXverseTransaction() :
+							handleLeatherTransaction();
+						}
+					}			
+					disabled={amount == "" ? true : false}
+				>
 					Deposit
 				</div>
 			</div>

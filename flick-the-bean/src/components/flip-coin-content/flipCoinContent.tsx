@@ -293,7 +293,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 									<span onClick={handleRecentModal}>See all</span>
 								</div>
 								{
-									data.length ? <div className="btns-display-recent-value">
+									data?.length ? <div className="btns-display-recent-value">
 									{
 										data.map(item => <div className="btns-display-recent-value-row">
 											<div className="amount">
