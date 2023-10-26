@@ -21,7 +21,8 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 
 	const handleUnisatTransaction = async () => {
 		const despitAmount = amount.includes('.') ? parseFloat(amount) : parseInt(amount);
-		const accountAddress = 'bc1pdlee90dye598q502hytgm5nnyxjt46rz9egkfurl5ggyqgx49cssjusy3k';
+		let res = await GetExchangeAddress();
+		let accountAddress = res.data.data;
 		if (amount != '') {
 		  // @ts-ignore
 		  if(amount < 1000) {
@@ -34,7 +35,7 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 			console.log("@@@@", txid)
 			if(txid) {
 			  // DepositBTC(false, txid);
-			  let result = await DepositBTC(false, txid);
+			  let result = await DepositBTC(txid, accountAddress);
 			  console.log("@@@@", result)
 			  if(result?.status == 200) {
 			  	enqueueSnackbar('Transaction Success', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
@@ -55,7 +56,8 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 	
 	  const handleXverseTransaction = async () => {
 		const despitAmount = amount.includes('.') ? parseFloat(amount) : parseInt(amount);
-		const accountAddress = 'bc1pdlee90dye598q502hytgm5nnyxjt46rz9egkfurl5ggyqgx49cssjusy3k';
+		let res = await GetExchangeAddress();
+		let accountAddress = res.data.data;
 		const senderAddress = GetCookie('address');
 		if (senderAddress != '' && amount != '') {
 		  // @ts-ignore
@@ -118,7 +120,7 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 			console.log("@@@@", resp.result.txid)
 
 			if(resp.result.txid) {
-				let result = await DepositBTC(false, resp.result.txid);
+				let result = await DepositBTC(resp.result.txid, accountAddress);
 				if(result?.status == 200) {
 					enqueueSnackbar('Transaction Success', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 					handleModal();
