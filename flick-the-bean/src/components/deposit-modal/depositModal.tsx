@@ -141,7 +141,7 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 					</div>
 				</div>
 				<button 
-					className="deposit__btn btn-outline text-center" 
+					className="btn-outline text-center" 
 					onClick={() => {
 						const wallet = GetCookie('wallet');
 						wallet == 'unisat' ?
