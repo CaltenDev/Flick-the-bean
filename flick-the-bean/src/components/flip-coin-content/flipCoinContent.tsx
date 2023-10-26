@@ -68,7 +68,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 		}, 200)
 
 		const fetchIntervalId = setInterval(async () => {
-			const recentData = await GetrecentFlickers(null)
+			const recentData = await GetrecentFlickers()
 			setData(recentData)
 		}, 5000);
 

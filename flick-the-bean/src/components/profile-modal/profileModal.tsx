@@ -60,7 +60,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 	
 	const {data: recentData} = useQuery({
 		queryKey: ['recent'],
-		queryFn: async () => await GetrecentFlickers(null)
+		queryFn: async () => await GetrecentFlickers()
 	  })
 
 	if(isError) {

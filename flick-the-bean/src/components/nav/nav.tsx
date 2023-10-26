@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from "react";
 import FAQModal from '../faq-modal/FAQModal';
 import ProfileModal from '../profile-modal/profileModal';
-import UsernameModal from "../username-modal/usernameModal";
+// import UsernameModal from "../username-modal/usernameModal";
 import DepositModal from "../deposit-modal/depositModal";
 import {
   useBalanceStore,
@@ -138,7 +138,7 @@ const Navbar:FC<NavbarProps> = () => {
       </div>
       <FAQModal show={showFaqModal} handleModal={handleFaqModal} />
       { isLoggedin && <ProfileModal show={showProfileModal} handleModal={handleProfileModal} /> }
-      <UsernameModal show={showUsernameModal} handleModal={handleUsernameModal}/>
+      {/* <UsernameModal show={showUsernameModal} handleModal={handleUsernameModal}/> */}
 		  <DepositModal show={showDepositModal} handleModal={handleDepositModal}/>
     </header>
   )

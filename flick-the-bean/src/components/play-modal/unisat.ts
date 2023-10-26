@@ -40,7 +40,9 @@ export const getSignature = async () => {
 
     
     let {
+      // @ts-ignore
       userId = '',
+      // @ts-ignore
       newUser = false,
     } = await login(sign, publicKey, message, hash);
     if(userId != '') {
@@ -71,6 +73,7 @@ export const signMessage = async (value: string) => {
     publicKey = await uniSat.getPublicKey();
     let userId = '';
     if(sign && publicKey && GetCookie('userId') == '') {
+      // @ts-ignore
       userId = await login(sign, publicKey, value, hash);
       SetCookie('userId', userId);
     }

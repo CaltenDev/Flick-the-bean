@@ -20,7 +20,7 @@ const getSignature = async () => {
         message: hash,
         async onFinish(data) {
           user = await login(data.signature, data.publicKey, message, hash);
-          SetCookie('userId', user.userId);
+          SetCookie('userId', user?.userId);
           SetCookie('sign', data.signature);
           SetCookie('publicKey', data.publicKey);
           SetCookie('wallet', 'leather');

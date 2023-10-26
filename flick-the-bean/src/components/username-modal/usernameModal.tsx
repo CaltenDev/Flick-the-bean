@@ -1,6 +1,6 @@
 import { GetrecentFlickers } from "@/api/recent-flickers";
 import { useQuery } from "@tanstack/react-query";
-import { FC, userState, useEffect, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import Modal from "../modal/modal";
 
 interface UsernameModalProps {

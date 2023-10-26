@@ -34,10 +34,10 @@ const PlayModal: FC<PlayModalProps> = ({ show, handleModal }) => {
 		setShowUsernameModal(!showUsernameModal);
 	}
 
-	const handleUserName = async (value) => {
-		const res = await setUserName(value, user_id);
-		if(res.data.status = 200 && res.data.data == "OK") {
-			setShowUsernameModal();
+	const handleUserName = async (value: any) => {
+		let res = await setUserName(value, user_id);
+		if(res?.data.status == 200 && res?.data.data == "OK") {
+			handleUsernameModal();
 			router.push('/flip-coin');
 			setIsLoggedIn(true);
 			enqueueSnackbar('Logged In', {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
@@ -57,7 +57,9 @@ const PlayModal: FC<PlayModalProps> = ({ show, handleModal }) => {
 					<button disabled={loading} className="btn-secondary" onClick={async () => {
 						setLoading(true);
 						const {
+							// @ts-ignore
 							flag,
+							// @ts-ignore
 							payload: {
 								newUser = false,
 								userId, 
@@ -85,6 +87,7 @@ const PlayModal: FC<PlayModalProps> = ({ show, handleModal }) => {
 					<button disabled={loading} className="btn-secondary" onClick={async () => {
 						setLoading(true);
 						const {
+							// @ts-ignore
 							flag
 						} = await handleUnisat();
 						if (flag) {

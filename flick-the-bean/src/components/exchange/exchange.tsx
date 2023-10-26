@@ -22,7 +22,7 @@ const Exchange = () => {
 	});
 	const {data: recentData} = useQuery({
 		queryKey: ['recent'],
-		queryFn:  () => GetrecentFlickers(null)
+		queryFn:  () => GetrecentFlickers()
 	});
 
 	useEffect(() => {
