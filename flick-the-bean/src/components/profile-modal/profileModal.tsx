@@ -156,7 +156,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 							</span>
 							<span>
 								{/* @ts-ignore */}
-								{data?.data.data.publicKey}
+								{data?.data.data.publicKey.slice(0, 5)}....{data?.data.data.publicKey.slice(-8)}
 							</span>
 							<span>
 								Flipping since <a>{createDate}</a>
