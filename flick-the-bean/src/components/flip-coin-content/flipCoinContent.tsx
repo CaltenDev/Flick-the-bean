@@ -240,22 +240,32 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 						<div className="btns-control">
 							<div className="btns-control-left">
 								<div className="btns-row mt-30">
-									<button className="" id="head-btn" disabled={loading} onClick={() => {setStatus('heads')}}>
+									<button className={`btns-row-item ${status == "heads" && 'btns-row-item-active' }`} id="head-btn" disabled={loading} onClick={() => {setStatus('heads')}}>
 										<img className="btn-white__avatar" src={`/static/img/heads${status == 'heads' ? '_active' : '_disable'}.png`} alt="head icon" />
 									</button>
-									<button className="" disabled={loading} onClick={() => {setStatus("tails")}}>
+									<button className={`btns-row-item ${status == "tails" && 'btns-row-item-active' }`} disabled={loading} onClick={() => {setStatus("tails")}}>
 										<img className="btn-white__avatar" src={`/static/img/tails${status == 'tails' ? '_active' : '_disable'}.png`} alt="tail icon" />
 									</button>
 								</div>
 								<div className="btns-grid mt-30">
 									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 0.1 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(0.1)}>
-										0.1
+										<span>0.1</span>
 									</button>
-									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 0.25 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(0.25)}>0.25</button>
-									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 0.5 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(0.5)}>0.5</button>
-									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 1 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(1)}>1</button>
-									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 2 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(2)}>2</button>
-									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 3 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(3)}>3</button>
+									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 0.25 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(0.25)}>
+										<span>0.25</span>
+									</button>
+									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 0.5 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(0.5)}>
+										<span>0.5</span>
+									</button>
+									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 1 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(1)}>
+										<span>1</span>
+									</button>
+									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 2 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(2)}>
+										<span>2</span>
+									</button>
+									<button disabled={loading} className={`btn-outline btn-outline--medium ${acd == 3 && 'btn-outline--medium-active' }`} onClick={() => handleAcd(3)}>
+										<span>3</span>
+									</button>
 								</div>
 							</div>
 							<div className="btns-control-right">

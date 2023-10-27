@@ -81,7 +81,7 @@
 .btns-grid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	gap: 4px;
+	gap: 20px 8px;
 	justify-items: center;
 }
 
@@ -275,7 +275,19 @@
 .btns-row {
 	display: flex;
 	justify-content: center;
+	align-items: flex-end;
 	gap: 20px;
+
+	&-item {
+		width: 120px;
+		background-color: black;
+		display: flex;
+		border-radius: 12px;
+
+		&-active {
+			height: 152px;
+		}
+	}
 
 	button img {
 		width: 120px;
