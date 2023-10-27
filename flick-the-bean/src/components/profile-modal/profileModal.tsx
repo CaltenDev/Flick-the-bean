@@ -233,7 +233,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						</span>
 						<span>
 							{/* @ts-ignore */}
-							{Math.round((parseFloat(data?.data.data.insights.totalAmountBet) + Number.EPSILON) * 100) / 100}$
+							{Math.round((parseFloat(data?.data.data.insights.totalAmountBet) + Number.EPSILON) * 100) / 100} $
 						</span>
 					</div>
 					<div className="profile-value-item">
@@ -242,7 +242,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						</span>
 						<span>
 							{/* @ts-ignore */}
-							{data?.data.data.insights.winningPercentage}%
+							{data?.data.data.insights.winningPercentage} %
 						</span>
 					</div>
 					<div className="profile-value-item">
@@ -251,7 +251,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						</span>
 						<span>
 							{/* @ts-ignore */}
-							{Math.round((parseFloat(data?.data.data.insights.totalEarnings) + Number.EPSILON) * 100) / 100}$
+							{Math.round((parseFloat(data?.data.data.insights.totalEarnings) + Number.EPSILON) * 100) / 100} $
 						</span>
 					</div>
 					<div className="profile-value-item">
@@ -260,7 +260,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						</span>
 						<span>
 							{/* @ts-ignore */}
-							{Math.round((parseFloat(data?.data.data.insights.averageBetAmount) + Number.EPSILON) * 100) / 100}$
+							{Math.round((parseFloat(data?.data.data.insights.averageBetAmount) + Number.EPSILON) * 100) / 100} $
 						</span>
 					</div>
 					
