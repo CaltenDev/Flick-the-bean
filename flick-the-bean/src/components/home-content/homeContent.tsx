@@ -48,7 +48,7 @@ const HomeContent:FC = () => {
         <section>
           <h1 className="heading-primary">
             <img src="/static/img/border.png" alt="border"/>
-            <img src="/static/img/landing.png" alt="landing"/>
+            <img src="/static/img/landing.webp" alt="landing"/>
           </h1>
         </section>
         <section className="center-area">

@@ -12,13 +12,14 @@
 	align-items: center;
 	gap: 12px;
 	img {
-		width: 160px;
+		width: 207px;
 	}
 
 	&_separator {
 		width: 2px;
 		height: 33px;
 		background-color: white;
+		margin-right: 24px;
 	}
 
 	&_balance {

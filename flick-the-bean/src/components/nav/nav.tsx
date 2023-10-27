@@ -86,7 +86,9 @@ const Navbar:FC<NavbarProps> = () => {
           { pathName === '/flip-coin' && (
             <>
               <div>
-                <button className="btn-outline btn-deposit" onClick={() => {handleDepositModal()}}><img src="/static/svgs/deposit.svg" />Deposit</button>
+                <button style={{
+                      height: "63.78px"
+                }} className="btn-outline btn-deposit" onClick={() => {handleDepositModal()}}><img src="/static/svgs/deposit.svg" />Deposit</button>
                 {/* <button className="btn-outline ml-10" onClick={() => router.push('/deposit')}>Deposit / Withdraw</button> */}
               </div>
 
