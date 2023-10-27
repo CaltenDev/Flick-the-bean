@@ -1425,10 +1425,13 @@
 	line-height: normal;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
 	align-items: center;
 	position: relative;
 	border-radius: 26px;
+
+	img {
+		margin-top: 0px !important;
+	}
 
 	&__title {
 		font-size: 25px;
