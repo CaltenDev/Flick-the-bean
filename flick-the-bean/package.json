@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run config | next dev",
     "build": "next build",
     "start": "next start",
+    "config": "node ./next.config.js",
     "lint": "next lint",
     "dep-netlify": "netlify deploy --build --prod"
   },
