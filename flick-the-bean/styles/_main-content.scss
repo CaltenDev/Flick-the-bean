@@ -66,6 +66,8 @@
 
 .btns-inner-wrapper {
 	flex: 1;
+	padding-left: 66px;
+	margin-top: -20px;
 }
 
 .score-area {
@@ -81,8 +83,8 @@
 .btns-grid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	gap: 20px 8px;
-	justify-items: center;
+	gap: 8px;
+	align-items: end;
 }
 
 .btns-control {
@@ -158,6 +160,7 @@
 }
 
 .btns-verification {
+	width: 260px;
 	border: 3px solid black;
 	border-radius: 8px;
 	padding: 10px 40px;
@@ -165,7 +168,7 @@
 	margin-left: 20px;
 	display: flex;
 	align-items: center;
-	width: fit-content;
+	justify-content: center;
 	gap: 10px;
 
 	&-active {
@@ -341,9 +344,10 @@
 		background-color: black;
 		display: flex;
 		border-radius: 12px;
+		height: 152px;
 
 		&-active {
-			height: 152px;
+			height: 142px;
 		}
 	}
 

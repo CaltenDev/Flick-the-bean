@@ -975,10 +975,10 @@
 		position: relative;
 		display: flex;
 		width: 80px;
-		height: 56px;
+		height: 66px;
 		justify-content: center;
 		padding: 0px;
-		align-items: center;
+
 		border: 3px solid rgba(0, 0, 0, 1);
 		font-size: 20px;
 		font-family: 'Play';
@@ -988,8 +988,7 @@
 		background: black;
 
 		&-active {
-			height: 66px;
-			margin-top: -10px;
+			height: 60px;
 			background-image: unset;
 			
 			color: rgba(253, 205, 0, 1);
@@ -1009,7 +1008,7 @@
 		span {
 			display: inline-block;
 			width: 100%;
-			height: 100%;
+			height: 54px;
 			border-radius: 10px;
 			display: flex;
 			justify-content: center;

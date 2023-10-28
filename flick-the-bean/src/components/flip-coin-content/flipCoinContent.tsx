@@ -40,6 +40,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 	const[points, setPoints] = useState(0);
 	const[status, setStatus] = useState('heads');
 	const[start, setStart] = useState(false);
+	const[first, setFirst] = useState(true);
 	const[idx, setIdx] = useState(0);
 	const[startAnimation, setStartAnimation] = useState('coin_start.gif');
 	const updateBalance = useBalanceStore(state => state.updateBalance);
@@ -211,7 +212,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 				</div>
 				<section className="btns-wrapper">
 					{/* <button className="btn-outline btn-outline--big mb-20">Switch to 2x mode</button> */}
-					<div className="result mb-20 h-100">
+					<div className="result h-100">
 						{
 							loading && (
 								<img className="coin-start-animation" src={`/static/animations/${startAnimation}`} alt="" />
@@ -275,6 +276,7 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 							</div>
 							<div className="btns-control-right">
 								<div className={`switch ${start ? 'active' : ''}`} onClick={() => {
+									setFirst(false);
 									if(status == 'heads') {
 										startGame(true);
 									}
@@ -290,12 +292,12 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 								<img src={`/static/img/arrow_${(idx+1)}.png`} alt="switch"/>
 							</div>
 						</div>
-						<div className={`btns-verification ${!loading && "btns-verification-active"}`} onClick={handleVerification}>
+						<div className={`btns-verification ${(!loading && !first ) && "btns-verification-active"}`} onClick={handleVerification}>
 							<div className="btns-verification-icon">
-								<img src={`/static/img/tick_${!loading ? "" : "in"}active.png`} />
+								<img src={`/static/img/${(!loading && !first) ? "tick_active.png" : "tick_inactive.png"}`} />
 							</div>
 							<span>
-								See verification
+								VERIFY
 							</span>
 						</div>
 						<div className="btns-display">
