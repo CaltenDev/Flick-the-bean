@@ -290,9 +290,9 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 								<img src={`/static/img/arrow_${(idx+1)}.png`} alt="switch"/>
 							</div>
 						</div>
-						<div className={`btns-verification ${verification && "btns-verification-active"}`} onClick={handleVerification}>
+						<div className={`btns-verification ${!loading && "btns-verification-active"}`} onClick={handleVerification}>
 							<div className="btns-verification-icon">
-								<img src={`/static/img/tick_${verification ? "" : "in"}active.png`} />
+								<img src={`/static/img/tick_${!loading ? "" : "in"}active.png`} />
 							</div>
 							<span>
 								See verification
