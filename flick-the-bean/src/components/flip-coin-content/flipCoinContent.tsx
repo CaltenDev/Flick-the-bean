@@ -28,6 +28,7 @@ interface dataProps {
 
 const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 	const [data, setData] = useState<dataProps[]>([]);
+	const[verification, setVerification] = useState(false);
   	const[showRecentModal, setShowRecentModal] = useState(false);
   	const[showAddFundModal, setShowAddFundModal] = useState(false);
 	const[showUsernameModal, setShowUsernameModal] = useState(false);
@@ -85,6 +86,10 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 				setPoints(profileData.data.data.points)
 		})();	
 	}, [loading])
+
+  const handleVerification = () => {
+	setVerification(!verification);
+  }
 
   const handleAddFundModal = () => {
     setShowAddFundModal(!showAddFundModal);
@@ -284,6 +289,14 @@ const FlipCoinContent:FC<FlipCoinContentProps> = ({  }) => {
 								</div>
 								<img src={`/static/img/arrow_${(idx+1)}.png`} alt="switch"/>
 							</div>
+						</div>
+						<div className="btns-verification">
+							<div className="btns-verification-icon">
+								
+							</div>
+							<span>
+								See verification
+							</span>
 						</div>
 						<div className="btns-display">
 							<div className="btns-display-points">
