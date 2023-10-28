@@ -83,16 +83,17 @@ const Navbar:FC<NavbarProps> = () => {
       </div>
       <div className="header__wrap">
         <div className="header__wrap">
-          { pathName === '/flip-coin' && (
             <>
+            {isLoggedin && 
               <div>
                 <button style={{
                       height: "63.78px"
                 }} className="btn-outline btn-deposit" onClick={() => {handleDepositModal()}}><img src="/static/svgs/deposit.svg" />Deposit</button>
                 {/* <button className="btn-outline ml-10" onClick={() => router.push('/deposit')}>Deposit / Withdraw</button> */}
               </div>
-
+            }
               <div className="header__profile">
+              {isLoggedin && 
                 <figure 
                   className="btn-outline"
                   onClick={handleProfileModal}
@@ -109,17 +110,17 @@ const Navbar:FC<NavbarProps> = () => {
                       alt="icon"
                     />
                   </div> */}
-                </figure>
+                </figure>}
                 <button className="btn-outline" onClick={() => {handleFaqModal()}}>
                   <img src="/static/svgs/qa.svg" alt="share icon" />
                 </button>
                 {/* <p className="header__profile-text">{pubKey}</p> */}
+                { isLoggedin && 
                 <button className="btn-outline" onClick={logout}>
                   <img src="/static/svgs/exit.svg" alt="share icon" />
-                </button>
+                </button>}
               </div>
             </>
-          )}
         </div>
         {/* <div className={`hamburger ${openNav ? 'open' : ''}`} onClick={handleNavbar}>
           <span></span>
