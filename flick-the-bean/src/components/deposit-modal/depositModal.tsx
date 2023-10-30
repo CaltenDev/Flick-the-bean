@@ -7,6 +7,8 @@ import GetCookie from "@/hooks/cookies/getCookie";
 import { sendBtcTransaction } from "sats-connect";
 import { enqueueSnackbar } from "notistack";
 import Modal from "../modal/modal";
+import { playButtonAudio } from "@/sound";
+
 interface DepositModalProps {
 	show: boolean;
   handleModal: () => void;
@@ -19,7 +21,7 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 		setAmount(value);
 	}
 
-	const handleUnisatTransaction = async () => {
+	  const handleUnisatTransaction = async () => {
 		const despitAmount = amount.includes('.') ? parseFloat(amount) : parseInt(amount);
 		let res = await GetExchangeAddress();
 		let accountAddress = res.data.data;
@@ -169,6 +171,7 @@ const DepositModal:FC<DepositModalProps> = ({ show, handleModal }) => {
 				<button 
 					className="btn-outline text-center" 
 					onClick={() => {
+						playButtonAudio();
 						const wallet = GetCookie('wallet');
 						wallet == 'unisat' ?
 						  handleUnisatTransaction() :

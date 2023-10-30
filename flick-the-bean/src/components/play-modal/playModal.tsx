@@ -10,6 +10,7 @@ import { handleLeather } from "./leather";
 import { handleUnisat } from "./unisat";
 import { handleXverse } from './xverse';
 import UsernameModal from "../username-modal/usernameModal";
+import { playButtonAudio } from '@/sound';
 
 interface PlayModalProps {
 	show: boolean;
@@ -30,7 +31,7 @@ const PlayModal: FC<PlayModalProps> = ({ show, handleModal }) => {
 	const { isLoggedin, setIsLoggedIn } = useGlobalContext();
 	const[showUsernameModal, setShowUsernameModal] = useState(false);
 
-	const handleUsernameModal = () => {
+		const handleUsernameModal = () => {
 		setShowUsernameModal(!showUsernameModal);
 	}
 
@@ -56,6 +57,7 @@ const PlayModal: FC<PlayModalProps> = ({ show, handleModal }) => {
 				</p>
 				<div className="modal__btn-wrapper">
 					<button disabled={loading} className="btn-secondary" onClick={async () => {
+						playButtonAudio();
 						setLoading(true);
 						const {
 							// @ts-ignore
@@ -87,6 +89,7 @@ const PlayModal: FC<PlayModalProps> = ({ show, handleModal }) => {
 						<img src="/static/img/leather-icon.png" alt="leather-icon" /><span>Leather</span>
 					</button>
 					<button disabled={loading} className="btn-secondary" onClick={async () => {
+						playButtonAudio();
 						setLoading(true);
 						const {
 							// @ts-ignore
@@ -104,6 +107,7 @@ const PlayModal: FC<PlayModalProps> = ({ show, handleModal }) => {
 						<img src="/static/img/unisat-icon.png" alt="unisat-icon" /><span>UniSat</span>
 					</button>
 					<button disabled={loading} className="btn-secondary" onClick={async () => {
+						playButtonAudio();
 						setLoading(true);
 						const flag = await handleXverse();
 						if (flag) {

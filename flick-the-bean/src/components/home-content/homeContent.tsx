@@ -6,6 +6,7 @@ import { FC, useEffect, useState } from "react";
 import PlayModal from "../play-modal/playModal";
 import RecentFlickersTable from "../recent-flickers-table/recentFlickerTable";
 import RecentFlickersModal from "../recent-flickers-modal/recentFlickersModal";
+import { playButtonAudio } from "@/sound";
 
 const HomeContent:FC = () => {
   const[showRecentModal, setShowRecentModal] = useState(false);
@@ -17,7 +18,6 @@ const HomeContent:FC = () => {
     queryKey: ['recent'],
     queryFn:  GetrecentFlickers
   });
-
 
   useEffect(() => {
     console.log("component mounted", search);
@@ -40,6 +40,7 @@ const HomeContent:FC = () => {
   }
 
   const handleModal = () => {
+    playButtonAudio();
     setShowModal(!showModal)
   }
   return(

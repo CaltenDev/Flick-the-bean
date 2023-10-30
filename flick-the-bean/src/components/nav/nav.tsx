@@ -12,6 +12,8 @@ import DepositModal from "../deposit-modal/depositModal";
 import {
   useBalanceStore,
 } from '../../store'
+import { playButtonAudio } from '@/sound';
+
 interface NavbarProps {
 }
 
@@ -41,6 +43,7 @@ const Navbar:FC<NavbarProps> = () => {
   }
 
   const handleProfileModal = () => {
+    playButtonAudio();
     setShowProfileModal(!showProfileModal);
   }
 
@@ -53,6 +56,7 @@ const Navbar:FC<NavbarProps> = () => {
   }
 
   const logout = () => {
+    playButtonAudio();
 		RemoveCookie('userId');
     RemoveCookie('sign');
     RemoveCookie('gameNonce');
@@ -88,7 +92,7 @@ const Navbar:FC<NavbarProps> = () => {
               <div>
                 <button style={{
                       height: "63.78px"
-                }} className="btn-outline btn-deposit" onClick={() => {handleDepositModal()}}><img src="/static/svgs/deposit.svg" />Deposit</button>
+                }} className="btn-outline btn-deposit" onClick={() => {playButtonAudio();handleDepositModal()}}><img src="/static/svgs/deposit.svg" />Deposit</button>
                 {/* <button className="btn-outline ml-10" onClick={() => router.push('/deposit')}>Deposit / Withdraw</button> */}
               </div>
             }
@@ -111,7 +115,7 @@ const Navbar:FC<NavbarProps> = () => {
                     />
                   </div> */}
                 </figure>}
-                <button className="btn-outline" onClick={() => {handleFaqModal()}}>
+                <button className="btn-outline" onClick={() => {playButtonAudio();handleFaqModal()}}>
                   <img src="/static/svgs/qa.svg" alt="share icon" />
                 </button>
                 {/* <p className="header__profile-text">{pubKey}</p> */}

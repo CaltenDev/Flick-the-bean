@@ -8,6 +8,7 @@ import { sendBtcTransaction } from "sats-connect";
 import {
 	useBalanceStore,
 } from '../../store'
+import { playButtonAudio } from "@/sound";
 
 const Deposit = () => {
   const[tab, setTab] = useState(0);
@@ -25,6 +26,7 @@ const Deposit = () => {
   }
 
   const handleWithdraw = () => {
+    playButtonAudio()
     const withdrawAmount = amount.includes('.') ? parseFloat(amount) : parseInt(amount);
     // WithdrawBtc(withdrawAmount);
   }
@@ -126,14 +128,16 @@ const Deposit = () => {
   return(
     <>
       <div className="tabs">
-        <button onClick={() => setTab(0)} className={`tabs__tab ${tab == 0 ? 'tabs__tab--active' : ''}`}>Desposit</button>
-        <button onClick={() => setTab(1)} className={`tabs__tab ${tab == 1 ? 'tabs__tab--active' : ''}`}>Withdraw</button>
+        <button onClick={() => {playButtonAudio();setTab(0)}} className={`tabs__tab ${tab == 0 ? 'tabs__tab--active' : ''}`}>Desposit</button>
+        <button onClick={() => {playButtonAudio();setTab(1)}} className={`tabs__tab ${tab == 1 ? 'tabs__tab--active' : ''}`}>Withdraw</button>
       </div>
       {
         tab == 0 ? (
           <section className="deposit">
             <div className="deposit__header-wrapper">
-              <button className="deposit__back-btn" onClick={() => router.push('/flip-coin')}>
+              <button className="deposit__back-btn" onClick={() => {
+                playButtonAudio();
+                router.push('/flip-coin')}}>
                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                   <title/>
                   <g data-name="Layer 2" id="Layer_2">
@@ -152,6 +156,7 @@ const Deposit = () => {
             <button
               className="deposit__btn"
               onClick={
+                playButtonAudio();
                 wallet == 'unisat' ?
                   handleUnisatTransaction :
                   wallet == 'xverse' ?
@@ -166,7 +171,7 @@ const Deposit = () => {
         ) : (
           <section className="deposit">
             <div className="deposit__header-wrapper">
-              <button className="deposit__back-btn" onClick={() => router.push('/flip-coin')}>
+              <button className="deposit__back-btn" onClick={() => {playButtonAudio(); router.push('/flip-coin')}}>
                 <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
                   <title/>
                   <g data-name="Layer 2" id="Layer_2">

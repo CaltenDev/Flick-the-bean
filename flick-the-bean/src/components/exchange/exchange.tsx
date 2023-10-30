@@ -10,6 +10,7 @@ import RecentFlickersModal from "../recent-flickers-modal/recentFlickersModal";
 import {
 	useBalanceStore,
 } from '../../store'
+import { playButtonAudio } from "@/sound";
 
 const Exchange = () => {
 	const[refetching, setRefetching] = useState(false);
@@ -45,6 +46,7 @@ const Exchange = () => {
 	const[brc, setBrc] = useState('');
 
 	const handlePosition = () => {
+		playButtonAudio();
 		setBtcToBrc(!btcToBrc);
 	}
 
@@ -53,6 +55,7 @@ const Exchange = () => {
   }
 
 	const handleBtcToBrc = async () => {
+		playButtonAudio();
 		try {
 			setLoading(true);
 			const exchangeAmount = btc.includes('.') ? parseFloat(btc) : parseInt(btc);
@@ -71,6 +74,7 @@ const Exchange = () => {
   }
 
 	const handleBrcToBtc = async () => {
+		playButtonAudio()
 		try {
 			setLoading(true);
 			const exchangeAmount = brc.includes('.') ? parseFloat(brc) : parseInt(brc);
@@ -111,7 +115,7 @@ const Exchange = () => {
       <section className="exchange">
 					<div className="exchange__header">
 						<div className="exchange__header-wrapper">
-							<button className="exchange__back-btn" onClick={() => router.push('/flip-coin')}>
+							<button className="exchange__back-btn" onClick={() => {playButtonAudio(); router.push('/flip-coin')}}>
 								<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
 									<title/>
 									<g data-name="Layer 2" id="Layer_2">

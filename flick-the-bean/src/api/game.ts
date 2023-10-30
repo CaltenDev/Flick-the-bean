@@ -2,7 +2,6 @@ import GetCookie from "@/hooks/cookies/getCookie";
 import axios from "axios";
 import { handleUnisat } from "../components/play-modal/unisat";
 
-
 export const GetNonce = async () => {
   const val = GetCookie('userId');
   const userId = parseInt(val != '' ? val : '0');
