@@ -83,8 +83,8 @@
 .btns-grid {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	gap: 8px;
-	align-items: end;
+	justify-items: center;
+	gap: 32px;
 }
 
 .btns-control {
@@ -156,6 +156,13 @@
 				height: 80px;
 				margin-top: -120px;
 		}
+	}
+
+	&-left {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: stretch;
 	}
 }
 
@@ -335,9 +342,8 @@
 
 .btns-row {
 	display: flex;
-	justify-content: center;
-	align-items: flex-end;
-	gap: 20px;
+	justify-content: space-between;
+	align-items: center;
 
 	&-item {
 		width: 120px;

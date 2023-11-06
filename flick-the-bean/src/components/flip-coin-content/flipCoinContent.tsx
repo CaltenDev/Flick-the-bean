@@ -11,14 +11,12 @@ import { getLeatherSignature } from "../play-modal/leather";
 import { signMessage } from "../play-modal/unisat";
 import { getXverseSign } from "../play-modal/xverse";
 import RecentFlickersModal from "../recent-flickers-modal/recentFlickersModal";
-import leverDownSound from "../../../public/audio/lever_down.mp3";
-import buttonAudio from "../../../public/audio/button.mp3";
-import { playWinAudio, playLoseAudio, playButtonAudio, playLeverDownAudio, playLeverUpAudio, playCoinAudio, playCoinDropAudio, playFlipingSideLongAudio } from "@/sound";
-
-import { useBalanceStore } from "../../store";
-import UsernameModal from "../username-modal/usernameModal";
-import DepositModal from "../exchange-modal/exchangeModal";
-interface FlipCoinContentProps {}
+import {
+	useBalanceStore,
+} from '../../store'
+import { stat } from "fs";
+interface FlipCoinContentProps {
+}
 
 interface dataProps {
   outcome: string;
@@ -324,114 +322,44 @@ const FlipCoinContent: FC<FlipCoinContentProps> = ({}) => {
 							<div className="score-area__text">Token used <span className="fw-bold">ACD3</span></div>
 							<div className="score-area__text">Total balance: {balance} ACD3</div>
 						</div> */}
-          <div className="btns-control">
-            <div className="btns-control-left">
-              <div className="btns-row mt-30">
-                <button
-                  className={`btns-row-item ${
-                    status == "heads" && "btns-row-item-active"
-                  }`}
-                  id="head-btn"
-                  disabled={loading}
-                  onClick={() => {
-					playButtonAudio();
-                    setStatus("heads");
-                  }}
-                >
-                  <img
-                    className="btn-white__avatar"
-                    src={`/static/img/heads${
-                      status == "heads" ? "_active" : "_disable"
-                    }.png`}
-                    alt="head icon"
-                  />
-                </button>
-                <button
-                  className={`btns-row-item ${
-                    status == "tails" && "btns-row-item-active"
-                  }`}
-                  disabled={loading}
-                  onClick={() => {
-					playButtonAudio();
-                    setStatus("tails");
-                  }}
-                >
-                  <img
-                    className="btn-white__avatar"
-                    src={`/static/img/tails${
-                      status == "tails" ? "_active" : "_disable"
-                    }.png`}
-                    alt="tail icon"
-                  />
-                </button>
-              </div>
-              <div className="btns-grid mt-30">
-                <button
-                  disabled={loading}
-                  className={`btn-outline btn-outline--medium ${
-                    acd == 0.1 && "btn-outline--medium-active"
-                  }`}
-                  onClick={() => {playButtonAudio();handleAcd(0.1);}}
-                >
-                  <span>0.1</span>
-                </button>
-                <button
-                  disabled={loading}
-                  className={`btn-outline btn-outline--medium ${
-                    acd == 0.25 && "btn-outline--medium-active"
-                  }`}
-                  onClick={() => {playButtonAudio();handleAcd(0.25)}}
-                >
-                  <span>0.25</span>
-                </button>
-                <button
-                  disabled={loading}
-                  className={`btn-outline btn-outline--medium ${
-                    acd == 0.5 && "btn-outline--medium-active"
-                  }`}
-                  onClick={() => {playButtonAudio();handleAcd(0.5)}}
-                >
-                  <span>0.5</span>
-                </button>
-                <button
-                  disabled={loading}
-                  className={`btn-outline btn-outline--medium ${
-                    acd == 1 && "btn-outline--medium-active"
-                  }`}
-                  onClick={() => {playButtonAudio();handleAcd(1)}}
-                >
-                  <span>1</span>
-                </button>
-                <button
-                  disabled={loading}
-                  className={`btn-outline btn-outline--medium ${
-                    acd == 2 && "btn-outline--medium-active"
-                  }`}
-                  onClick={() => {playButtonAudio();handleAcd(2)}}
-                >
-                  <span>2</span>
-                </button>
-                <button
-                  disabled={loading}
-                  className={`btn-outline btn-outline--medium ${
-                    acd == 3 && "btn-outline--medium-active"
-                  }`}
-                  onClick={() => {playButtonAudio();handleAcd(3)}}
-                >
-                  <span>3</span>
-                </button>
-              </div>
-            </div>
-            <div className="btns-control-right">
-              <div
-                className={`switch ${start ? "active" : ""}`}
-                onClick={() => {
-				  playLeverDownAudio();
-                  setFirst(false);
-
-				  if (status == "heads") {
-                    startGame(true);
-                  }
+						<div className="btns-control">
+							<div className="btns-control-left">
+								<div className="btns-row mt-30">
+									<button className={`btn-item btn-heads_tails ${status == 'heads' && 'btn-heads_tails-active'}`} id="head-btn" disabled={loading} onClick={() => {setStatus('heads')}}>
+										<img style={status != 'heads' ? {width: '51px', height: '62px'} : {width: '116px', height: '142px', top: '-20px'}} className="btn-white__avatar" src={`/static/svgs/heads${status == 'heads' ? '_active' : '_inactive'}.svg`} alt="head icon" />
+										<span>Heads</span>
+									</button>
+									<button className={`btn-item btn-heads_tails ${status == 'tails' && 'btn-heads_tails-active'}`} disabled={loading} onClick={() => {setStatus("tails")}}>
+										<img style={status != 'tails' ? {width: '51px', height: '62px'} : {width: '116px', height: '142px', top: '-20px'}} className="btn-white__avatar" src={`/static/svgs/tails${status == 'tails' ? '_active' : '_inactive'}.svg`} alt="tail icon" />
+										<span>Tails</span>
+									</button>
+								</div>
+								<div className="btns-grid mt-30">
+									<button disabled={loading} className={`btn-item ${acd == 0.1 && 'btn-item-active' }`} onClick={() => handleAcd(0.1)}>
+										<span>0.1</span>
+									</button>
+									<button disabled={loading} className={`btn-item ${acd == 0.25 && 'btn-item-active' }`} onClick={() => handleAcd(0.25)}>
+										<span>0.25</span>
+									</button>
+									<button disabled={loading} className={`btn-item ${acd == 0.5 && 'btn-item-active' }`} onClick={() => handleAcd(0.5)}>
+										<span>0.5</span>
+									</button>
+									<button disabled={loading} className={`btn-item ${acd == 1 && 'btn-item-active' }`} onClick={() => handleAcd(1)}>
+										<span>1</span>
+									</button>
+									<button disabled={loading} className={`btn-item ${acd == 2 && 'btn-item-active' }`} onClick={() => handleAcd(2)}>
+										<span>2</span>
+									</button>
+									<button disabled={loading} className={`btn-item ${acd == 3 && 'btn-item-active' }`} onClick={() => handleAcd(3)}>
+										<span>3</span>
+									</button>
+								</div>
+							</div>
+							<div className="btns-control-right">
+								<div className={`switch ${start ? 'active' : ''}`} onClick={() => {
+									if(status == 'heads') {
+										startGame(true);
+									}
 
                   if (status == "tails") {
                     startGame(false);
