@@ -10,6 +10,7 @@ import RecentFlickersModal from "../recent-flickers-modal/recentFlickersModal";
 import {
 	useBalanceStore,
 } from '../../store'
+import { playButtonAudio } from "@/sound";
 
 const Exchange = () => {
 	const[refetching, setRefetching] = useState(false);
@@ -22,7 +23,7 @@ const Exchange = () => {
 	});
 	const {data: recentData} = useQuery({
 		queryKey: ['recent'],
-		queryFn:  () => GetrecentFlickers(null)
+		queryFn:  () => GetrecentFlickers()
 	});
 
 	useEffect(() => {
@@ -36,7 +37,7 @@ const Exchange = () => {
 	},[refetching]);
 
 	if(isError) {
-		enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+		// enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 	}
 
   const[showRecentModal, setShowRecentModal] = useState(false);
@@ -45,6 +46,7 @@ const Exchange = () => {
 	const[brc, setBrc] = useState('');
 
 	const handlePosition = () => {
+		playButtonAudio();
 		setBtcToBrc(!btcToBrc);
 	}
 
@@ -53,6 +55,7 @@ const Exchange = () => {
   }
 
 	const handleBtcToBrc = async () => {
+		playButtonAudio();
 		try {
 			setLoading(true);
 			const exchangeAmount = btc.includes('.') ? parseFloat(btc) : parseInt(btc);
@@ -63,12 +66,15 @@ const Exchange = () => {
 			setBtc('');
 			setBrc('');
 			setLoading(false);
-		} catch(e) {
-			enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+			enqueueSnackbar("Exchange successfull", {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+		} catch(e: any) {
+			setLoading(false);
+			enqueueSnackbar(e.response.data.data, {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 		}
   }
 
 	const handleBrcToBtc = async () => {
+		playButtonAudio()
 		try {
 			setLoading(true);
 			const exchangeAmount = brc.includes('.') ? parseFloat(brc) : parseInt(brc);
@@ -76,9 +82,13 @@ const Exchange = () => {
 			console.log(res);
 			setRefetching(!refetching);
 			refetch();
+			setBtc('');
+			setBrc('');
 			setLoading(false);
-		} catch(e) {
-			enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+			enqueueSnackbar("Exchange successfull", {variant: 'success', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
+		} catch(e: any) {
+			setLoading(false);
+			enqueueSnackbar(e.response.data.data, {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
 		}
   }
 
@@ -104,7 +114,18 @@ const Exchange = () => {
     <>
       <section className="exchange">
 					<div className="exchange__header">
-						<h3 className="exchange__title"><img src="/static/img/arrow_left.png" alt="settings icon" onClick={() => router.back()}/>Exchange</h3>
+						<div className="exchange__header-wrapper">
+							<button className="exchange__back-btn" onClick={() => {playButtonAudio(); router.push('/flip-coin')}}>
+								<svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+									<title/>
+									<g data-name="Layer 2" id="Layer_2">
+										<path d="M10.1,23a1,1,0,0,0,0-1.41L5.5,17H29.05a1,1,0,0,0,0-2H5.53l4.57-4.57A1,1,0,0,0,8.68,9L2.32,15.37a.9.9,0,0,0,0,1.27L8.68,23A1,1,0,0,0,10.1,23Z"/>
+									</g>
+								</svg>
+							</button>
+							<h3 className="exchange__title">Exchange</h3>
+						</div>
+						<img src="/static/svgs/close.svg" className="close"/>
 						<div>
 							{/* <button><img src="/static/svgs/settings.svg" alt="settings icon" /></button> */}
 						</div>
@@ -226,18 +247,6 @@ const Exchange = () => {
 						) : 'Exchange'}
 					</button>
 				</section>
-				<div className="mt-30">
-					<button className="btn-arrow" id="flickersBtn" onClick={handleRecentModal}>
-						Recent Flickers
-						<img className="btn-arrow__icon" src="/static/svgs/arrow-right.svg" alt="arrow icon" />
-					</button>
-				</div>
-
-      <RecentFlickersModal 
-	  	show={showRecentModal} 
-		handleModal={handleRecentModal} 
-		tableData={recentData}
-	  />
     </>
   )
 }

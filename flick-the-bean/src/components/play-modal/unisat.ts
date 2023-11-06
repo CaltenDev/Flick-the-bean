@@ -38,14 +38,22 @@ export const getSignature = async () => {
     sign = await uniSat.signMessage(hash);
     publicKey = await uniSat.getPublicKey();
 
-    let userId = '';
-    userId = await login(sign, publicKey, message, hash);
+    
+    let {
+      // @ts-ignore
+      userId = '',
+      // @ts-ignore
+      newUser = false,
+    } = await login(sign, publicKey, message, hash);
     if(userId != '') {
       SetCookie('userId', userId);
       SetCookie('sign', sign);
       SetCookie('publicKey', publicKey);
       SetCookie('wallet', 'unisat');
-      return true;
+      return {
+        flag: true,
+        newUser,
+      };
     }
   } catch (e) {
     console.log(e);
@@ -65,6 +73,7 @@ export const signMessage = async (value: string) => {
     publicKey = await uniSat.getPublicKey();
     let userId = '';
     if(sign && publicKey && GetCookie('userId') == '') {
+      // @ts-ignore
       userId = await login(sign, publicKey, value, hash);
       SetCookie('userId', userId);
     }

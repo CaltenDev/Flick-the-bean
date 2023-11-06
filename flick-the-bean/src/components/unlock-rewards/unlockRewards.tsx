@@ -2,6 +2,7 @@
 
 import { FC, useState } from "react";
 import RewardModal from "../reward-modal/rewardModal";
+import { playButtonAudio } from "@/sound";
 
 interface UnlockRewardsProps {
 
@@ -11,6 +12,7 @@ const UnlockRewards:FC<UnlockRewardsProps> = () => {
   const[showRewardModal, setShowRewardModal] = useState(false);
 
   const handleRewardModal = () => {
+    playButtonAudio();
     setShowRewardModal(!showRewardModal);
   }
   return(

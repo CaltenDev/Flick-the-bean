@@ -66,6 +66,8 @@
 
 .btns-inner-wrapper {
 	flex: 1;
+	padding-left: 66px;
+	margin-top: -20px;
 }
 
 .score-area {
@@ -89,6 +91,7 @@
 	display: flex;
 	justify-content: space-between;
 	padding: 20px;
+	padding-top: 0px;
 	&-right {
 		display: flex;
 		flex-direction: column;
@@ -160,6 +163,64 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: stretch;
+	}
+}
+
+.btns-verification {
+	width: 260px;
+	border: 3px solid black;
+	border-radius: 8px;
+	padding: 10px 40px;
+	display: inline-block;
+	margin-left: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+
+	&-active {
+		border-color: #5BEF43;
+		box-shadow: 0px 0px 24px 0px #5BEF43 inset;
+		box-shadow: 0px 2px 12px 0px #5BEF43;
+		box-shadow: 0px 2px 44px 0px #5BEF43;
+
+		div {
+			border-color: #5BEF43;
+			box-shadow: 0px 0px 24px 0px #5BEF43 inset;
+			box-shadow: 0px 2px 12px 0px #5BEF43;
+			box-shadow: 0px 2px 44px 0px #5BEF43;
+		}
+
+		span {
+			color: #5BEF43 !important;
+			text-shadow: 0px 0px 24px #5BEF43 inset;
+			text-shadow: 0px 2px 12px #5BEF43;
+			text-shadow: 0px 2px 44px #5BEF43;
+		}
+	}
+
+	&-icon {
+		border: 2px solid black;
+		width: 20px;
+		height: 20px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 4px;
+		
+		img {
+			width: 10px;
+			height: 9px;
+		}
+	}
+
+	span {
+		color: black;
+		font-family: "Play";
+		font-size: 16px;
+		font-weight: 700;
+		line-height: 19px;
+		letter-spacing: 0em;
 	}
 }
 
@@ -283,6 +344,18 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+
+	&-item {
+		width: 120px;
+		background-color: black;
+		display: flex;
+		border-radius: 12px;
+		height: 152px;
+
+		&-active {
+			height: 142px;
+		}
+	}
 
 	button img {
 		width: 120px;

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { GetProfile } from "@/api/profile";
 import GetCookie from '@/hooks/cookies/getCookie';
 import { GetrecentFlickers } from "@/api/recent-flickers";
@@ -18,7 +19,7 @@ interface ProfileModalProps {
 const RecentTable = () => {
 	const {data} = useQuery({
     queryKey: ['recent'],
-    queryFn: async () => await GetrecentFlickers(null)
+	queryFn: GetrecentFlickers
   })
 	return (
 		<RecentFlickersTable classname="auto" tableData={data} />
@@ -27,6 +28,7 @@ const RecentTable = () => {
 
 const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 	const[data, setData] = useState(null);
+	const[recentData, setRecentData] = useState(null);
 	const[isError, setIsError] = useState(null);
 	const[error, setError] = useState(null);
 	const[pubKey, setPubkey] = useState('');
@@ -58,10 +60,10 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 		"lucky_bean",
 	]
 	
-	const {data: recentData} = useQuery({
-		queryKey: ['recent'],
-		queryFn: async () => await GetrecentFlickers(null)
-	  })
+	// const {data: recentData} = useQuery({
+	// 	queryKey: ['recent'],
+	// 	queryFn: async () => await GetrecentFlickers()
+	//   })
 
 	if(isError) {
 		enqueueSnackbar("Server Error", {variant: 'error', anchorOrigin: {horizontal: 'left', vertical: 'top'}})
@@ -84,6 +86,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 	const getProfileData = async () => {
 		console.log('###')
 		const profileData = await GetProfile();
+		const _recentData = await GetrecentFlickers();
 		if(profileData?.data.data.referrals?.error) {
 			// @ts-ignore
 			// enqueueSnackbar(profileData.data.data.referrals.error, {variant: 'error', anchorOrigin: {horizontal: 'center', vertical: 'center'}})
@@ -92,6 +95,8 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 		console.log('###', profileData)
 		// @ts-ignore
 		setData(profileData);
+		// @ts-ignore
+		setRecentData(_recentData);
 		// @ts-ignore
 		setIsError(tempError);
 	}
@@ -228,7 +233,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						</span>
 						<span>
 							{/* @ts-ignore */}
-							{Math.round((parseFloat(data?.data.data.insights.totalAmountBet) + Number.EPSILON) * 100) / 100}
+							{Math.round((parseFloat(data?.data.data.insights.totalAmountBet) + Number.EPSILON) * 100) / 100} $
 						</span>
 					</div>
 					<div className="profile-value-item">
@@ -237,7 +242,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						</span>
 						<span>
 							{/* @ts-ignore */}
-							{data?.data.data.insights.winningPercentage}
+							{data?.data.data.insights.winningPercentage} %
 						</span>
 					</div>
 					<div className="profile-value-item">
@@ -246,7 +251,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						</span>
 						<span>
 							{/* @ts-ignore */}
-							{Math.round((parseFloat(data?.data.data.insights.totalEarnings) + Number.EPSILON) * 100) / 100}
+							{Math.round((parseFloat(data?.data.data.insights.totalEarnings) + Number.EPSILON) * 100) / 100} $
 						</span>
 					</div>
 					<div className="profile-value-item">
@@ -255,7 +260,7 @@ const ProfileModal:FC<ProfileModalProps> = ({ show, handleModal }) => {
 						</span>
 						<span>
 							{/* @ts-ignore */}
-							{Math.round((parseFloat(data?.data.data.insights.averageBetAmount) + Number.EPSILON) * 100) / 100}
+							{Math.round((parseFloat(data?.data.data.insights.averageBetAmount) + Number.EPSILON) * 100) / 100} $
 						</span>
 					</div>
 					

@@ -36,6 +36,7 @@ export const handleXverse = async () => {
   if (sign != '') {
     const userId = await login(sign, publicKey, message, hash);
     console.log("xverse: ", userId);
+    // @ts-ignore
     SetCookie('userId', userId);
     SetCookie('sign', sign);
     SetCookie('publicKey', publicKey);

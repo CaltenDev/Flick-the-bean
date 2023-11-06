@@ -20,7 +20,7 @@ const getSignature = async () => {
         message: hash,
         async onFinish(data) {
           user = await login(data.signature, data.publicKey, message, hash);
-          SetCookie('userId', user);
+          SetCookie('userId', user?.userId);
           SetCookie('sign', data.signature);
           SetCookie('publicKey', data.publicKey);
           SetCookie('wallet', 'leather');
@@ -38,7 +38,10 @@ const getSignature = async () => {
     
 
     if (userResult) {
-      return true;
+      return {
+        flag: true,
+        payload: userResult
+      };
     } else {
       return false;
     }
@@ -75,7 +78,7 @@ export const handleLeather = async () => {
   console.log('data: ', data);
 
   if (data) {
-    return true;
+    return data;
   } else {
     return false;
   }

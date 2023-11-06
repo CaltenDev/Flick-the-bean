@@ -1,8 +1,10 @@
+import GetCookie from "@/hooks/cookies/getCookie";
 import SetCookie from "@/hooks/cookies/setCookie";
 import axios from "axios";
 
 export const login = async (sign: string, publicKey: string, message: string, hash:string) => {
-  return await axios.post('https://flickthebean.onrender.com/login', {
+  const refCode = GetCookie('refCode');
+  return await axios.post(`https://flickthebean.onrender.com/login${refCode != '' ? '?ref=' + refCode : ''}`, {
     hash: hash,
     value: message,
     userPublicKey: publicKey,
@@ -11,7 +13,10 @@ export const login = async (sign: string, publicKey: string, message: string, ha
   }).then(function (res) {
     console.log(res);
     SetCookie('balance', res.data.data.balance);
-    return  res.data.data.userId && res.data.data.userId;
+    return  {
+      userId: res.data.data.userId && res.data.data.userId,
+      newUser: res.data.data.newUser && res.data.data.newUser
+    };
   }).catch(function (error) {
     console.log(error.toJSON());
   });

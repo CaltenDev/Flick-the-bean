@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const GetrecentFlickers = async (param: string | null) => {
-  return await axios.get(`https://flickthebean.onrender.com/${param != null ? '?ref=' + param : ''}`, {
+export const GetrecentFlickers = async () => {
+  return await axios.get(`https://flickthebean.onrender.com`, {
   }).then(function (res) {
     return  res.data.data;
   }).catch(function (error) {

@@ -7,9 +7,13 @@ import { usePathname, useRouter } from 'next/navigation';
 import { FC, useEffect, useState } from "react";
 import FAQModal from '../faq-modal/FAQModal';
 import ProfileModal from '../profile-modal/profileModal';
+// import UsernameModal from "../username-modal/usernameModal";
+import DepositModal from "../deposit-modal/depositModal";
 import {
   useBalanceStore,
 } from '../../store'
+import { playButtonAudio } from '@/sound';
+
 interface NavbarProps {
 }
 
@@ -19,6 +23,8 @@ const Navbar:FC<NavbarProps> = () => {
   const[openNav, setOpneNav] = useState(false);
   const[showFaqModal, setShowFaqModal] = useState(false);
   const[showProfileModal, setShowProfileModal] = useState(false);
+  const[showUsernameModal, setShowUsernameModal] = useState(false);
+	const[showDepositModal, setShowDepositModal] = useState(false);
   const[pubKey, setPubkey] = useState('');
   const { isLoggedin, setIsLoggedIn } = useGlobalContext();
   let balance = useBalanceStore(state => state.balance);
@@ -37,10 +43,20 @@ const Navbar:FC<NavbarProps> = () => {
   }
 
   const handleProfileModal = () => {
+    playButtonAudio();
     setShowProfileModal(!showProfileModal);
   }
 
+  const handleUsernameModal = () => {
+    setShowUsernameModal(!showUsernameModal);
+  }
+
+  const handleDepositModal = () => {
+    setShowDepositModal(!showDepositModal);
+  }
+
   const logout = () => {
+    playButtonAudio();
 		RemoveCookie('userId');
     RemoveCookie('sign');
     RemoveCookie('gameNonce');
@@ -56,7 +72,7 @@ const Navbar:FC<NavbarProps> = () => {
     <header className="header">
       <div className='header__logo'>
         <button className="flex-shrink-0">
-          <img src="/static/img/logo.png" alt="logo" onClick={logout} />
+          <img src="/static/svgs/logo.svg" alt="logo" onClick={logout} />
         </button>
         {
           isLoggedin && <>
@@ -71,14 +87,17 @@ const Navbar:FC<NavbarProps> = () => {
       </div>
       <div className="header__wrap">
         <div className="header__wrap">
-          { pathName === '/flip-coin' && (
             <>
+            {isLoggedin && 
               <div>
-                <button className="btn-outline btn-deposit" onClick={() => router.push('/exchange')}><img src="/static/svgs/deposit.svg" />Deposit</button>
+                <button style={{
+                      height: "63.78px"
+                }} className="btn-outline btn-deposit" onClick={() => {playButtonAudio();handleDepositModal()}}><img src="/static/svgs/deposit.svg" />Deposit</button>
                 {/* <button className="btn-outline ml-10" onClick={() => router.push('/deposit')}>Deposit / Withdraw</button> */}
               </div>
-
+            }
               <div className="header__profile">
+              {isLoggedin && 
                 <figure 
                   className="btn-outline"
                   onClick={handleProfileModal}
@@ -95,17 +114,17 @@ const Navbar:FC<NavbarProps> = () => {
                       alt="icon"
                     />
                   </div> */}
-                </figure>
-                <button className="btn-outline" onClick={() => {handleFaqModal()}}>
+                </figure>}
+                <button className="btn-outline" onClick={() => {playButtonAudio();handleFaqModal()}}>
                   <img src="/static/svgs/qa.svg" alt="share icon" />
                 </button>
                 {/* <p className="header__profile-text">{pubKey}</p> */}
+                { isLoggedin && 
                 <button className="btn-outline" onClick={logout}>
                   <img src="/static/svgs/exit.svg" alt="share icon" />
-                </button>
+                </button>}
               </div>
             </>
-          )}
         </div>
         {/* <div className={`hamburger ${openNav ? 'open' : ''}`} onClick={handleNavbar}>
           <span></span>
@@ -126,6 +145,8 @@ const Navbar:FC<NavbarProps> = () => {
       </div>
       <FAQModal show={showFaqModal} handleModal={handleFaqModal} />
       { isLoggedin && <ProfileModal show={showProfileModal} handleModal={handleProfileModal} /> }
+      {/* <UsernameModal show={showUsernameModal} handleModal={handleUsernameModal}/> */}
+		  <DepositModal show={showDepositModal} handleModal={handleDepositModal}/>
     </header>
   )
 }
